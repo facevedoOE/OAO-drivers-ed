@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Check 1.2 — The IPDE Process</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.quiz-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:var(--gamer-green);color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.quiz-title{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px}
+.quiz-desc{font-size:16px;color:#6b7280;margin-bottom:24px}
+.question-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;padding:28px;margin-bottom:20px}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--bitstream-blue);color:#fff;font-family:var(--font-display);font-weight:800;font-size:16px;border-radius:8px;margin-bottom:12px}
+.q-text{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--binary-blue);margin-bottom:6px;line-height:1.5}
+.q-context{font-size:14px;color:#6b7280;font-style:italic;margin-bottom:16px}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid #e5e7eb;border-radius:12px;background:#fff;cursor:pointer;transition:all .2s;font-family:var(--font-text);font-size:15px;color:var(--binary-blue);text-align:left;width:100%}
+.opt-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.opt-btn.selected{border-color:var(--bitstream-blue);background:#e0f2fe}
+.opt-btn.correct{border-color:var(--gamer-green);background:#f0fdf4}
+.opt-btn.wrong{border-color:#DC2626;background:#fef2f2}
+.opt-btn.correct-show{border-color:var(--gamer-green);background:#f0fdf4}
+.opt-letter{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;flex-shrink:0;background:#f3f4f6;color:#6b7280}
+.opt-btn.selected .opt-letter{background:var(--bitstream-blue);color:#fff}
+.opt-btn.correct .opt-letter,.opt-btn.correct-show .opt-letter{background:var(--gamer-green);color:#fff}
+.opt-btn.wrong .opt-letter{background:#DC2626;color:#fff}
+.feedback{margin-top:14px;padding:14px 18px;border-radius:10px;font-size:14px;line-height:1.6}
+.feedback.ok{background:#f0fdf4;border:1px solid var(--gamer-green);color:#166534}
+.feedback.no{background:#fef2f2;border:1px solid #DC2626;color:#991b1b}
+.feedback strong{display:block;margin-bottom:4px}
+.q-nav{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+.q-dot{width:40px;height:40px;border-radius:8px;border:2px solid #e5e7eb;background:#fff;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);cursor:pointer;transition:all .2s}
+.q-dot.active{border-color:var(--bitstream-blue);background:#e0f2fe;box-shadow:0 0 0 3px rgba(85,200,232,.3)}
+.q-dot.right{border-color:var(--gamer-green);background:#f0fdf4;color:var(--gamer-green)}
+.q-dot.miss{border-color:#DC2626;background:#fef2f2;color:#DC2626}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-green{background:linear-gradient(135deg,var(--gamer-green),#5FA035);color:#fff}
+.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:18px;height:18px}
+.results-card{background:#fff;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.results-score{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--binary-blue)}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px;margin-top:16px}
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:768px){.container{padding:24px 16px 60px}.quiz-title{font-size:24px}.bottom-nav,.actions{flex-direction:column}.bottom-nav .btn,.actions .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>350 XP</div></div></header>
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Unit 1</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Lesson 1.2</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span class="current">Knowledge Check</span></div></nav>
+
+<main class="container">
+<div class="quiz-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg> KNOWLEDGE CHECK</div>
+<h1 class="quiz-title">Lesson 1.2 Knowledge Check</h1>
+<p class="quiz-desc">5 scenario-based questions to test your understanding of the IPDE process.</p>
+<div id="quizRoot"></div>
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.2</a>
+<a href="#" class="btn btn-primary" id="nextBtn" style="display:none">Next: Lesson 1.3<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+</main>
+
+<script>
+const questions=[
+{id:1,question:"Which phase of IPDE involves scanning your environment for potential hazards?",context:"Think about what each letter stands for.",options:["Execute","Predict","Identify","Decide"],correct:2,feedback:{correct:"Identify is the first phase — scanning for anything that could affect your driving. This includes other vehicles, pedestrians, road conditions, signs, and signals.",incorrect:"The Identify phase is all about scanning and seeing. It's the foundation of IPDE — you can't react to what you haven't seen."}},
+{id:2,question:"You see a ball roll into the street from between parked cars. Using IPDE, what would the Predict phase tell you?",context:"Scenario: Residential neighborhood, parked cars on both sides.",options:["Slow down immediately","A child may follow the ball into the street","Honk your horn","Change lanes to the left"],correct:1,feedback:{correct:"In the Predict phase, you ask 'what could happen next?' A ball in the street is a classic cue that a child may follow it — one of the most important predictive connections in driving.",incorrect:"Predict is about anticipating what COULD happen. A ball near children almost always means a child might chase it. This prediction then drives your decision and execution."}},
+{id:3,question:"A driver who completes the IPDE cycle effectively will typically:",context:"Think about the overall purpose of the IPDE process.",options:["Drive faster than other traffic","React to hazards only after they become emergencies","Anticipate hazards and respond before they become emergencies","Always drive at or below the speed limit"],correct:2,feedback:{correct:"The whole point of IPDE is proactive, not reactive, driving. By identifying and predicting early, you respond before a hazard becomes a crisis — giving you more time and more options.",incorrect:"IPDE is about proactive driving — identifying hazards early and responding before they become emergencies. It's not about speed; it's about awareness and early action."}},
+{id:4,question:"Which IPDE phase involves choosing between changing speed, changing direction, or communicating?",context:"The four basic response options: speed, direction, communication, or combination.",options:["Identify","Predict","Decide","Execute"],correct:2,feedback:{correct:"The Decide phase is where you choose your response: change speed, change direction, communicate (horn, lights, signals), or a combination. The quality of this decision depends on good Identify and Predict work.",incorrect:"Decide is the phase where you choose your action. Your four basic options are: change speed, change direction, communicate, or a combination. Good decisions depend on early identification and accurate prediction."}},
+{id:5,question:"Why do expert drivers scan their mirrors every 5-8 seconds?",context:"Think about the Identify phase and maintaining awareness.",options:["It's required by Florida law","To maintain continuous situational awareness for the Identify phase of IPDE","To check their appearance","To watch for police"],correct:1,feedback:{correct:"Frequent mirror checks are how expert drivers maintain the Identify phase continuously. Your environment changes every few seconds — what was safe 10 seconds ago may not be safe now.",incorrect:"Regular mirror scanning maintains the Identify phase of IPDE. Your driving environment constantly changes — traffic, pedestrians, and conditions shift every few seconds. Frequent checks keep you aware."}}
+];
+let cur=0,ans={},done=false;
+function render(){
+  if(done){showResults();return}
+  const q=questions[cur],a=ans[q.id]||{};
+  document.getElementById('quizRoot').innerHTML=`
+    <div class="q-nav">${questions.map((qq,i)=>{const aa=ans[qq.id];let c='';if(i===cur)c='active';if(aa?.submitted&&aa.selected===qq.correct)c+=' right';if(aa?.submitted&&aa.selected!==qq.correct)c+=' miss';return`<button class="q-dot ${c}" onclick="go(${i})">${i+1}</button>`}).join('')}</div>
+    <div class="question-card">
+      <div class="q-num">${cur+1}</div>
+      <div class="q-text">${q.question}</div>
+      ${q.context?`<div class="q-context">${q.context}</div>`:''}
+      <div class="options">${q.options.map((o,i)=>{let c='';if(a.submitted){if(i===q.correct)c='correct-show';if(i===a.selected&&i!==q.correct)c='wrong';if(i===a.selected&&i===q.correct)c='correct'}else if(a.selected===i)c='selected';return`<button class="opt-btn ${c}" onclick="sel(${q.id},${i})" ${a.submitted?'disabled':''}><div class="opt-letter">${'ABCD'[i]}</div><span>${o}</span></button>`}).join('')}</div>
+      ${a.submitted?`<div class="feedback ${a.selected===q.correct?'ok':'no'}"><strong>${a.selected===q.correct?'✅ Correct!':'❌ Incorrect'}</strong>${a.selected===q.correct?q.feedback.correct:q.feedback.incorrect}</div>`:''}
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="go(${Math.max(0,cur-1)})" ${cur===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        ${!a.submitted?`<button class="btn btn-green" onclick="sub(${q.id})" ${a.selected===undefined?'disabled':''}>Check Answer</button>`:''}
+        ${cur<questions.length-1?`<button class="btn btn-primary" onclick="go(${cur+1})">Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>`:Object.keys(ans).filter(k=>ans[k].submitted).length===questions.length?`<button class="btn btn-green" onclick="finish()">View Results 🏆</button>`:`<span style="font-size:14px;color:#6b7280;display:flex;align-items:center">Answer all to see results</span>`}
+      </div>
+    </div>`;
+}
+function sel(qId,idx){if(ans[qId]?.submitted)return;ans[qId]={...ans[qId],selected:idx};render()}
+function sub(qId){if(ans[qId]?.selected===undefined)return;ans[qId].submitted=true;render()}
+function go(i){cur=i;render();window.scrollTo({top:0,behavior:'smooth'})}
+function finish(){done=true;render();window.scrollTo({top:0,behavior:'smooth'})}
+function showResults(){
+  let c=0;questions.forEach(q=>{if(ans[q.id]?.selected===q.correct)c++});
+  const pct=Math.round((c/questions.length)*100),pass=pct>=80,xp=c*20;
+  document.getElementById('quizRoot').innerHTML=`
+    <div class="results-card">
+      <div style="font-size:48px;margin-bottom:12px">${pass?'✅':'📝'}</div>
+      <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">${pass?'Knowledge Check Passed!':'Keep Reviewing!'}</div>
+      <div class="results-score">${pct}%</div>
+      <div style="font-size:18px;color:#6b7280;margin-bottom:8px">${c} of ${questions.length} correct</div>
+      <div class="results-xp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>+${xp} XP</div>
+      <p style="margin-top:20px;color:#6b7280;max-width:500px;margin:20px auto 0">${pass?"You've demonstrated strong understanding of the IPDE process. You're ready for Lesson 1.3!":"Review the IPDE lesson material and try again. Focus on understanding what each phase requires."}</p>
+    </div>
+    <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">Answer Review</h2>
+    ${questions.map((q,i)=>{const a=ans[q.id],ok=a?.selected===q.correct;return`<div style="border:2px solid ${ok?'var(--gamer-green)':'#DC2626'};background:${ok?'#f0fdf4':'#fef2f2'};border-radius:12px;padding:16px 20px;margin-bottom:12px"><div style="display:flex;align-items:start;gap:12px"><span style="font-size:20px">${ok?'✅':'❌'}</span><div><p style="font-weight:600;color:var(--binary-blue);margin-bottom:6px">Q${i+1}: ${q.question}</p><p style="font-size:14px;color:${ok?'#166534':'#991b1b'}">Your answer: ${q.options[a?.selected]}</p>${!ok?`<p style="font-size:14px;color:#166534;margin-top:4px">Correct: ${q.options[q.correct]}</p>`:''}<p style="font-size:14px;color:#6b7280;margin-top:6px">${ok?q.feedback.correct:q.feedback.incorrect}</p></div></div></div>`}).join('')}
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+      ${!pass?`<button class="btn btn-secondary" onclick="retake()">Retake</button>`:''}
+      <button class="btn btn-primary">${pass?'Continue to Lesson 1.3':'Back to Lesson 1.2'}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>`;
+  if(pass)document.getElementById('nextBtn').style.display='inline-flex';
+}
+function retake(){cur=0;ans={};done=false;render();window.scrollTo({top:0,behavior:'smooth'})}
+render();
+</script>
+</body>
+</html>

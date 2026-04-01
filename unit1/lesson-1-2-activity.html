@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 1.2 — IPDE Scenario Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.activity-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.activity-title{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--binary-blue);margin-bottom:10px}
+.activity-desc{font-size:17px;color:#6b7280;line-height:1.6;margin-bottom:24px}
+/* Progress */
+.progress-section{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:20px 24px;margin-bottom:24px}
+.progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.progress-label{font-family:var(--font-display);font-weight:600;color:var(--binary-blue);font-size:15px}
+.progress-count{font-family:var(--font-display);font-weight:700;color:var(--bitstream-blue);font-size:15px}
+.progress-bar-track{width:100%;height:10px;background:#e5e7eb;border-radius:6px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--bitstream-blue),var(--dark-bitstream));border-radius:6px;transition:width .5s}
+/* Scene Card */
+.scene-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.scene-visual{position:relative}
+.scene-label{position:absolute;top:16px;left:16px;background:var(--binary-blue);color:#fff;padding:6px 14px;border-radius:8px;font-family:var(--font-display);font-weight:700;font-size:14px;z-index:2}
+.scene-content{padding:24px}
+.scene-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:8px}
+.scene-text{color:#6b7280;margin-bottom:20px}
+/* IPDE Phase Steps */
+.ipde-phase{border:2px solid #e5e7eb;border-radius:12px;padding:20px;margin-bottom:16px;transition:all .3s}
+.ipde-phase.active{border-color:var(--bitstream-blue);background:#f0f9ff}
+.ipde-phase.complete{border-color:var(--gamer-green);background:#f0fdf4}
+.ipde-phase.locked{opacity:.5;pointer-events:none}
+.phase-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.phase-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+.phase-name{font-family:var(--font-display);font-weight:700;color:var(--binary-blue);font-size:16px}
+.phase-status{margin-left:auto;font-size:13px;font-weight:600}
+.phase-options{display:flex;flex-direction:column;gap:8px}
+.phase-btn{display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;transition:all .2s;font-family:var(--font-text);font-size:14px;color:var(--binary-blue);text-align:left;width:100%}
+.phase-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.phase-btn.selected{border-color:var(--bitstream-blue);background:#e0f2fe}
+.phase-btn.correct{border-color:var(--gamer-green);background:#f0fdf4}
+.phase-btn.wrong{border-color:#DC2626;background:#fef2f2}
+.phase-feedback{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px}
+.phase-feedback.correct{background:#f0fdf4;border:1px solid var(--gamer-green);color:#166534}
+.phase-feedback.incorrect{background:#fef2f2;border:1px solid #DC2626;color:#991b1b}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}
+.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:18px;height:18px}
+.nav-dots{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.dot{width:40px;height:40px;border-radius:8px;border:2px solid #e5e7eb;background:#fff;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);cursor:pointer;transition:all .2s}
+.dot.active{border-color:var(--bitstream-blue);background:#e0f2fe;box-shadow:0 0 0 3px rgba(85,200,232,.3)}
+.dot.done{border-color:var(--gamer-green);background:#f0fdf4;color:var(--gamer-green)}
+.results-card{background:#fff;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.results-score{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--binary-blue)}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px;margin-top:16px}
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:768px){.container{padding:24px 16px 60px}.activity-title{font-size:26px}.bottom-nav{flex-direction:column}.bottom-nav .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>200 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Unit 1</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span class="current">Activity: IPDE Scenarios</span></div></nav>
+
+<main class="container">
+<div class="activity-badge">🎮 INTERACTIVE ACTIVITY</div>
+<h1 class="activity-title">IPDE Scenario Engine</h1>
+<p class="activity-desc">For each driving scenario, work through all four IPDE phases in order. Select the best response for each phase — Identify the hazard, Predict what could happen, Decide on an action, and Execute the right maneuver.</p>
+
+<div class="progress-section">
+<div class="progress-row"><span class="progress-label">Scenario Progress</span><span class="progress-count" id="progressCount">0 / 4 Complete</span></div>
+<div class="progress-bar-track"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+</div>
+
+<div id="appRoot"></div>
+
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.2</a>
+<a href="#" class="btn btn-primary">Next: Knowledge Check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+</main>
+
+<script>
+const scenarios = [
+  {
+    id:1, title:"Intersection with a Stale Green", location:"Urban intersection",
+    sceneSvg:`<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="400" fill="#6B7280"/><rect x="0" y="0" width="370" height="170" fill="#d1d5db"/><rect x="530" y="0" width="370" height="170" fill="#d1d5db"/><rect x="0" y="230" width="370" height="170" fill="#d1d5db"/><rect x="530" y="230" width="370" height="170" fill="#d1d5db"/><line x1="450" y1="0" x2="450" y2="170" stroke="#FCD34D" stroke-width="3" stroke-dasharray="12,8"/><line x1="450" y1="230" x2="450" y2="400" stroke="#FCD34D" stroke-width="3" stroke-dasharray="12,8"/><line x1="0" y1="200" x2="370" y2="200" stroke="#FCD34D" stroke-width="3" stroke-dasharray="12,8"/><line x1="530" y1="200" x2="900" y2="200" stroke="#FCD34D" stroke-width="3" stroke-dasharray="12,8"/><rect x="375" y="175" width="150" height="50" fill="white" opacity=".3" stroke="white" stroke-width="2" stroke-dasharray="20,10"/><g transform="translate(450,330)"><rect x="-20" y="-10" width="40" height="20" rx="6" fill="#55C8E8"/><circle cx="-10" cy="12" r="4" fill="#374151"/><circle cx="10" cy="12" r="4" fill="#374151"/></g><g transform="translate(600,200)"><rect x="-20" y="-10" width="40" height="20" rx="6" fill="#C7922C"/><circle cx="-10" cy="12" r="4" fill="#374151"/><circle cx="10" cy="12" r="4" fill="#374151"/></g><circle cx="535" cy="175" r="8" fill="#22C55E" stroke="#fff" stroke-width="2"/><circle cx="385" cy="260" r="6" fill="#F78F1E"/><text x="385" y="280" text-anchor="middle" font-size="10" fill="#fff" font-family="var(--font-text)">Pedestrian</text><text x="450" y="390" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.6)" font-family="var(--font-display)">Your car approaching intersection — light is green</text></svg>`,
+    description:"You're approaching a four-way intersection. The light is green, but it's been green for a while (stale green). A pedestrian is standing near the corner on your left, and a gold car is approaching from the right on the cross street.",
+    phases:[
+      {name:"Identify",color:"#1e40af",options:["The green light ahead","Stale green light, pedestrian on left, cross-traffic car on right","The road markings in the intersection","The buildings on either side"],correct:1,feedback:{correct:"Great scanning! You identified all three key hazards: the stale green, the pedestrian, and the approaching cross-traffic.",incorrect:"Look again — a safe driver would identify ALL potential hazards: the stale green light, the pedestrian near the corner, AND the car approaching from the right."}},
+      {name:"Predict",color:"#67308F",options:["Everything will stay the same","The light may turn yellow; the pedestrian might step off the curb; the cross-traffic car may not stop","The pedestrian will definitely cross","Traffic will speed up"],correct:1,feedback:{correct:"Excellent prediction! You considered multiple 'what if' scenarios — exactly what the Predict phase requires.",incorrect:"In the Predict phase, think about what COULD go wrong. A stale green could change, the pedestrian might enter the crosswalk, and the cross-traffic driver might anticipate their green."}},
+      {name:"Decide",color:"#15803d",options:["Speed up to make the light","Cover the brake, scan left-right-left, prepare to yield to pedestrian","Honk at the pedestrian to warn them","Change lanes to the right"],correct:1,feedback:{correct:"Smart decision! Covering the brake gives you a faster reaction time, and scanning left-right-left catches hazards entering from both sides.",incorrect:"The safest decision is to cover the brake (reducing reaction time) and scan left-right-left as you enter the intersection — ready to stop if needed."}},
+      {name:"Execute",color:"#b45309",options:["Slam the brakes as you enter the intersection","Ease off gas, move foot over brake, complete L-R-L scan, proceed with caution","Close your eyes and hope for the best","Accelerate quickly through the intersection"],correct:1,feedback:{correct:"Perfect execution! Smooth, controlled actions — easing off the gas, covering the brake, and systematic scanning — keep you safe without causing problems for traffic behind you.",incorrect:"Execution should be smooth and controlled: ease off the gas, hover your foot over the brake, complete your left-right-left scan, and proceed with caution."}}
+    ]
+  },
+  {
+    id:2, title:"Highway Merge with Dense Traffic", location:"Interstate on-ramp",
+    sceneSvg:`<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#DBEAFE"/></linearGradient></defs><rect width="900" height="400" fill="url(#sky2)"/><rect x="0" y="160" width="900" height="240" fill="#6B7280"/><line x1="300" y1="160" x2="300" y2="400" stroke="#fff" stroke-width="3" stroke-dasharray="15,10"/><line x1="600" y1="160" x2="600" y2="400" stroke="#fff" stroke-width="3" stroke-dasharray="15,10"/><line x1="0" y1="160" x2="0" y2="400" stroke="#fff" stroke-width="4"/><line x1="900" y1="160" x2="900" y2="400" stroke="#fff" stroke-width="4"/><path d="M900 350 Q800 350 750 400" fill="#6B7280" stroke="#fff" stroke-width="2"/><g transform="translate(250,280)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#EF4444"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g><g transform="translate(450,260)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#fff"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g><g transform="translate(550,300)"><rect x="-30" y="-14" width="60" height="28" rx="6" fill="#374151"/><circle cx="-17" cy="16" r="5" fill="#1f2937"/><circle cx="17" cy="16" r="5" fill="#1f2937"/></g><g transform="translate(800,340)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#55C8E8"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g><text x="830" y="370" font-size="11" fill="#fff" font-family="var(--font-display)">YOU</text><text x="450" y="390" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.6)" font-family="var(--font-display)">On-ramp merging into highway — traffic is heavy</text></svg>`,
+    description:"You're on a highway on-ramp, accelerating to merge into heavy interstate traffic. The right lane has a red car, a white car, and a semi-truck. Your merge lane is ending in about 400 feet.",
+    phases:[
+      {name:"Identify",color:"#1e40af",options:["Just the road ahead","Red car, white car, and semi-truck in right lane; merge lane ending soon; traffic speed ~65 mph","The trees on the roadside","The exit sign overhead"],correct:1,feedback:{correct:"You've identified all the key elements: vehicles in your target lane, the merge point, and the relative speed of traffic.",incorrect:"For a safe merge, you need to identify ALL vehicles in your target lane, how much merge distance remains, and the speed of highway traffic."}},
+      {name:"Predict",color:"#67308F",options:["All vehicles will maintain their current position and speed","A gap may open between the white car and truck; the red car might slow down; someone may change lanes into the right lane","Traffic will stop for you","The merge lane will extend further"],correct:1,feedback:{correct:"Smart thinking! You're considering how gaps might change and anticipating that other drivers may also be adjusting their position.",incorrect:"When merging, predict how gaps between vehicles might change — they could open or close. Also anticipate that other drivers may not see you or may change lanes."}},
+      {name:"Decide",color:"#15803d",options:["Slow down and wait at the end of the merge lane","Accelerate to match highway speed, target the gap between the white car and truck, signal early","Force your way in front of the red car","Stop on the merge lane until a gap appears"],correct:1,feedback:{correct:"Perfect! Matching highway speed is critical — speed differential is what causes merge crashes. Early signaling communicates your intent.",incorrect:"The correct approach: accelerate to match traffic speed (never merge slowly), pick a gap, and signal early. Stopping on a merge lane is extremely dangerous."}},
+      {name:"Execute",color:"#b45309",options:["Jerk the wheel and cut in quickly","Signal, accelerate smoothly to 65 mph, check mirrors and blind spot, merge into gap with steady steering","Wait until the last second, then merge abruptly","Honk your horn to make space"],correct:1,feedback:{correct:"Excellent execution! Smooth acceleration, signaling, blind spot check, and steady steering — this is textbook merging technique.",incorrect:"Proper merge execution: signal, match traffic speed smoothly, check mirrors AND blind spot (head check), then merge with controlled steering."}}
+    ]
+  },
+  {
+    id:3, title:"School Zone with Children", location:"Residential school zone",
+    sceneSvg:`<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="400" fill="#BAE6FD"/><rect x="0" y="250" width="900" height="150" fill="#6B7280"/><rect x="350" y="250" width="200" height="150" fill="#4B5563"/><rect x="50" y="150" width="200" height="100" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="150" y="210" text-anchor="middle" font-family="var(--font-display)" font-size="14" font-weight="700" fill="#92400E">SCHOOL</text><rect x="700" y="160" width="150" height="90" rx="4" fill="#e5e7eb"/><rect x="720" y="175" width="30" height="25" rx="2" fill="#BAE6FD"/><rect x="770" y="175" width="30" height="25" rx="2" fill="#BAE6FD"/><rect x="680" y="210" width="8" height="50" fill="#9CA3AF"/><polygon points="660,175 700,210 660,210" fill="#FCD34D"/><polygon points="700,175 660,175 680,155" fill="#FCD34D" stroke="#92400E" stroke-width="1"/><text x="680" y="198" text-anchor="middle" font-size="8" font-weight="700" fill="#92400E">15</text><circle cx="400" cy="240" r="6" fill="#F78F1E"/><circle cx="400" cy="232" r="4" fill="#F78F1E"/><circle cx="420" cy="242" r="5" fill="#3B82F6"/><circle cx="420" cy="235" r="3.5" fill="#3B82F6"/><circle cx="480" cy="260" r="10" fill="#EF4444" opacity=".8"/><line x1="380" y1="250" x2="420" y2="250" stroke="#fff" stroke-width="8" opacity=".6"/><line x1="380" y1="260" x2="420" y2="260" stroke="#fff" stroke-width="8" opacity=".6"/><g transform="translate(430,330)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#55C8E8"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g><text x="450" y="385" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.6)" font-family="var(--font-display)">School zone — children and ball near road</text></svg>`,
+    description:"You're driving through an active school zone (flashing lights on). Two children are on the sidewalk to your left, and a red ball has rolled near the curb. The speed limit sign shows 15 mph.",
+    phases:[
+      {name:"Identify",color:"#1e40af",options:["The school building","Active school zone, two children on left sidewalk, ball near curb, 15 mph speed limit","The blue sky above","Other parked cars"],correct:1,feedback:{correct:"Sharp eyes! You identified the critical elements: active school zone, children, the ball (a major predictive cue), and the speed limit.",incorrect:"Key hazards in this scene: the active school zone, children on the sidewalk, a ball near the curb (huge warning sign), and the 15 mph speed restriction."}},
+      {name:"Predict",color:"#67308F",options:["The children will stay on the sidewalk","Nothing will happen because it's a school zone","A child may chase the ball into the street; more children may appear from behind parked cars; a crossing guard may step out","The ball will roll away from the road"],correct:2,feedback:{correct:"A ball near children is one of the strongest predictive cues in driving — it almost always means a child might follow it into the street.",incorrect:"A ball near the road with children nearby is a classic hazard cue. Children are unpredictable — they may chase the ball without looking. Always expect the unexpected near schools."}},
+      {name:"Decide",color:"#15803d",options:["Maintain 15 mph and keep driving","Reduce speed below 15 mph, cover brake, be ready to stop completely, scan sidewalks continuously","Honk to warn the children","Speed up to pass the area quickly"],correct:1,feedback:{correct:"Excellent decision! Slowing below the limit, covering the brake, and being ready for a full stop shows mature defensive driving.",incorrect:"Near children with a ball near the road, the safest choice is to slow even below the posted limit, cover your brake, and be fully prepared to stop."}},
+      {name:"Execute",color:"#b45309",options:["Slam brakes immediately","Gently reduce to 10 mph, foot hovering over brake, eyes scanning left sidewalk and ahead, hands ready for controlled stop","Speed through hoping for the best","Pull over and wait"],correct:1,feedback:{correct:"Perfect execution! Gentle speed reduction, brake coverage, active scanning — you're protecting those children without creating a hazard for traffic behind you.",incorrect:"Execute by gently reducing speed, keeping your foot ready on the brake, and actively scanning both sidewalks. Smooth, controlled actions protect children without surprising other drivers."}}
+    ]
+  },
+  {
+    id:4, title:"Parking Lot Pedestrian Crossing", location:"Shopping center parking lot",
+    sceneSvg:`<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="400" fill="#9CA3AF"/><rect x="0" y="0" width="900" height="80" fill="#d1d5db"/><text x="450" y="50" text-anchor="middle" font-family="var(--font-display)" font-size="18" fill="#374151" font-weight="700">SHOPPING CENTER</text><line x1="150" y1="80" x2="150" y2="400" stroke="#fff" stroke-width="2"/><line x1="300" y1="80" x2="300" y2="400" stroke="#fff" stroke-width="2"/><line x1="450" y1="80" x2="450" y2="400" stroke="#fff" stroke-width="2"/><line x1="600" y1="80" x2="600" y2="400" stroke="#fff" stroke-width="2"/><line x1="750" y1="80" x2="750" y2="400" stroke="#fff" stroke-width="2"/><rect x="0" y="220" width="900" height="60" fill="#6B7280"/><g transform="translate(180,150)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#EF4444"/></g><g transform="translate(340,160)"><rect x="-24" y="-12" width="48" height="24" rx="6" fill="#1f2937"/></g><g transform="translate(620,145)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#fff"/></g><g transform="translate(380,250)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#55C8E8"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g><circle cx="500" cy="240" r="6" fill="#F78F1E"/><circle cx="500" cy="232" r="4" fill="#F78F1E"/><line x1="495" y1="243" x2="490" y2="255" stroke="#F78F1E" stroke-width="2"/><line x1="505" y1="243" x2="510" y2="255" stroke="#F78F1E" stroke-width="2"/><circle cx="540" cy="242" r="5" fill="#8B5CF6"/><circle cx="540" cy="236" r="3.5" fill="#8B5CF6"/><rect x="535" y="220" width="10" height="14" rx="2" fill="#A78BFA" opacity=".7"/><text x="520" y="210" font-size="10" fill="#fff" font-family="var(--font-display)">Looking at phone</text><text x="450" y="385" text-anchor="middle" font-size="13" fill="rgba(255,255,255,.6)" font-family="var(--font-display)">Parking lot — pedestrians crossing, one distracted</text></svg>`,
+    description:"You're driving through a busy shopping center parking lot. A pedestrian is crossing the driving lane ahead of you, and another person is walking while looking at their phone. Cars are backing out of spaces on both sides.",
+    phases:[
+      {name:"Identify",color:"#1e40af",options:["The parking spaces","Crossing pedestrian, distracted phone-user, cars potentially backing out of spaces on both sides","The shopping center sign","The painted lines"],correct:1,feedback:{correct:"Excellent identification! Parking lots are full of hazards — pedestrians (especially distracted ones) and reversing vehicles are the biggest threats.",incorrect:"In parking lots, the key hazards are: pedestrians crossing (especially distracted ones on phones), and vehicles that may back out without seeing you."}},
+      {name:"Predict",color:"#67308F",options:["Everyone will see you and stop","The phone-user may walk into your path without looking; parked cars may back out suddenly; the crossing pedestrian may stop mid-lane","Traffic will flow smoothly","All pedestrians will use crosswalks"],correct:1,feedback:{correct:"Great predictions! Distracted pedestrians are highly unpredictable, and reversing drivers in parking lots often don't check mirrors adequately.",incorrect:"A distracted pedestrian on their phone may walk directly into your path. Cars may back out without looking. Never assume people see you in parking lots."}},
+      {name:"Decide",color:"#15803d",options:["Honk at the distracted pedestrian","Slow to 5-10 mph, cover brake, yield to all pedestrians, watch for reverse lights on parked cars","Drive normally — it's their responsibility to watch out","Speed through to avoid conflicts"],correct:1,feedback:{correct:"Perfect decision! In parking lots, pedestrians always have the right of way. Ultra-slow speed gives you maximum time to react.",incorrect:"In parking lots: slow way down (5-10 mph), always yield to pedestrians (even distracted ones), and watch for white reverse lights on parked cars."}},
+      {name:"Execute",color:"#b45309",options:["Inch forward while honking","Reduce to walking speed, stop completely for pedestrians, scan left and right for backing vehicles, proceed only when clear","Race through between pedestrians","Flash your lights"],correct:1,feedback:{correct:"Textbook parking lot driving! Walking speed, complete stops for pedestrians, and active scanning for reversing vehicles.",incorrect:"Execute by reducing to walking speed, making full stops for pedestrians, and checking both sides for vehicles with reverse lights on."}}
+    ]
+  }
+];
+
+let currentScenario = 0;
+let state = {}; // {scenarioId: {phases: {0: {selected, submitted}}, complete}}
+let totalComplete = 0;
+
+function init(){
+  scenarios.forEach(s => { state[s.id] = {phases:{}, complete:false}; });
+  render();
+}
+
+function render(){
+  const s = scenarios[currentScenario];
+  const ss = state[s.id];
+  const root = document.getElementById('appRoot');
+  
+  root.innerHTML = `
+    <div class="nav-dots">${scenarios.map((sc,i) => `<button class="dot ${i===currentScenario?'active':''} ${state[sc.id].complete?'done':''}" onclick="goTo(${i})">${i+1}</button>`).join('')}</div>
+    <div class="scene-card">
+      <div class="scene-visual"><div class="scene-label">Scenario ${currentScenario+1} of ${scenarios.length}: ${s.location}</div>${s.sceneSvg}</div>
+      <div class="scene-content">
+        <h2 class="scene-title">${s.title}</h2>
+        <p class="scene-text">${s.description}</p>
+        ${s.phases.map((p,pi) => {
+          const ps = ss.phases[pi] || {};
+          const prevDone = pi === 0 || ss.phases[pi-1]?.submitted;
+          const isActive = prevDone && !ps.submitted;
+          const isLocked = !prevDone && !ps.submitted;
+          const isComplete = ps.submitted;
+          return `
+          <div class="ipde-phase ${isActive?'active':''} ${isComplete?'complete':''} ${isLocked?'locked':''}">
+            <div class="phase-header">
+              <div class="phase-dot" style="background:${p.color}">${p.name[0]}</div>
+              <div class="phase-name">${p.name}</div>
+              <div class="phase-status" style="color:${isComplete?(ps.selected===p.correct?'var(--gamer-green)':'#DC2626'):isActive?'var(--bitstream-blue)':'#9ca3af'}">${isComplete?(ps.selected===p.correct?'✅ Correct':'❌ Incorrect'):isActive?'Your turn':'🔒 Locked'}</div>
+            </div>
+            ${!isLocked ? `<div class="phase-options">
+              ${p.options.map((opt,oi) => {
+                let cls = '';
+                if(isComplete){
+                  if(oi===p.correct) cls='correct';
+                  else if(oi===ps.selected && oi!==p.correct) cls='wrong';
+                } else if(ps.selected===oi) cls='selected';
+                return `<button class="phase-btn ${cls}" onclick="selectPhase(${s.id},${pi},${oi})" ${isComplete?'disabled':''}>${opt}</button>`;
+              }).join('')}
+            </div>
+            ${isActive && ps.selected !== undefined && !ps.submitted ? `<div style="text-align:right;margin-top:10px"><button class="btn btn-primary" onclick="submitPhase(${s.id},${pi})" style="padding:8px 20px;font-size:14px">Check →</button></div>` : ''}
+            ${isComplete ? `<div class="phase-feedback ${ps.selected===p.correct?'correct':'incorrect'}"><strong>${ps.selected===p.correct?'✅ Correct!':'❌ Not quite'}</strong> — ${ps.selected===p.correct?p.feedback.correct:p.feedback.incorrect}</div>` : ''}` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-secondary" onclick="goTo(${Math.max(0,currentScenario-1)})" ${currentScenario===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg> Previous</button>
+      ${ss.complete && currentScenario < scenarios.length-1 ? `<button class="btn btn-primary" onclick="goTo(${currentScenario+1})">Next Scenario <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg></button>` : ''}
+      ${totalComplete === scenarios.length ? `<button class="btn btn-primary" onclick="showResults()" style="background:linear-gradient(135deg,var(--gamer-green),#5FA035)">View Results 🏆</button>` : ''}
+    </div>
+  `;
+}
+
+function selectPhase(sId,pIdx,optIdx){
+  if(state[sId].phases[pIdx]?.submitted) return;
+  state[sId].phases[pIdx] = {...state[sId].phases[pIdx], selected:optIdx};
+  render();
+}
+
+function submitPhase(sId,pIdx){
+  const s = scenarios.find(sc=>sc.id===sId);
+  state[sId].phases[pIdx].submitted = true;
+  // Check if all 4 phases done
+  if(pIdx === 3 && !state[sId].complete){
+    state[sId].complete = true;
+    totalComplete++;
+    document.getElementById('progressCount').textContent = `${totalComplete} / ${scenarios.length} Complete`;
+    document.getElementById('progressBar').style.width = `${(totalComplete/scenarios.length)*100}%`;
+  }
+  render();
+}
+
+function goTo(idx){
+  currentScenario = idx;
+  render();
+  window.scrollTo({top:document.querySelector('.scene-card')?.offsetTop - 80, behavior:'smooth'});
+}
+
+function showResults(){
+  let correct = 0, total = 0;
+  scenarios.forEach(s => {
+    s.phases.forEach((p,i) => {
+      total++;
+      if(state[s.id].phases[i]?.selected === p.correct) correct++;
+    });
+  });
+  const pct = Math.round((correct/total)*100);
+  document.getElementById('appRoot').innerHTML = `
+    <div class="results-card">
+      <div style="font-size:48px;margin-bottom:12px">🏆</div>
+      <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">IPDE Scenarios Complete!</div>
+      <div class="results-score">${pct}%</div>
+      <div style="font-size:18px;color:#6b7280;margin-bottom:8px">${correct} of ${total} IPDE phases answered correctly</div>
+      <div class="results-xp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> +150 XP Earned!</div>
+      <p style="margin-top:20px;color:#6b7280;max-width:500px;margin:20px auto 0">${pct>=80?"Outstanding! You've demonstrated strong IPDE skills across all four driving scenarios. You're thinking like a defensive driver!":"Good effort! Review the scenarios you missed — the IPDE process gets easier with practice. Focus on the Identify and Predict phases."}</p>
+    </div>
+  `;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+init();
+</script>
+</body>
+</html>

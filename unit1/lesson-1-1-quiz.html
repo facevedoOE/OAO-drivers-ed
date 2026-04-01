@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Check 1.1 — What Does It Really Mean to Drive?</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+
+.oao-header{background:var(--binary-blue);color:white;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,0.3)}
+.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.oao-logo-area{display:flex;align-items:center;gap:16px}
+.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,0.2)}
+.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}
+.oao-header-sub{font-size:12px;color:rgba(255,255,255,0.7)}
+.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:white;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+
+.breadcrumb-bar{background:white;border-bottom:1px solid #e5e7eb}
+.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}
+.breadcrumb-inner a{color:#6b7280;text-decoration:none;transition:color 0.2s}
+.breadcrumb-inner a:hover{color:var(--bitstream-blue)}
+.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}
+.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+
+.quiz-container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+
+/* Quiz Header */
+.quiz-header{margin-bottom:24px}
+.quiz-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:var(--gamer-green);color:white;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.quiz-title{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px}
+.quiz-desc{font-size:16px;color:#6b7280}
+
+/* Progress */
+.quiz-progress{background:white;border:2px solid #e5e7eb;border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.quiz-progress-info{display:flex;align-items:center;gap:12px}
+.quiz-progress-info span{font-family:var(--font-display);font-weight:600;color:var(--binary-blue);font-size:15px}
+.quiz-timer{display:flex;align-items:center;gap:6px;color:var(--odyssey-orange);font-family:var(--font-display);font-weight:600}
+.quiz-progress-bar{width:100%;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--gamer-green),#5FA035);border-radius:4px;transition:width 0.4s}
+
+/* Question Card */
+.question-card{background:white;border:2px solid #e5e7eb;border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.question-number{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--bitstream-blue);color:white;font-family:var(--font-display);font-weight:800;font-size:16px;border-radius:8px;margin-bottom:12px}
+.question-text{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--binary-blue);margin-bottom:20px;line-height:1.5}
+
+.answer-options{display:flex;flex-direction:column;gap:10px}
+.answer-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid #e5e7eb;border-radius:12px;background:white;cursor:pointer;transition:all 0.2s;font-family:var(--font-text);font-size:15px;color:var(--binary-blue);text-align:left;width:100%}
+.answer-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.answer-btn.selected{border-color:var(--bitstream-blue);background:#e0f2fe}
+.answer-btn.correct{border-color:var(--gamer-green);background:#f0fdf4}
+.answer-btn.incorrect{border-color:#DC2626;background:#fef2f2}
+.answer-btn.correct-highlight{border-color:var(--gamer-green);background:#f0fdf4}
+.answer-letter{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;flex-shrink:0;background:#f3f4f6;color:#6b7280;transition:all 0.2s}
+.answer-btn.selected .answer-letter{background:var(--bitstream-blue);color:white}
+.answer-btn.correct .answer-letter{background:var(--gamer-green);color:white}
+.answer-btn.incorrect .answer-letter{background:#DC2626;color:white}
+.answer-btn.correct-highlight .answer-letter{background:var(--gamer-green);color:white}
+
+.feedback-box{margin-top:14px;padding:14px 18px;border-radius:10px;font-size:14px;line-height:1.6}
+.feedback-correct{background:#f0fdf4;border:1px solid var(--gamer-green);color:#166534}
+.feedback-incorrect{background:#fef2f2;border:1px solid #DC2626;color:#991b1b}
+.feedback-label{font-family:var(--font-display);font-weight:700;margin-bottom:4px}
+
+/* Question nav dots */
+.question-nav{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+.q-dot{width:40px;height:40px;border-radius:8px;border:2px solid #e5e7eb;background:white;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);cursor:pointer;transition:all 0.2s}
+.q-dot.active{border-color:var(--bitstream-blue);background:#e0f2fe;box-shadow:0 0 0 3px rgba(85,200,232,0.3)}
+.q-dot.answered{border-color:var(--gamer-green);background:#f0fdf4;color:var(--gamer-green)}
+.q-dot.wrong{border-color:#DC2626;background:#fef2f2;color:#DC2626}
+
+/* Submit/Results */
+.quiz-actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:white}
+.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,0.4);transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,var(--gamer-green),#5FA035);color:white}
+.btn-green:hover{box-shadow:0 4px 16px rgba(118,192,67,0.4)}
+.btn-secondary{background:white;color:var(--binary-blue);border:2px solid #d1d5db}
+.btn-secondary:hover{border-color:#9ca3af}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn svg{width:18px;height:18px}
+
+/* Results card */
+.results-card{background:white;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.results-icon{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px}
+.results-icon.pass{background:var(--gamer-green)}
+.results-icon.fail{background:var(--odyssey-orange)}
+.results-score{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--binary-blue);margin-bottom:4px}
+.results-pct{font-size:18px;color:#6b7280;margin-bottom:20px}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px}
+
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+
+@media(max-width:768px){
+  .quiz-title{font-size:24px}
+  .quiz-container{padding:24px 16px 60px}
+  .bottom-nav,.quiz-actions{flex-direction:column}
+  .bottom-nav .btn,.quiz-actions .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="oao-header">
+  <div class="oao-header-inner">
+    <div class="oao-logo-area">
+      <svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/>
+        <path d="M20 8 C12 8 8 14 8 20 C8 28 14 32 20 32 C26 32 32 28 32 20 C32 14 28 8 20 8Z" fill="var(--binary-blue)" opacity="0.3"/>
+        <path d="M14 18 Q20 12 26 18 L24 22 Q20 18 16 22 Z" fill="white"/>
+        <circle cx="17" cy="20" r="1.5" fill="white"/><circle cx="23" cy="20" r="1.5" fill="white"/>
+        <path d="M15 24 Q20 28 25 24" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="white">Optima</text>
+        <text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,0.7)" letter-spacing="2">ACADEMY ONLINE</text>
+      </svg>
+      <div class="oao-header-divider"></div>
+      <div>
+        <div class="oao-header-course">Driver's Education</div>
+        <div class="oao-header-sub">Florida High School</div>
+      </div>
+    </div>
+    <div class="oao-xp-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      250 XP
+    </div>
+  </div>
+</header>
+
+<nav class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="#">Course Home</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="#">Unit 1</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="#">Lesson 1.1</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span class="current">Knowledge Check</span>
+  </div>
+</nav>
+
+<main class="quiz-container">
+  <div class="quiz-header">
+    <div class="quiz-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      KNOWLEDGE CHECK
+    </div>
+    <h1 class="quiz-title">Lesson 1.1 Knowledge Check</h1>
+    <p class="quiz-desc">5 questions to verify your understanding. You'll get instant feedback on each answer.</p>
+  </div>
+
+  <div id="quizContent"></div>
+
+  <div class="bottom-nav">
+    <a href="#" class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Lesson 1.1
+    </a>
+    <a href="#" class="btn btn-primary" id="nextLessonBtn" style="display:none;">
+      Next: Lesson 1.2 — The IPDE Process
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</main>
+
+<script>
+const questions = [
+  {
+    id: 1,
+    question: "In Florida, driving is legally considered a:",
+    options: [
+      "Constitutional right guaranteed to all citizens",
+      "Privilege that can be earned and revoked",
+      "Requirement once you turn 16",
+      "Right granted after passing a written test"
+    ],
+    correct: 1,
+    feedback: {
+      correct: "Driving is a privilege, not a right. Florida can grant, restrict, or revoke your license based on your behavior and compliance with traffic laws.",
+      incorrect: "Driving is a privilege — not a right. Unlike constitutional rights, your driver's license can be taken away if you violate traffic laws or fail to meet requirements."
+    }
+  },
+  {
+    id: 2,
+    question: "According to NHTSA data, what percentage of crashes are caused by human error?",
+    options: [
+      "About 60%",
+      "About 75%",
+      "About 94%",
+      "About 50%"
+    ],
+    correct: 2,
+    feedback: {
+      correct: "Approximately 94% of serious crashes are caused by human error — including distracted driving, speeding, impairment, and poor decision-making. This is exactly why driver education matters.",
+      incorrect: "The answer is approximately 94%. Nearly all serious crashes are caused by human error, which is why learning proper driving skills and decision-making is so critical."
+    }
+  },
+  {
+    id: 3,
+    question: "What does IPDE stand for in the context of driving?",
+    options: [
+      "Inspect, Plan, Drive, Evaluate",
+      "Identify, Predict, Decide, Execute",
+      "Indicate, Prepare, Drive, Exit",
+      "Inspect, Predict, Determine, Execute"
+    ],
+    correct: 1,
+    feedback: {
+      correct: "IPDE stands for Identify, Predict, Decide, Execute. This four-step mental process helps you continuously scan for and respond to hazards while driving.",
+      incorrect: "IPDE stands for Identify, Predict, Decide, Execute. You'll learn this process in detail in Lesson 1.2 — it's the foundation of safe driving decision-making."
+    }
+  },
+  {
+    id: 4,
+    question: "Which of the following makes Florida's driving environment uniquely challenging?",
+    options: [
+      "All roads have speed limits under 45 mph",
+      "There are no pedestrians or cyclists on roads",
+      "Tourist traffic, sudden storms, and diverse road users",
+      "Florida has the lowest crash rate in the nation"
+    ],
+    correct: 2,
+    feedback: {
+      correct: "Florida's unique challenges include millions of tourist drivers unfamiliar with local roads, sudden afternoon thunderstorms, diverse road users (pedestrians, cyclists, scooters), and high-speed highways alongside residential areas.",
+      incorrect: "Florida's driving environment is uniquely challenging because of tourist traffic, sudden thunderstorms, diverse road users (pedestrians, cyclists, scooters, trucks), and a mix of high-speed highways and residential zones."
+    }
+  },
+  {
+    id: 5,
+    question: "What is the primary goal of defensive driving?",
+    options: [
+      "To arrive at your destination as quickly as possible",
+      "To follow every traffic law perfectly at all times",
+      "To anticipate and respond to hazards to prevent crashes",
+      "To avoid getting pulled over by law enforcement"
+    ],
+    correct: 2,
+    feedback: {
+      correct: "Defensive driving is about anticipating danger, recognizing hazards early, and making smart decisions to prevent crashes — even when other drivers make mistakes.",
+      incorrect: "While following laws is important, the primary goal of defensive driving is to anticipate and respond to hazards proactively — preventing crashes before they happen, even when other drivers are making mistakes."
+    }
+  }
+];
+
+let currentQ = 0;
+let answers = {};
+let submitted = false;
+
+function render() {
+  const container = document.getElementById('quizContent');
+  
+  if (submitted) {
+    showResults();
+    return;
+  }
+  
+  const q = questions[currentQ];
+  const ans = answers[q.id];
+  
+  container.innerHTML = `
+    <!-- Progress -->
+    <div class="quiz-progress">
+      <div class="quiz-progress-info">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span>Question ${currentQ + 1} of ${questions.length}</span>
+      </div>
+      <span style="font-size:14px;color:#6b7280">${Object.keys(answers).filter(k => answers[k].submitted).length} answered</span>
+    </div>
+    <div class="quiz-progress-bar" style="margin-bottom:24px">
+      <div class="quiz-progress-fill" style="width:${((currentQ + 1) / questions.length) * 100}%"></div>
+    </div>
+
+    <!-- Question Nav -->
+    <div class="question-nav">
+      ${questions.map((qq, i) => {
+        const a = answers[qq.id];
+        let cls = '';
+        if (i === currentQ) cls = 'active';
+        if (a?.submitted && a.selected === qq.correct) cls += ' answered';
+        if (a?.submitted && a.selected !== qq.correct) cls += ' wrong';
+        return `<button class="q-dot ${cls}" onclick="goTo(${i})">${i + 1}</button>`;
+      }).join('')}
+    </div>
+
+    <!-- Question -->
+    <div class="question-card">
+      <div class="question-number">${currentQ + 1}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answer-options">
+        ${q.options.map((opt, i) => {
+          let cls = '';
+          if (ans?.submitted) {
+            if (i === q.correct) cls = 'correct-highlight';
+            if (i === ans.selected && i !== q.correct) cls = 'incorrect';
+            if (i === ans.selected && i === q.correct) cls = 'correct';
+          } else if (ans?.selected === i) {
+            cls = 'selected';
+          }
+          return `
+            <button class="answer-btn ${cls}" onclick="selectAnswer(${q.id}, ${i})" ${ans?.submitted ? 'disabled' : ''}>
+              <div class="answer-letter">${String.fromCharCode(65 + i)}</div>
+              <span>${opt}</span>
+            </button>`;
+        }).join('')}
+      </div>
+      
+      ${ans?.submitted ? `
+        <div class="feedback-box ${ans.selected === q.correct ? 'feedback-correct' : 'feedback-incorrect'}">
+          <div class="feedback-label">${ans.selected === q.correct ? '✅ Correct!' : '❌ Incorrect'}</div>
+          <p>${ans.selected === q.correct ? q.feedback.correct : q.feedback.incorrect}</p>
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="quiz-actions">
+      <button class="btn btn-secondary" onclick="goTo(${Math.max(0, currentQ - 1)})" ${currentQ === 0 ? 'disabled' : ''}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Previous
+      </button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        ${!ans?.submitted ? `
+          <button class="btn btn-green" onclick="submitAnswer(${q.id})" ${ans?.selected === undefined ? 'disabled' : ''}>
+            Check Answer
+          </button>
+        ` : ''}
+        ${currentQ < questions.length - 1 ? `
+          <button class="btn btn-primary" onclick="goTo(${currentQ + 1})">
+            Next
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        ` : Object.keys(answers).filter(k => answers[k].submitted).length === questions.length ? `
+          <button class="btn btn-green" onclick="finishQuiz()">
+            View Results
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </button>
+        ` : `
+          <span style="font-size:14px;color:#6b7280;display:flex;align-items:center">Answer all questions to see results</span>
+        `}
+      </div>
+    </div>
+  `;
+}
+
+function selectAnswer(qId, optIndex) {
+  if (answers[qId]?.submitted) return;
+  answers[qId] = { ...answers[qId], selected: optIndex };
+  render();
+}
+
+function submitAnswer(qId) {
+  if (answers[qId]?.selected === undefined) return;
+  answers[qId].submitted = true;
+  render();
+}
+
+function goTo(index) {
+  currentQ = index;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function finishQuiz() {
+  submitted = true;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showResults() {
+  let correct = 0;
+  questions.forEach(q => {
+    if (answers[q.id]?.selected === q.correct) correct++;
+  });
+  const pct = Math.round((correct / questions.length) * 100);
+  const passed = pct >= 80;
+  const xp = correct * 20;
+
+  const container = document.getElementById('quizContent');
+  container.innerHTML = `
+    <div class="results-card">
+      <div class="results-icon ${passed ? 'pass' : 'fail'}">
+        ${passed ? '✅' : '📝'}
+      </div>
+      <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">
+        ${passed ? 'Knowledge Check Passed!' : 'Keep Reviewing!'}
+      </div>
+      <div class="results-score">${pct}%</div>
+      <div class="results-pct">${correct} of ${questions.length} correct</div>
+      <div class="results-xp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        +${xp} XP Earned!
+      </div>
+      <p style="margin-top:20px;color:#6b7280;max-width:500px;margin-left:auto;margin-right:auto">
+        ${passed 
+          ? "Great work! You've demonstrated a solid understanding of why driving is a privilege and why defensive driving matters. You're ready for Lesson 1.2!" 
+          : "You need 80% to pass. Review the lesson material and try again — you'll get it!"}
+      </p>
+    </div>
+
+    <!-- Review -->
+    <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">Answer Review</h2>
+    ${questions.map((q, i) => {
+      const a = answers[q.id];
+      const isCorrect = a?.selected === q.correct;
+      return `
+        <div style="border:2px solid ${isCorrect ? 'var(--gamer-green)' : '#DC2626'};background:${isCorrect ? '#f0fdf4' : '#fef2f2'};border-radius:12px;padding:16px 20px;margin-bottom:12px">
+          <div style="display:flex;align-items:start;gap:12px">
+            <span style="font-size:20px">${isCorrect ? '✅' : '❌'}</span>
+            <div>
+              <p style="font-weight:600;color:var(--binary-blue);margin-bottom:6px">Q${i+1}: ${q.question}</p>
+              <p style="font-size:14px;color:${isCorrect ? '#166534' : '#991b1b'}">Your answer: ${q.options[a?.selected]}</p>
+              ${!isCorrect ? `<p style="font-size:14px;color:#166534;margin-top:4px">Correct: ${q.options[q.correct]}</p>` : ''}
+              <p style="font-size:14px;color:#6b7280;margin-top:6px">${isCorrect ? q.feedback.correct : q.feedback.incorrect}</p>
+            </div>
+          </div>
+        </div>`;
+    }).join('')}
+
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+      ${!passed ? `
+        <button class="btn btn-secondary" onclick="retake()">Retake Quiz</button>
+      ` : ''}
+      <button class="btn btn-primary" onclick="document.getElementById('nextLessonBtn').scrollIntoView({behavior:'smooth'})">
+        ${passed ? 'Continue to Lesson 1.2' : 'Back to Lesson 1.1'}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  `;
+  
+  if (passed) document.getElementById('nextLessonBtn').style.display = 'inline-flex';
+}
+
+function retake() {
+  currentQ = 0;
+  answers = {};
+  submitted = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+
+</body>
+</html>

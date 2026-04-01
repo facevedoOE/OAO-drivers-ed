@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 1.1 — Rate the Risk</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --binary-blue: #0E1C42;
+  --bitstream-blue: #55C8E8;
+  --gateway-gold: #C7922C;
+  --portal-purple: #67308F;
+  --gamer-green: #76C043;
+  --odyssey-orange: #F78F1E;
+  --dark-bitstream: #0E5568;
+  --font-display: 'Wix Madefor Display', sans-serif;
+  --font-text: 'Wix Madefor Text', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-text); font-size: 16px; line-height: 1.7; color: #374151; background: #f8f9fa; }
+
+/* Header */
+.oao-header { background: var(--binary-blue); color: white; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(14,28,66,0.3); }
+.oao-header-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.oao-logo-area { display: flex; align-items: center; gap: 16px; }
+.oao-header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); }
+.oao-header-course { font-family: var(--font-display); font-size: 14px; color: var(--bitstream-blue); font-weight: 600; }
+.oao-header-sub { font-size: 12px; color: rgba(255,255,255,0.7); }
+.oao-xp-badge { display: flex; align-items: center; gap: 8px; background: var(--gateway-gold); color: white; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: var(--font-display); }
+
+/* Breadcrumb */
+.breadcrumb-bar { background: white; border-bottom: 1px solid #e5e7eb; }
+.breadcrumb-inner { max-width: 900px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #6b7280; flex-wrap: wrap; }
+.breadcrumb-inner a { color: #6b7280; text-decoration: none; transition: color 0.2s; }
+.breadcrumb-inner a:hover { color: var(--bitstream-blue); }
+.breadcrumb-inner .current { color: var(--binary-blue); font-weight: 600; }
+.breadcrumb-sep { width: 16px; height: 16px; fill: none; stroke: #9ca3af; stroke-width: 2; }
+
+/* Main */
+.activity-container { max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* Activity Header */
+.activity-header { margin-bottom: 32px; }
+.activity-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: linear-gradient(135deg, var(--bitstream-blue), var(--dark-bitstream)); color: white; font-size: 13px; font-weight: 700; font-family: var(--font-display); border-radius: 20px; margin-bottom: 16px; }
+.activity-title { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--binary-blue); margin-bottom: 10px; }
+.activity-desc { font-size: 17px; color: #6b7280; line-height: 1.6; }
+
+/* Progress Bar */
+.progress-section { background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+.progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.progress-label { font-family: var(--font-display); font-weight: 600; color: var(--binary-blue); font-size: 15px; }
+.progress-count { font-family: var(--font-display); font-weight: 700; color: var(--bitstream-blue); font-size: 15px; }
+.progress-bar-track { width: 100%; height: 10px; background: #e5e7eb; border-radius: 6px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--bitstream-blue), var(--dark-bitstream)); border-radius: 6px; transition: width 0.5s ease; }
+
+/* Scenario Card */
+.scenario-card { background: white; border: 2px solid #e5e7eb; border-radius: 16px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.scenario-visual { aspect-ratio: 16/9; position: relative; overflow: hidden; }
+.scenario-number { position: absolute; top: 16px; left: 16px; background: var(--binary-blue); color: white; padding: 6px 14px; border-radius: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; z-index: 2; }
+.scenario-content { padding: 24px; }
+.scenario-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--binary-blue); margin-bottom: 8px; }
+.scenario-text { color: #6b7280; margin-bottom: 20px; line-height: 1.7; }
+
+/* Risk Rating Buttons */
+.risk-options { display: flex; flex-direction: column; gap: 10px; }
+.risk-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 20px; border: 2px solid #e5e7eb; border-radius: 12px;
+  background: white; cursor: pointer; transition: all 0.2s;
+  font-family: var(--font-text); font-size: 15px; color: var(--binary-blue);
+  text-align: left; width: 100%;
+}
+.risk-btn:hover { border-color: var(--bitstream-blue); background: #f0f9ff; }
+.risk-btn.selected { border-color: var(--bitstream-blue); background: #e0f2fe; }
+.risk-btn.correct { border-color: var(--gamer-green); background: #f0fdf4; }
+.risk-btn.incorrect { border-color: var(--odyssey-orange); background: #fff7ed; }
+.risk-level-dot {
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 14px; color: white; flex-shrink: 0;
+}
+.risk-low { background: var(--gamer-green); }
+.risk-moderate { background: var(--gateway-gold); }
+.risk-high { background: var(--odyssey-orange); }
+.risk-critical { background: #DC2626; }
+
+/* Explain Box */
+.explain-box { margin-top: 16px; }
+.explain-label { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--binary-blue); margin-bottom: 6px; }
+.explain-textarea {
+  width: 100%; min-height: 80px; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 10px;
+  font-family: var(--font-text); font-size: 15px; resize: vertical; color: #374151; line-height: 1.6;
+  transition: border-color 0.2s;
+}
+.explain-textarea:focus { border-color: var(--bitstream-blue); outline: none; }
+
+/* Submit Button */
+.submit-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+.btn-submit {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 10px;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px; border: none; cursor: pointer;
+  transition: all 0.2s; color: white;
+  background: linear-gradient(135deg, var(--bitstream-blue), var(--dark-bitstream));
+}
+.btn-submit:hover { box-shadow: 0 4px 16px rgba(85,200,232,0.4); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Feedback */
+.feedback-box { margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 15px; }
+.feedback-correct { background: #f0fdf4; border: 2px solid var(--gamer-green); color: #166534; }
+.feedback-incorrect { background: #fff7ed; border: 2px solid var(--odyssey-orange); color: #9a3412; }
+.feedback-label { font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
+
+/* Results */
+.results-card { background: white; border: 2px solid var(--gamer-green); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+.results-score { font-family: var(--font-display); font-size: 56px; font-weight: 800; color: var(--binary-blue); }
+.results-label { font-size: 18px; color: #6b7280; margin-bottom: 16px; }
+.results-xp { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gateway-gold); padding: 10px 24px; border-radius: 12px; font-family: var(--font-display); font-weight: 700; color: var(--gateway-gold); font-size: 18px; }
+
+/* Nav buttons */
+.bottom-nav { margin-top: 48px; padding-top: 32px; border-top: 2px solid #e5e7eb; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 15px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-primary { background: linear-gradient(135deg, var(--bitstream-blue), var(--dark-bitstream)); color: white; }
+.btn-primary:hover { box-shadow: 0 4px 16px rgba(85,200,232,0.4); }
+.btn-secondary { background: white; color: var(--binary-blue); border: 2px solid #d1d5db; }
+.btn-secondary:hover { border-color: #9ca3af; }
+.btn svg { width: 18px; height: 18px; }
+
+@media (max-width: 768px) {
+  .activity-title { font-size: 26px; }
+  .activity-container { padding: 24px 16px 60px; }
+  .bottom-nav { flex-direction: column; }
+  .bottom-nav .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="oao-header">
+  <div class="oao-header-inner">
+    <div class="oao-logo-area">
+      <svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/>
+        <path d="M20 8 C12 8 8 14 8 20 C8 28 14 32 20 32 C26 32 32 28 32 20 C32 14 28 8 20 8Z" fill="var(--binary-blue)" opacity="0.3"/>
+        <path d="M14 18 Q20 12 26 18 L24 22 Q20 18 16 22 Z" fill="white"/>
+        <circle cx="17" cy="20" r="1.5" fill="white"/><circle cx="23" cy="20" r="1.5" fill="white"/>
+        <path d="M15 24 Q20 28 25 24" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="white">Optima</text>
+        <text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,0.7)" letter-spacing="2">ACADEMY ONLINE</text>
+      </svg>
+      <div class="oao-header-divider"></div>
+      <div>
+        <div class="oao-header-course">Driver's Education</div>
+        <div class="oao-header-sub">Florida High School</div>
+      </div>
+    </div>
+    <div class="oao-xp-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span id="xpDisplay">100 XP</span>
+    </div>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<nav class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="#">Course Home</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="#">Unit 1: Driving Defensively</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span class="current">Activity: Rate the Risk</span>
+  </div>
+</nav>
+
+<main class="activity-container">
+  <!-- Activity Header -->
+  <div class="activity-header">
+    <div class="activity-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      INTERACTIVE ACTIVITY
+    </div>
+    <h1 class="activity-title">🚦 Rate the Risk</h1>
+    <p class="activity-desc">Read each driving scenario and rate the risk level. Then explain your reasoning. Think carefully — real drivers face decisions like these every day.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-section">
+    <div class="progress-row">
+      <span class="progress-label">Scenario Progress</span>
+      <span class="progress-count" id="progressCount">0 / 5 Complete</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Scenarios Container -->
+  <div id="scenariosContainer"></div>
+
+  <!-- Results (hidden initially) -->
+  <div id="resultsSection" style="display: none;">
+    <div class="results-card">
+      <div class="results-score" id="finalScore">0/5</div>
+      <div class="results-label">Scenarios Rated Correctly</div>
+      <div style="margin-top: 16px;">
+        <div class="results-xp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          +150 XP Earned!
+        </div>
+      </div>
+      <p style="margin-top: 16px; color: #6b7280; font-size: 15px;" id="resultsMessage"></p>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="#" class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Lesson 1.1
+    </a>
+    <a href="#" class="btn btn-primary">
+      Next: Knowledge Check
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</main>
+
+<script>
+const scenarios = [
+  {
+    id: 1,
+    title: "Texting at a Red Light",
+    description: "You're stopped at a red light and decide to check a text message on your phone. The light is still red, so you figure it's safe since the car isn't moving.",
+    correctRisk: "high",
+    explanation: "Even at a red light, texting shifts your attention away from the road. You might miss the light change, fail to notice an emergency vehicle, or not see a pedestrian crossing. Florida law prohibits texting while driving — and 'while driving' includes being stopped in traffic.",
+    scene: "traffic-light"
+  },
+  {
+    id: 2,
+    title: "Driving 5 MPH Over the Limit on an Empty Road",
+    description: "It's 10 PM on a straight, dry, well-lit suburban road with no other cars visible. The speed limit is 35 mph, and you're going 40 mph.",
+    correctRisk: "moderate",
+    explanation: "While the conditions seem safe, exceeding the speed limit — even by 5 mph — increases stopping distance and is illegal. Animals, pedestrians, or cars from driveways can appear suddenly. 'Empty' roads are where many single-vehicle crashes happen because drivers let their guard down.",
+    scene: "night-road"
+  },
+  {
+    id: 3,
+    title: "Following a Friend's Car Closely",
+    description: "Your friend is leading you to a new restaurant. To avoid getting lost, you're following their car bumper-to-bumper at 45 mph on a busy road.",
+    correctRisk: "critical",
+    explanation: "Tailgating is one of the most dangerous driving behaviors. At 45 mph, you need at minimum 3 seconds of following distance — about 200 feet. Following bumper-to-bumper means you have virtually zero time to react if they brake suddenly. Use GPS navigation instead of tailgating.",
+    scene: "tailgating"
+  },
+  {
+    id: 4,
+    title: "Changing Lanes Without Checking Blind Spots",
+    description: "You're on a four-lane highway and want to move to the left lane. You check your mirrors and they look clear, so you signal and begin moving over without turning your head.",
+    correctRisk: "high",
+    explanation: "Mirrors have blind spots — areas they simply cannot show you. A vehicle (especially a motorcycle) can be completely hidden in your blind spot. The head check (looking over your shoulder) is essential every time you change lanes. Skipping it is a leading cause of sideswipe crashes.",
+    scene: "highway"
+  },
+  {
+    id: 5,
+    title: "Driving with Adjusted Mirrors and Seatbelt",
+    description: "Before starting the car, you adjust your seat, mirrors, and steering wheel. You buckle your seatbelt, put your phone in the glovebox, and check your surroundings before backing out.",
+    correctRisk: "low",
+    explanation: "This is textbook safe behavior. Pre-drive checks, mirror adjustment, seatbelt use, and phone storage all dramatically reduce crash risk. This is exactly the kind of routine that separates safe drivers from everyone else. Low risk — but never zero risk, because driving always carries some level of risk.",
+    scene: "pre-drive"
+  }
+];
+
+const riskLevels = [
+  { key: "low", label: "Low Risk", color: "#76C043", class: "risk-low" },
+  { key: "moderate", label: "Moderate Risk", color: "#C7922C", class: "risk-moderate" },
+  { key: "high", label: "High Risk", color: "#F78F1E", class: "risk-high" },
+  { key: "critical", label: "Critical Risk", color: "#DC2626", class: "risk-critical" }
+];
+
+// Scene SVGs
+const sceneSVGs = {
+  "traffic-light": `<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="900" height="400" fill="#1e293b"/>
+    <rect x="0" y="250" width="900" height="150" fill="#374151"/>
+    <rect x="350" y="250" width="200" height="150" fill="#4B5563"/>
+    <line x1="450" y1="260" x2="450" y2="400" stroke="#FCD34D" stroke-width="3" stroke-dasharray="15,10"/>
+    <line x1="360" y1="250" x2="360" y2="400" stroke="white" stroke-width="2"/>
+    <line x1="540" y1="250" x2="540" y2="400" stroke="white" stroke-width="2"/>
+    <rect x="420" y="50" width="60" height="140" rx="8" fill="#1f2937" stroke="#4B5563" stroke-width="2"/>
+    <circle cx="450" cy="85" r="18" fill="#EF4444"/>
+    <circle cx="450" cy="125" r="18" fill="#374151"/>
+    <circle cx="450" cy="165" r="18" fill="#374151"/>
+    <rect x="446" y="190" width="8" height="60" fill="#4B5563"/>
+    <g transform="translate(430, 320)"><rect x="-20" y="-10" width="40" height="20" rx="6" fill="#55C8E8"/><rect x="-14" y="-15" width="28" height="8" rx="4" fill="#55C8E8" opacity="0.7"/></g>
+    <rect x="415" y="330" width="30" height="6" rx="2" fill="#BAE6FD" opacity="0.5"/>
+    <text x="450" y="385" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="rgba(255,255,255,0.5)">Stopped at red light — phone in hand</text>
+  </svg>`,
+  "night-road": `<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="900" height="400" fill="#0f172a"/>
+    <circle cx="150" cy="60" r="25" fill="#FCD34D" opacity="0.3"/>
+    <circle cx="150" cy="60" r="12" fill="#FCD34D" opacity="0.7"/>
+    <rect x="0" y="220" width="900" height="180" fill="#1e293b"/>
+    <rect x="200" y="220" width="500" height="180" fill="#374151"/>
+    <line x1="450" y1="230" x2="450" y2="400" stroke="#FCD34D" stroke-width="3" stroke-dasharray="20,12"/>
+    <rect x="680" y="160" width="30" height="70" rx="2" fill="#374151"/>
+    <rect x="670" y="130" width="50" height="40" rx="4" fill="white" stroke="#374151" stroke-width="2"/>
+    <text x="695" y="155" text-anchor="middle" font-family="var(--font-display)" font-size="18" font-weight="800" fill="#374151">35</text>
+    <g transform="translate(430, 330)"><rect x="-20" y="-10" width="40" height="20" rx="6" fill="#55C8E8"/><circle cx="-10" cy="12" r="4" fill="#374151"/><circle cx="10" cy="12" r="4" fill="#374151"/></g>
+    <text x="580" y="340" font-family="var(--font-display)" font-size="16" font-weight="700" fill="var(--odyssey-orange)">40 MPH</text>
+    <text x="450" y="385" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="rgba(255,255,255,0.5)">10 PM — empty suburban road, going 5 over</text>
+  </svg>`,
+  "tailgating": `<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="daysky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7DD3FC"/><stop offset="100%" stop-color="#BAE6FD"/></linearGradient></defs>
+    <rect width="900" height="400" fill="url(#daysky)"/>
+    <rect x="0" y="200" width="900" height="200" fill="#6B7280"/>
+    <line x1="450" y1="210" x2="450" y2="400" stroke="#FCD34D" stroke-width="3" stroke-dasharray="15,10"/>
+    <line x1="250" y1="200" x2="250" y2="400" stroke="white" stroke-width="2"/>
+    <line x1="650" y1="200" x2="650" y2="400" stroke="white" stroke-width="2"/>
+    <g transform="translate(420, 270)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#C7922C"/><rect x="-16" y="-17" width="32" height="10" rx="4" fill="#C7922C" opacity="0.8"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/><rect x="-18" y="7" width="8" height="4" rx="1" fill="#DC2626" opacity="0.8"/><rect x="10" y="7" width="8" height="4" rx="1" fill="#DC2626" opacity="0.8"/></g>
+    <g transform="translate(420, 340)"><rect x="-24" y="-12" width="48" height="24" rx="8" fill="#55C8E8"/><rect x="-17" y="-18" width="34" height="10" rx="4" fill="#55C8E8" opacity="0.8"/><circle cx="-13" cy="14" r="5" fill="#374151"/><circle cx="13" cy="14" r="5" fill="#374151"/></g>
+    <line x1="395" y1="295" x2="395" y2="325" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3"/>
+    <line x1="445" y1="295" x2="445" y2="325" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="490" y="318" font-family="var(--font-display)" font-size="12" font-weight="700" fill="#DC2626">TOO CLOSE!</text>
+    <text x="450" y="390" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="rgba(255,255,255,0.7)">Following bumper-to-bumper at 45 mph</text>
+  </svg>`,
+  "highway": `<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="hwysky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#DBEAFE"/></linearGradient></defs>
+    <rect width="900" height="400" fill="url(#hwysky)"/>
+    <rect x="0" y="180" width="900" height="220" fill="#6B7280"/>
+    <line x1="300" y1="180" x2="300" y2="400" stroke="white" stroke-width="3" stroke-dasharray="15,10"/>
+    <line x1="600" y1="180" x2="600" y2="400" stroke="white" stroke-width="3" stroke-dasharray="15,10"/>
+    <line x1="150" y1="180" x2="150" y2="400" stroke="white" stroke-width="3"/>
+    <line x1="750" y1="180" x2="750" y2="400" stroke="white" stroke-width="3"/>
+    <g transform="translate(430, 300)"><rect x="-24" y="-12" width="48" height="24" rx="8" fill="#55C8E8"/><rect x="-17" y="-18" width="34" height="10" rx="4" fill="#55C8E8" opacity="0.8"/><circle cx="-13" cy="14" r="5" fill="#374151"/><circle cx="13" cy="14" r="5" fill="#374151"/></g>
+    <path d="M430 280 L500 260" stroke="var(--odyssey-orange)" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+    <defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--odyssey-orange)"/></marker></defs>
+    <g transform="translate(540, 280)"><rect x="-20" y="-10" width="40" height="20" rx="7" fill="#F78F1E"/><circle cx="-10" cy="12" r="4" fill="#374151"/><circle cx="10" cy="12" r="4" fill="#374151"/></g>
+    <text x="560" y="260" font-family="var(--font-display)" font-size="12" font-weight="700" fill="var(--odyssey-orange)">BLIND SPOT</text>
+    <text x="450" y="385" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="rgba(255,255,255,0.7)">Lane change — mirrors only, no head check</text>
+  </svg>`,
+  "pre-drive": `<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="900" height="400" fill="#E0F2FE"/>
+    <rect x="150" y="100" width="600" height="250" rx="20" fill="#374151"/>
+    <rect x="160" y="110" width="580" height="200" rx="15" fill="#0f172a"/>
+    <rect x="170" y="120" width="560" height="180" rx="10" fill="#1e293b"/>
+    <rect x="200" y="130" width="200" height="30" rx="6" fill="#374151"/>
+    <circle cx="220" cy="145" r="8" fill="var(--gamer-green)"/>
+    <text x="240" y="150" font-family="var(--font-display)" font-size="12" font-weight="600" fill="white">Mirrors ✓</text>
+    <rect x="200" y="170" width="200" height="30" rx="6" fill="#374151"/>
+    <circle cx="220" cy="185" r="8" fill="var(--gamer-green)"/>
+    <text x="240" y="190" font-family="var(--font-display)" font-size="12" font-weight="600" fill="white">Seatbelt ✓</text>
+    <rect x="200" y="210" width="200" height="30" rx="6" fill="#374151"/>
+    <circle cx="220" cy="225" r="8" fill="var(--gamer-green)"/>
+    <text x="240" y="230" font-family="var(--font-display)" font-size="12" font-weight="600" fill="white">Phone Stored ✓</text>
+    <rect x="200" y="250" width="200" height="30" rx="6" fill="#374151"/>
+    <circle cx="220" cy="265" r="8" fill="var(--gamer-green)"/>
+    <text x="240" y="270" font-family="var(--font-display)" font-size="12" font-weight="600" fill="white">Seat Adjusted ✓</text>
+    <rect x="500" y="150" width="200" height="130" rx="10" fill="#374151"/>
+    <circle cx="600" cy="200" r="30" fill="#1e293b" stroke="var(--bitstream-blue)" stroke-width="2"/>
+    <text x="600" y="205" text-anchor="middle" font-family="var(--font-display)" font-size="11" font-weight="700" fill="var(--gamer-green)">READY</text>
+    <text x="600" y="260" text-anchor="middle" font-family="var(--font-display)" font-size="12" fill="rgba(255,255,255,0.6)">All checks complete</text>
+    <text x="450" y="370" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="var(--binary-blue)">Full pre-drive checklist completed before starting</text>
+  </svg>`
+};
+
+let currentScenario = 0;
+let answers = {};
+let completed = 0;
+
+function renderScenario(index) {
+  const s = scenarios[index];
+  const container = document.getElementById('scenariosContainer');
+  const prev = answers[s.id];
+  
+  container.innerHTML = `
+    <div class="scenario-card">
+      <div class="scenario-visual">
+        <div class="scenario-number">Scenario ${index + 1} of ${scenarios.length}</div>
+        ${sceneSVGs[s.scene]}
+      </div>
+      <div class="scenario-content">
+        <h2 class="scenario-title">${s.title}</h2>
+        <p class="scenario-text">${s.description}</p>
+        
+        <div style="font-family: var(--font-display); font-weight: 700; color: var(--binary-blue); margin-bottom: 12px; font-size: 15px;">Rate the Risk Level:</div>
+        <div class="risk-options" id="riskOptions">
+          ${riskLevels.map(level => `
+            <button class="risk-btn ${prev?.selected === level.key ? (prev.submitted ? (prev.selected === s.correctRisk ? 'correct' : 'incorrect') : 'selected') : ''}" 
+                    data-risk="${level.key}" 
+                    ${prev?.submitted ? 'disabled' : ''}
+                    onclick="selectRisk('${level.key}', ${s.id})">
+              <div class="risk-level-dot ${level.class}">${level.key === 'low' ? 'L' : level.key === 'moderate' ? 'M' : level.key === 'high' ? 'H' : 'C'}</div>
+              <span>${level.label}</span>
+              ${prev?.submitted && level.key === s.correctRisk ? '<span style="margin-left:auto;color:#166534;font-weight:700;">✓ Correct</span>' : ''}
+            </button>
+          `).join('')}
+        </div>
+
+        <div class="explain-box">
+          <div class="explain-label">Explain your reasoning:</div>
+          <textarea class="explain-textarea" id="explainText" placeholder="Why did you choose this risk level? What factors did you consider?" ${prev?.submitted ? 'disabled' : ''}>${prev?.reasoning || ''}</textarea>
+        </div>
+
+        ${prev?.submitted ? `
+          <div class="feedback-box ${prev.selected === s.correctRisk ? 'feedback-correct' : 'feedback-incorrect'}">
+            <div class="feedback-label">${prev.selected === s.correctRisk ? '✅ Correct!' : '⚠️ Not quite — the correct answer is ' + riskLevels.find(l => l.key === s.correctRisk).label}</div>
+            <p>${s.explanation}</p>
+          </div>
+        ` : `
+          <div class="submit-row">
+            <button class="btn-submit" id="submitBtn" onclick="submitAnswer(${s.id})" ${!prev?.selected ? 'disabled' : ''}>
+              Submit Answer
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        `}
+      </div>
+    </div>
+
+    <!-- Scenario navigation -->
+    <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 16px;">
+      ${scenarios.map((sc, i) => `
+        <button onclick="goToScenario(${i})" style="
+          width: 40px; height: 40px; border-radius: 8px; border: 2px solid ${i === index ? 'var(--bitstream-blue)' : answers[sc.id]?.submitted ? 'var(--gamer-green)' : '#e5e7eb'};
+          background: ${i === index ? '#e0f2fe' : answers[sc.id]?.submitted ? '#f0fdf4' : 'white'};
+          color: ${answers[sc.id]?.submitted ? 'var(--gamer-green)' : 'var(--binary-blue)'};
+          font-family: var(--font-display); font-weight: 700; font-size: 15px; cursor: pointer;
+          ${i === index ? 'box-shadow: 0 0 0 3px rgba(85,200,232,0.3);' : ''}
+        ">${i + 1}</button>
+      `).join('')}
+    </div>
+
+    <!-- Next/Prev -->
+    <div style="display: flex; justify-content: space-between; gap: 12px;">
+      <button class="btn btn-secondary" onclick="goToScenario(${Math.max(0, index - 1)})" ${index === 0 ? 'disabled style="opacity:0.4"' : ''}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        Previous
+      </button>
+      ${index === scenarios.length - 1 && completed === scenarios.length ? `
+        <button class="btn btn-primary" onclick="showResults()">
+          View Results
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </button>
+      ` : `
+        <button class="btn btn-primary" onclick="goToScenario(${Math.min(scenarios.length - 1, index + 1)})" ${index === scenarios.length - 1 ? 'disabled style="opacity:0.4"' : ''}>
+          Next Scenario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      `}
+    </div>
+  `;
+}
+
+function selectRisk(level, scenarioId) {
+  if (answers[scenarioId]?.submitted) return;
+  answers[scenarioId] = { ...answers[scenarioId], selected: level };
+  
+  document.querySelectorAll('.risk-btn').forEach(btn => {
+    btn.classList.remove('selected');
+    if (btn.dataset.risk === level) btn.classList.add('selected');
+  });
+  
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) submitBtn.disabled = false;
+}
+
+function submitAnswer(scenarioId) {
+  const reasoning = document.getElementById('explainText')?.value || '';
+  const scenario = scenarios.find(s => s.id === scenarioId);
+  
+  answers[scenarioId] = {
+    ...answers[scenarioId],
+    reasoning,
+    submitted: true
+  };
+  
+  if (!answers[scenarioId].wasCountedComplete) {
+    completed++;
+    answers[scenarioId].wasCountedComplete = true;
+  }
+  
+  // Update progress
+  document.getElementById('progressCount').textContent = `${completed} / ${scenarios.length} Complete`;
+  document.getElementById('progressBar').style.width = `${(completed / scenarios.length) * 100}%`;
+  
+  renderScenario(currentScenario);
+}
+
+function goToScenario(index) {
+  currentScenario = index;
+  renderScenario(index);
+  window.scrollTo({ top: document.querySelector('.scenario-card')?.offsetTop - 80, behavior: 'smooth' });
+}
+
+function showResults() {
+  let correct = 0;
+  scenarios.forEach(s => {
+    if (answers[s.id]?.selected === s.correctRisk) correct++;
+  });
+  
+  document.getElementById('scenariosContainer').style.display = 'none';
+  document.getElementById('resultsSection').style.display = 'block';
+  document.getElementById('finalScore').textContent = `${correct}/${scenarios.length}`;
+  
+  const pct = Math.round((correct / scenarios.length) * 100);
+  document.getElementById('resultsMessage').textContent = pct >= 80 
+    ? "Excellent risk assessment skills! You're developing a sharp eye for danger — exactly what a defensive driver needs." 
+    : pct >= 60 
+    ? "Good effort! Review the scenarios you missed and think about what factors you may have overlooked." 
+    : "Keep studying! Risk assessment is a critical skill. Review the lesson material and try again.";
+}
+
+// Initialize
+renderScenario(0);
+</script>
+
+</body>
+</html>
