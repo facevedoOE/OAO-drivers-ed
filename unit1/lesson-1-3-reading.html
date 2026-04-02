@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1.3 — Sharing the Road: Everyone Belongs</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.lesson-container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.lesson-badge{display:inline-block;padding:4px 14px;background:var(--bitstream-blue);color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;letter-spacing:.5px;margin-bottom:16px}
+.lesson-title{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--binary-blue);line-height:1.2;margin-bottom:12px}
+.lesson-desc{font-size:18px;color:#6b7280;margin-bottom:32px;line-height:1.6}
+.standards-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;margin-bottom:32px;font-size:14px;color:#6b7280}
+.standards-label{font-family:var(--font-display);font-weight:600;color:var(--binary-blue);font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.objectives-box{background:linear-gradient(135deg,#eff6ff,#ecfeff);border:2px solid var(--bitstream-blue);border-radius:12px;padding:24px;margin-bottom:32px}
+.objectives-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--binary-blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.objective-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.objective-item:last-child{margin-bottom:0}
+.objective-check{width:24px;height:24px;background:rgba(85,200,232,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.objective-check svg{width:14px;height:14px}
+.content-block{border:2px solid #e5e7eb;border-radius:12px;padding:24px;margin-bottom:32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.block-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.block-icon{width:32px;height:32px;flex-shrink:0}
+.block-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--binary-blue)}
+.block-body{color:#374151;line-height:1.8}
+.block-body p{margin-bottom:16px}
+.block-body p:last-child{margin-bottom:0}
+.block-read{background:#fff;border-color:#e5e7eb}
+.block-think{background:linear-gradient(135deg,#fffbeb,#fff7ed);border-color:var(--odyssey-orange)}
+.block-fact{background:linear-gradient(135deg,#eff6ff,#e0f2fe);border-color:var(--bitstream-blue)}
+.block-achievement{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:var(--gateway-gold)}
+.key-term{background:rgba(199,146,44,.15);padding:2px 6px;border-radius:4px;font-weight:600;color:var(--binary-blue)}
+/* Road user cards */
+.road-user-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:24px 0}
+.road-user-card{border-radius:16px;padding:24px;text-align:center;border:2px solid #e5e7eb;background:#fff;transition:all .2s}
+.road-user-card:hover{border-color:var(--bitstream-blue);box-shadow:0 4px 16px rgba(85,200,232,.15)}
+.road-user-icon{width:64px;height:64px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:32px}
+.road-user-card h3{font-family:var(--font-display);font-weight:700;color:var(--binary-blue);font-size:16px;margin-bottom:6px}
+.road-user-card p{font-size:14px;color:#6b7280;line-height:1.5}
+/* Law spotlight */
+.law-spotlight{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-left:4px solid var(--gateway-gold);border-radius:0 12px 12px 0;padding:24px;margin:32px 0}
+.law-spotlight-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.law-spotlight-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--gateway-gold)}
+/* Did you know */
+.did-you-know{background:linear-gradient(135deg,#eff6ff,#e0f2fe);border-left:4px solid var(--bitstream-blue);border-radius:0 12px 12px 0;padding:24px;margin:32px 0}
+.did-you-know-header{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--bitstream-blue);margin-bottom:8px}
+/* Vocab */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:20px 0}
+.vocab-card{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:20px;transition:border-color .2s}
+.vocab-card:hover{border-color:var(--bitstream-blue)}
+.vocab-term{font-family:var(--font-display);font-weight:700;color:var(--binary-blue);font-size:16px;margin-bottom:6px}
+.vocab-def{font-size:14px;color:#6b7280;line-height:1.6}
+/* Pro tip */
+.pro-tip{background:#eff6ff;border-left:4px solid var(--bitstream-blue);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+.pro-tip-label{font-weight:700;color:var(--binary-blue);margin-bottom:4px}
+/* Section divider */
+.section-divider{display:flex;align-items:center;gap:16px;margin:40px 0}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,#e5e7eb,transparent)}
+.section-divider-icon{width:40px;height:40px;background:var(--binary-blue);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.section-divider-icon svg{width:20px;height:20px;fill:#fff}
+/* Nav */
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}
+.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4);transform:translateY(-1px)}
+.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}
+.btn-secondary:hover{border-color:#9ca3af}
+.btn-ghost{background:transparent;color:var(--bitstream-blue)}
+.btn svg{width:18px;height:18px}
+/* Hero */
+.hero-image{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hero-image svg{width:100%;height:100%}
+/* Stat cards */
+.stat-callout{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}
+.stat-card{flex:1;min-width:140px;background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:20px;text-align:center}
+.stat-number{font-family:var(--font-display);font-size:28px;font-weight:800;line-height:1.2}
+.stat-label{font-size:13px;color:#6b7280;margin-top:4px}
+@media(max-width:768px){
+.lesson-title{font-size:28px}
+.lesson-container{padding:24px 16px 60px}
+.road-user-grid{grid-template-columns:1fr}
+.stat-callout{flex-direction:column}
+.vocab-grid{grid-template-columns:1fr}
+.bottom-nav{flex-direction:column}
+.bottom-nav .btn{width:100%;justify-content:center}
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeInUp .5s ease-out forwards;opacity:0}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>300 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner">
+<a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<a href="#">Unit 1: Driving Defensively</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<span class="current">Lesson 1.3: Sharing the Road</span>
+</div></nav>
+
+<main class="lesson-container">
+
+<div class="animate-in">
+<div class="lesson-badge">UNIT 1 • LESSON 3</div>
+<h1 class="lesson-title">Sharing the Road: Everyone Belongs</h1>
+<p class="lesson-desc">The road isn't just for cars. Pedestrians, cyclists, and motorcyclists all have a legal right to be there — and as a driver, you have a responsibility to protect them. Here's how.</p>
+</div>
+
+<div class="standards-box animate-in delay-1">
+<div class="standards-label">Florida Standards Alignment</div>
+Describe specific laws and safe driving behavior with vulnerable road users (pedestrians, bicyclists, motorcyclists).
+</div>
+
+<div class="objectives-box animate-in delay-2">
+<div class="objectives-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--bitstream-blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--bitstream-blue)"/></svg>Learning Objectives</div>
+<div class="objective-item"><div class="objective-check"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bitstream-blue)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>Describe Florida laws that protect pedestrians, cyclists, and motorcyclists</span></div>
+<div class="objective-item"><div class="objective-check"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bitstream-blue)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>Explain the 3-foot passing law and when it applies</span></div>
+<div class="objective-item"><div class="objective-check"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bitstream-blue)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>Identify common conflict points between drivers and vulnerable road users</span></div>
+<div class="objective-item"><div class="objective-check"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bitstream-blue)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>Apply safe driving strategies when encountering pedestrians, cyclists, and motorcyclists</span></div>
+</div>
+
+<!-- Hero: Street scene with multiple road users -->
+<div class="hero-image animate-in delay-3">
+<svg viewBox="0 0 900 506" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#60A5FA"/><stop offset="60%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#DBEAFE"/></linearGradient>
+</defs>
+<!-- Sky -->
+<rect width="900" height="250" fill="url(#sky)"/>
+<!-- Buildings -->
+<rect x="20" y="120" width="120" height="130" rx="4" fill="#e5e7eb"/><rect x="35" y="135" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="75" y="135" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="35" y="170" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="75" y="170" width="25" height="20" rx="2" fill="#BAE6FD"/>
+<rect x="160" y="100" width="100" height="150" rx="4" fill="#d1d5db"/><rect x="175" y="115" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="205" y="115" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="175" y="145" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="205" y="145" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="175" y="175" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="205" y="175" width="20" height="18" rx="2" fill="#BAE6FD"/>
+<rect x="680" y="110" width="110" height="140" rx="4" fill="#e5e7eb"/><rect x="695" y="125" width="22" height="18" rx="2" fill="#BAE6FD"/><rect x="730" y="125" width="22" height="18" rx="2" fill="#BAE6FD"/><rect x="695" y="155" width="22" height="18" rx="2" fill="#BAE6FD"/><rect x="730" y="155" width="22" height="18" rx="2" fill="#BAE6FD"/>
+<rect x="800" y="130" width="100" height="120" rx="4" fill="#d1d5db"/><rect x="815" y="145" width="20" height="18" rx="2" fill="#BAE6FD"/><rect x="845" y="145" width="20" height="18" rx="2" fill="#BAE6FD"/>
+<!-- Sidewalks -->
+<rect x="0" y="245" width="900" height="15" fill="#d1d5db"/>
+<rect x="0" y="440" width="900" height="15" fill="#d1d5db"/>
+<!-- Road -->
+<rect x="0" y="260" width="900" height="180" fill="#6B7280"/>
+<!-- Lane markings -->
+<line x1="0" y1="350" x2="900" y2="350" stroke="#FBBF24" stroke-width="3" stroke-dasharray="20,14"/>
+<!-- Crosswalk -->
+<g><rect x="300" y="260" width="12" height="180" fill="white" opacity=".8"/><rect x="318" y="260" width="12" height="180" fill="white" opacity=".8"/><rect x="336" y="260" width="12" height="180" fill="white" opacity=".8"/><rect x="354" y="260" width="12" height="180" fill="white" opacity=".8"/><rect x="372" y="260" width="12" height="180" fill="white" opacity=".8"/><rect x="390" y="260" width="12" height="180" fill="white" opacity=".8"/></g>
+<!-- Bike lane marking -->
+<rect x="0" y="415" width="900" height="25" fill="#6B7280"/>
+<line x1="0" y1="415" x2="900" y2="415" stroke="white" stroke-width="2"/>
+<text x="50" y="433" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="white" opacity=".6">🚲 BIKE LANE</text>
+<text x="500" y="433" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="white" opacity=".6">🚲 BIKE LANE</text>
+<!-- Pedestrian in crosswalk -->
+<g transform="translate(345, 300)">
+<circle r="8" fill="#F78F1E" cy="-8"/><rect x="-6" y="0" width="12" height="18" rx="4" fill="#F78F1E"/><line x1="-4" y1="18" x2="-6" y2="30" stroke="#F78F1E" stroke-width="3" stroke-linecap="round"/><line x1="4" y1="18" x2="6" y2="30" stroke="#F78F1E" stroke-width="3" stroke-linecap="round"/>
+</g>
+<!-- Cyclist in bike lane -->
+<g transform="translate(600, 425)">
+<circle r="10" fill="none" stroke="#374151" stroke-width="2" cx="-12"/><circle r="10" fill="none" stroke="#374151" stroke-width="2" cx="12"/><circle r="6" fill="#3B82F6" cy="-15"/><rect x="-4" y="-10" width="8" height="12" rx="3" fill="#3B82F6"/><line x1="0" y1="-3" x2="-12" y2="0" stroke="#374151" stroke-width="2"/>
+</g>
+<!-- Motorcycle -->
+<g transform="translate(700, 320)">
+<ellipse rx="18" ry="8" fill="#67308F" opacity=".9"/><rect x="-10" y="-18" width="10" height="14" rx="3" fill="#67308F"/><circle r="3" fill="#374151" cx="-14" cy="8"/><circle r="3" fill="#374151" cx="14" cy="8"/>
+</g>
+<!-- Car in left lane -->
+<g transform="translate(200, 320)">
+<rect x="-24" y="-12" width="48" height="24" rx="8" fill="var(--bitstream-blue)"/><rect x="-17" y="-18" width="34" height="10" rx="4" fill="var(--bitstream-blue)" opacity=".8"/><circle cx="-13" cy="14" r="5" fill="#374151"/><circle cx="13" cy="14" r="5" fill="#374151"/>
+</g>
+<!-- Labels -->
+<rect x="0" y="455" width="900" height="51" fill="#0E1C42" opacity=".88"/>
+<text x="450" y="477" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-size="18" font-weight="700" fill="white">Everyone Belongs on the Road — Drivers, Pedestrians, Cyclists, Motorcyclists</text>
+<text x="450" y="498" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="11" fill="rgba(255,255,255,.7)">Lesson 1.3 • Unit 1: Driving Defensively to Minimize Risk</text>
+</svg>
+</div>
+
+<!-- INTRO READ BLOCK -->
+<div class="content-block block-read animate-in delay-4">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 8v16M10 12h12M10 16h12M10 20h8" stroke="var(--bitstream-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">The Road Is for Everyone</h2>
+</div>
+<div class="block-body">
+<p>When most people think about driving, they picture cars. But Florida's roads are shared by a much wider variety of users: <span class="key-term">pedestrians</span> walking to school or work, <span class="key-term">cyclists</span> commuting or exercising, <span class="key-term">motorcyclists</span> navigating alongside traffic, and even people on scooters, skateboards, and in wheelchairs.</p>
+
+<p>These road users are called <span class="key-term">vulnerable road users (VRUs)</span> because they have little to no protection in a collision with a motor vehicle. A driver in a 4,000-pound car has crumple zones, airbags, and a seatbelt. A cyclist has a helmet — maybe. A pedestrian has nothing.</p>
+
+<p>That's why Florida law places extra responsibility on drivers. As someone behind the wheel of a powerful machine, you have a <strong>legal and moral obligation</strong> to protect those who are most at risk.</p>
+</div>
+</div>
+
+<!-- Road User Cards -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">Who Are Vulnerable Road Users?</h2>
+<div class="road-user-grid">
+<div class="road-user-card">
+<div class="road-user-icon" style="background:#FEF3C7">🚶</div>
+<h3>Pedestrians</h3>
+<p>People walking, jogging, using wheelchairs, or pushing strollers. They have the right-of-way in crosswalks — marked or unmarked.</p>
+</div>
+<div class="road-user-card">
+<div class="road-user-icon" style="background:#DBEAFE">🚴</div>
+<h3>Cyclists</h3>
+<p>Bicyclists have the same rights and responsibilities as motor vehicle drivers on Florida roads. They may ride in the road, not just bike lanes.</p>
+</div>
+<div class="road-user-card">
+<div class="road-user-icon" style="background:#F3E8FF">🏍️</div>
+<h3>Motorcyclists</h3>
+<p>Motorcycles are harder to see, can stop faster than cars, and are extremely vulnerable in crashes. Extra scanning is essential.</p>
+</div>
+</div>
+
+<!-- Stat callout -->
+<div class="stat-callout">
+<div class="stat-card" style="border-color:var(--odyssey-orange)"><div class="stat-number" style="color:var(--odyssey-orange)">~800</div><div class="stat-label">Pedestrians killed in FL annually</div></div>
+<div class="stat-card" style="border-color:var(--bitstream-blue)"><div class="stat-number" style="color:var(--bitstream-blue)">~180</div><div class="stat-label">Cyclists killed in FL annually</div></div>
+<div class="stat-card" style="border-color:var(--portal-purple)"><div class="stat-number" style="color:var(--portal-purple)">~600</div><div class="stat-label">Motorcyclists killed in FL annually</div></div>
+</div>
+<p style="font-size:13px;color:#9ca3af;margin-bottom:32px">Source: Florida DHSMV crash statistics</p>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- PEDESTRIANS -->
+<div class="content-block block-read">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 8v16M10 12h12M10 16h12M10 20h8" stroke="var(--bitstream-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">Driving Near Pedestrians</h2>
+</div>
+<div class="block-body">
+<p>Florida is consistently ranked as one of the <strong>most dangerous states for pedestrians</strong> in the United States. As a driver, here's what you need to know:</p>
+
+<p><strong>Crosswalk Rules:</strong></p>
+<ul style="margin:8px 0 16px;padding-left:24px">
+<li>You <strong>must stop</strong> for pedestrians in any crosswalk — even unmarked ones (any intersection has an implied crosswalk)</li>
+<li>Do not pass a vehicle that has stopped at a crosswalk — a pedestrian may be crossing in front of it</li>
+<li>At signalized intersections, yield to pedestrians when turning right or left on green</li>
+</ul>
+
+<p><strong>Special Situations:</strong></p>
+<ul style="margin:8px 0 16px;padding-left:24px">
+<li><strong>School zones:</strong> Reduced speed limits, crossing guards, and unpredictable children require maximum caution</li>
+<li><strong>Parking lots:</strong> Pedestrians have the right-of-way everywhere in a parking lot</li>
+<li><strong>Night:</strong> Over 75% of pedestrian fatalities happen at night. Scan sidewalks, curbs, and shoulders</li>
+<li><strong>Distracted pedestrians:</strong> People on phones may walk into traffic without looking — but it's still your responsibility to avoid hitting them</li>
+</ul>
+
+<div class="pro-tip">
+<div class="pro-tip-label">✓ Pro Tip</div>
+<p>When approaching a crosswalk, always scan both directions — even on one-way streets. Pedestrians don't always follow the rules, and you're responsible for avoiding a collision regardless.</p>
+</div>
+</div>
+</div>
+
+<!-- CYCLISTS -->
+<div class="content-block block-read">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 8v16M10 12h12M10 16h12M10 20h8" stroke="var(--bitstream-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">Driving Near Cyclists</h2>
+</div>
+<div class="block-body">
+<p>In Florida, <span class="key-term">bicycles are legally classified as vehicles</span>. Cyclists have every right to use the road — including taking the full lane when necessary. Here's how to share the road safely:</p>
+
+<p><strong>The 3-Foot Passing Law:</strong></p>
+<p>Florida law requires drivers to give cyclists a minimum of <span class="key-term">3 feet of clearance</span> when passing. If you can't provide 3 feet in your lane, you must wait until it's safe to move into the adjacent lane to pass.</p>
+
+<ul style="margin:16px 0;padding-left:24px">
+<li><strong>Be patient:</strong> Don't honk at or rush cyclists. They have a right to the road</li>
+<li><strong>Check before turning right:</strong> A cyclist may be riding alongside you in a bike lane or on the shoulder. Look over your right shoulder before turning</li>
+<li><strong>Watch for door zones:</strong> When parked, check for cyclists before opening your door</li>
+<li><strong>Intersections:</strong> Cyclists may go straight from a right-turn lane. Don't cut them off</li>
+<li><strong>Night riding:</strong> Florida law requires cyclists to have a front white light and a rear red reflector, but not all comply. Scan carefully</li>
+</ul>
+</div>
+</div>
+
+<!-- LAW SPOTLIGHT: 3-Foot Law -->
+<div class="law-spotlight">
+<div class="law-spotlight-header">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gateway-gold)" stroke-width="2"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9l-11-6z"/></svg>
+<span class="law-spotlight-title">⚖️ Florida Law Spotlight</span>
+</div>
+<p style="margin-bottom:8px"><strong>Florida Statute 316.083(1) — Overtaking Bicycles</strong></p>
+<p>Drivers must maintain a minimum clearance of <strong>3 feet</strong> when passing a bicyclist. If 3 feet is not possible within the lane, the driver must wait for a safe opportunity to pass using the adjacent lane. Violations carry fines and, if a crash results, can be charged as a moving violation with points.</p>
+</div>
+
+<!-- MOTORCYCLISTS -->
+<div class="content-block block-read">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 8v16M10 12h12M10 16h12M10 20h8" stroke="var(--bitstream-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">Driving Near Motorcyclists</h2>
+</div>
+<div class="block-body">
+<p>Motorcycles are involved in a disproportionate number of fatal crashes — not because motorcyclists are reckless, but because they're <strong>hard to see</strong> and have <strong>no protection</strong> in a collision.</p>
+
+<p>The most common driver excuse after a motorcycle crash: <em>"I didn't see them."</em> That's an IPDE failure — specifically a failure in the <strong>Identify</strong> phase.</p>
+
+<p><strong>Why motorcycles are hard to see:</strong></p>
+<ul style="margin:8px 0 16px;padding-left:24px">
+<li>They're much smaller than cars and can be hidden in your blind spots</li>
+<li>They can be obscured by other vehicles, signs, or road features</li>
+<li>Their single headlight can be mistaken for a distant car</li>
+<li>Your brain is trained to look for car-sized objects — motorcycles don't register the same way</li>
+</ul>
+
+<p><strong>How to protect motorcyclists:</strong></p>
+<ul style="margin:8px 0 16px;padding-left:24px">
+<li><strong>Double-check before turning left:</strong> Left-turning vehicles are the #1 cause of car-vs-motorcycle crashes</li>
+<li><strong>Give extra following distance:</strong> Motorcycles can stop much faster than cars</li>
+<li><strong>Don't share their lane:</strong> A motorcycle deserves the full width of a lane</li>
+<li><strong>Check blind spots twice:</strong> Mirror-check, then head-check, especially before changing lanes</li>
+<li><strong>Use your signal early:</strong> Give motorcyclists time to react to your intentions</li>
+</ul>
+</div>
+</div>
+
+<!-- DID YOU KNOW -->
+<div class="did-you-know">
+<div class="did-you-know-header">💡 Did You Know?</div>
+<p>The phenomenon of drivers not seeing motorcycles is called <span class="key-term">"inattentional blindness"</span> — your brain literally filters out objects it's not expecting. This is why actively scanning for motorcycles (not just passively looking) is so important. Make it a habit to specifically look for two-wheeled vehicles at every intersection.</p>
+</div>
+
+<!-- MOVE OVER LAW -->
+<div class="content-block block-read">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 8v16M10 12h12M10 16h12M10 20h8" stroke="var(--bitstream-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">Florida's Move Over Law</h2>
+</div>
+<div class="block-body">
+<p>Florida's <span class="key-term">Move Over law</span> requires you to move over one lane (when safe) or slow down to 20 mph below the posted speed when approaching:</p>
+<ul style="margin:8px 0 16px;padding-left:24px">
+<li>Stopped emergency vehicles with flashing lights (police, fire, EMS)</li>
+<li>Tow trucks and road maintenance vehicles</li>
+<li>Disabled vehicles with hazard lights on</li>
+<li><strong>Cyclists and pedestrians</strong> on the roadside</li>
+</ul>
+<p>This law directly protects vulnerable road users. Violating it can result in fines, points on your license, and criminal charges if someone is injured.</p>
+</div>
+</div>
+
+<!-- LAW SPOTLIGHT: Move Over -->
+<div class="law-spotlight">
+<div class="law-spotlight-header">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gateway-gold)" stroke-width="2"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9l-11-6z"/></svg>
+<span class="law-spotlight-title">⚖️ Florida Law Spotlight</span>
+</div>
+<p style="margin-bottom:8px"><strong>Florida Statute 316.126 — Move Over Law</strong></p>
+<p>Drivers approaching a stopped emergency vehicle, tow truck, or other authorized vehicle with flashing lights must vacate the lane closest to the vehicle. If unable to move over safely, you must slow to a speed that is 20 mph less than the posted speed limit. Fines range from $60 to $500, and violations involving injury can result in felony charges.</p>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z"/></svg></div></div>
+
+<!-- VOCABULARY -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">📘 Key Vocabulary</h2>
+<div class="vocab-grid">
+<div class="vocab-card"><div class="vocab-term">Vulnerable Road Users (VRUs)</div><div class="vocab-def">Pedestrians, cyclists, motorcyclists, and other road users with limited or no crash protection compared to vehicle occupants.</div></div>
+<div class="vocab-card"><div class="vocab-term">3-Foot Passing Law</div><div class="vocab-def">Florida law requiring drivers to maintain at least 3 feet of clearance when passing a cyclist. If not possible, wait for a safe passing opportunity.</div></div>
+<div class="vocab-card"><div class="vocab-term">Move Over Law</div><div class="vocab-def">Florida law requiring drivers to change lanes or slow down when approaching stopped emergency vehicles, tow trucks, or disabled vehicles with flashing lights.</div></div>
+<div class="vocab-card"><div class="vocab-term">Unmarked Crosswalk</div><div class="vocab-def">Any intersection has an implied crosswalk, even without painted lines. Drivers must yield to pedestrians at unmarked crosswalks.</div></div>
+<div class="vocab-card"><div class="vocab-term">Inattentional Blindness</div><div class="vocab-def">A psychological phenomenon where the brain fails to perceive an object in plain sight because it's not expecting to see it — a major factor in motorcycle crashes.</div></div>
+<div class="vocab-card"><div class="vocab-term">Door Zone</div><div class="vocab-def">The area next to parked cars where a suddenly opened door could strike a passing cyclist. Drivers and passengers should always check before opening doors.</div></div>
+</div>
+
+<!-- REFLECTION -->
+<div class="content-block block-think" style="margin-top:32px">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+<h2 class="block-title">💭 Reflection</h2>
+</div>
+<div class="block-body">
+<p><strong>Have you ever been a pedestrian or cyclist and felt unsafe around cars?</strong> Maybe a car passed too close, didn't stop at a crosswalk, or turned without seeing you. Think about how that felt.</p>
+<p>Now flip the perspective: as a future driver, what specific habits will you build to make sure pedestrians and cyclists feel safe around your vehicle? Write 2–3 specific commitments.</p>
+</div>
+</div>
+
+<!-- NEXT STEPS -->
+<div class="content-block block-achievement" style="margin-top:32px">
+<div class="block-header">
+<svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l4 8 8 1.5-5.5 5.5 1 8.5L16 23.5 8.5 27.5l1-8.5L4 13.5 12 12z" stroke="var(--gateway-gold)" stroke-width="2" fill="rgba(199,146,44,.15)"/></svg>
+<h2 class="block-title">✅ Lesson Complete — What's Next?</h2>
+</div>
+<div class="block-body">
+<p>You've completed the reading for <strong>Lesson 1.3</strong>! Here's your path forward:</p>
+<ol style="margin:12px 0;padding-left:24px">
+<li style="margin-bottom:8px"><strong>Complete the "Spot the Risk" Activity</strong> — identify vulnerable road users and conflict points in street scenes</li>
+<li style="margin-bottom:8px"><strong>Take the Knowledge Check</strong> — 5 questions on sharing the road safely</li>
+<li style="margin-bottom:8px"><strong>Move to Lesson 1.4</strong> — Big Vehicles, Big Responsibility</li>
+</ol>
+<p style="font-size:14px;color:var(--gateway-gold);font-weight:600">+100 XP for completing this reading!</p>
+</div>
+</div>
+
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.2</a>
+<a href="#" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Module Home</a>
+<a href="#" class="btn btn-primary">Next: Spot the Risk Activity<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+
+</main>
+</body>
+</html>

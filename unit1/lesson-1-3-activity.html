@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 1.3 — Spot the Risk</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.activity-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.activity-title{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--binary-blue);margin-bottom:10px}
+.activity-desc{font-size:17px;color:#6b7280;line-height:1.6;margin-bottom:24px}
+.progress-section{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:20px 24px;margin-bottom:24px}
+.progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.progress-label{font-family:var(--font-display);font-weight:600;color:var(--binary-blue);font-size:15px}
+.progress-count{font-family:var(--font-display);font-weight:700;color:var(--bitstream-blue);font-size:15px}
+.progress-bar-track{width:100%;height:10px;background:#e5e7eb;border-radius:6px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--bitstream-blue),var(--dark-bitstream));border-radius:6px;transition:width .5s}
+.scene-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;overflow:hidden;margin-bottom:24px}
+.scene-header{padding:20px 24px;border-bottom:1px solid #e5e7eb}
+.scene-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--binary-blue);margin-bottom:4px}
+.scene-subtitle{font-size:14px;color:#6b7280}
+.scene-svg-wrap{position:relative;cursor:crosshair;user-select:none}
+.scene-svg-wrap svg{display:block;width:100%}
+.hotspot{cursor:pointer;opacity:0;transition:opacity .2s}
+.hotspot:hover{opacity:.3}
+.hotspot.found{opacity:1}
+.found-label{pointer-events:none;opacity:0;transition:opacity .3s}
+.found-label.show{opacity:1}
+.scene-info{padding:20px 24px}
+.found-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.found-tag{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;font-family:var(--font-display)}
+.found-tag.yes{background:#f0fdf4;color:var(--gamer-green);border:1px solid var(--gamer-green)}
+.found-tag.no{background:#f3f4f6;color:#9ca3af;border:1px solid #e5e7eb}
+.feedback-bar{padding:16px 24px;border-top:1px solid #e5e7eb;font-size:14px}
+.feedback-bar.correct{background:#f0fdf4;color:#166534}
+.feedback-bar.hint{background:#eff6ff;color:#1e40af}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}.btn-secondary:hover{border-color:#9ca3af}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:18px;height:18px}
+.nav-dots{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.dot{width:40px;height:40px;border-radius:8px;border:2px solid #e5e7eb;background:#fff;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);cursor:pointer;transition:all .2s}
+.dot.active{border-color:var(--bitstream-blue);background:#e0f2fe;box-shadow:0 0 0 3px rgba(85,200,232,.3)}
+.dot.done{border-color:var(--gamer-green);background:#f0fdf4;color:var(--gamer-green)}
+.results-card{background:#fff;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.results-score{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--binary-blue)}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px;margin-top:16px}
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.score-display{font-family:var(--font-display);font-weight:700;color:var(--gamer-green);font-size:18px;text-align:center;margin:12px 0}
+@media(max-width:768px){.container{padding:24px 16px 60px}.activity-title{font-size:26px}.bottom-nav{flex-direction:column}.bottom-nav .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>400 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Unit 1</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span class="current">Activity: Spot the Risk</span></div></nav>
+
+<main class="container">
+<div class="activity-badge">🎮 INTERACTIVE ACTIVITY</div>
+<h1 class="activity-title">🔍 Spot the Risk</h1>
+<p class="activity-desc">Each scene shows a driving situation with vulnerable road users. Click on all the hazards and conflict points you can find. The more you spot, the higher your score!</p>
+
+<div class="progress-section">
+<div class="progress-row"><span class="progress-label">Scene Progress</span><span class="progress-count" id="progressCount">0 / 3 Complete</span></div>
+<div class="progress-bar-track"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+</div>
+
+<div id="appRoot"></div>
+
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.3</a>
+<a href="#" class="btn btn-primary">Next: Knowledge Check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+</main>
+
+<script>
+const scenes = [
+  {
+    id: 1,
+    title: "Residential Street with Crosswalk",
+    subtitle: "Find all 4 hazards in this neighborhood scene",
+    totalHazards: 4,
+    svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="450" fill="#BAE6FD"/>
+      <rect x="0" y="100" width="250" height="130" rx="4" fill="#fef3c7"/><rect x="20" y="115" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="55" y="115" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="20" y="145" width="25" height="20" rx="2" fill="#BAE6FD"/><rect x="55" y="145" width="25" height="20" rx="2" fill="#BAE6FD"/><text x="125" y="195" text-anchor="middle" font-size="10" fill="#92400E" font-family="var(--font-display)">SCHOOL</text>
+      <rect x="560" y="120" width="240" height="110" rx="4" fill="#e5e7eb"/><rect x="580" y="135" width="22" height="18" rx="2" fill="#BAE6FD"/><rect x="612" y="135" width="22" height="18" rx="2" fill="#BAE6FD"/>
+      <rect x="0" y="225" width="800" height="10" fill="#d1d5db"/>
+      <rect x="0" y="235" width="800" height="160" fill="#6B7280"/>
+      <rect x="0" y="395" width="800" height="10" fill="#d1d5db"/>
+      <line x1="0" y1="315" x2="800" y2="315" stroke="#FBBF24" stroke-width="3" stroke-dasharray="18,12"/>
+      <g><rect x="340" y="235" width="10" height="160" fill="white" opacity=".7"/><rect x="356" y="235" width="10" height="160" fill="white" opacity=".7"/><rect x="372" y="235" width="10" height="160" fill="white" opacity=".7"/><rect x="388" y="235" width="10" height="160" fill="white" opacity=".7"/><rect x="404" y="235" width="10" height="160" fill="white" opacity=".7"/><rect x="420" y="235" width="10" height="160" fill="white" opacity=".7"/></g>
+      <circle id="h1_ped" cx="380" cy="280" r="25" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(380,275)"><circle r="7" fill="#F78F1E" cy="-7"/><rect x="-5" y="0" width="10" height="14" rx="3" fill="#F78F1E"/><line x1="-3" y1="14" x2="-5" y2="24" stroke="#F78F1E" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="14" x2="5" y2="24" stroke="#F78F1E" stroke-width="2.5" stroke-linecap="round"/></g>
+      <g class="found-label" id="l1_ped"><rect x="345" y="245" width="70" height="20" rx="4" fill="var(--gamer-green)"/><text x="380" y="259" text-anchor="middle" font-size="10" fill="white" font-family="var(--font-display)" font-weight="700">Pedestrian</text></g>
+      <circle id="h1_child" cx="170" cy="220" r="22" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(170,215)"><circle r="5" fill="#3B82F6" cy="-5"/><rect x="-4" y="0" width="8" height="10" rx="2" fill="#3B82F6"/></g>
+      <circle cx="185" cy="225" r="7" fill="#EF4444" opacity=".7"/>
+      <g class="found-label" id="l1_child"><rect x="130" y="195" width="80" height="20" rx="4" fill="var(--gamer-green)"/><text x="170" y="209" text-anchor="middle" font-size="10" fill="white" font-family="var(--font-display)" font-weight="700">Child + Ball</text></g>
+      <circle id="h1_cyclist" cx="600" cy="370" r="25" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(600,370)"><circle r="8" fill="none" stroke="#374151" stroke-width="1.5" cx="-10"/><circle r="8" fill="none" stroke="#374151" stroke-width="1.5" cx="10"/><circle r="5" fill="#3B82F6" cy="-12"/><rect x="-3" y="-8" width="6" height="10" rx="2" fill="#3B82F6"/></g>
+      <g class="found-label" id="l1_cyclist"><rect x="565" y="340" width="70" height="20" rx="4" fill="var(--gamer-green)"/><text x="600" y="354" text-anchor="middle" font-size="10" fill="white" font-family="var(--font-display)" font-weight="700">Cyclist</text></g>
+      <circle id="h1_car" cx="650" cy="285" r="28" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(650,285)"><rect x="-22" y="-11" width="44" height="22" rx="7" fill="#EF4444"/><rect x="-16" y="-17" width="32" height="10" rx="4" fill="#EF4444" opacity=".8"/><circle cx="-12" cy="13" r="4" fill="#374151"/><circle cx="12" cy="13" r="4" fill="#374151"/></g>
+      <path d="M635 275 L620 265" stroke="var(--odyssey-orange)" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <defs><marker id="arrow" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0,6 2,0 4" fill="var(--odyssey-orange)"/></marker></defs>
+      <g class="found-label" id="l1_car"><rect x="610" y="255" width="80" height="20" rx="4" fill="var(--gamer-green)"/><text x="650" y="269" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Car turning left</text></g>
+    </svg>`,
+    hazards: [
+      {id:"h1_ped",label:"l1_ped",name:"Pedestrian in crosswalk",desc:"A pedestrian is crossing in the crosswalk. You must yield and stop until they've completely cleared your lane."},
+      {id:"h1_child",label:"l1_child",name:"Child with ball near road",desc:"A child is near the road with a ball — a classic IPDE cue that they may chase it into the street. Slow down and cover your brake."},
+      {id:"h1_cyclist",label:"l1_cyclist",name:"Cyclist in roadway",desc:"A cyclist is riding in the right portion of the lane. Remember the 3-foot passing law and wait for a safe opportunity to pass."},
+      {id:"h1_car",label:"l1_car",name:"Car turning left toward crosswalk",desc:"A car is turning left across the crosswalk where the pedestrian is crossing. This creates a dangerous conflict point."}
+    ]
+  },
+  {
+    id: 2,
+    title: "Busy Intersection with Multiple Road Users",
+    subtitle: "Find all 5 hazards at this intersection",
+    totalHazards: 5,
+    svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="450" fill="#d1d5db"/>
+      <rect x="0" y="0" width="300" height="155" fill="#e5e7eb"/>
+      <rect x="500" y="0" width="300" height="155" fill="#fef3c7"/>
+      <rect x="0" y="295" width="300" height="155" fill="#e5e7eb"/>
+      <rect x="500" y="295" width="300" height="155" fill="#e5e7eb"/>
+      <rect x="300" y="0" width="200" height="450" fill="#6B7280"/>
+      <rect x="0" y="155" width="800" height="140" fill="#6B7280"/>
+      <line x1="400" y1="0" x2="400" y2="155" stroke="#FBBF24" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="400" y1="295" x2="400" y2="450" stroke="#FBBF24" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="0" y1="225" x2="300" y2="225" stroke="#FBBF24" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="500" y1="225" x2="800" y2="225" stroke="#FBBF24" stroke-width="3" stroke-dasharray="12,8"/>
+      <g><rect x="305" y="160" width="8" height="130" fill="white" opacity=".6"/><rect x="320" y="160" width="8" height="130" fill="white" opacity=".6"/><rect x="335" y="160" width="8" height="130" fill="white" opacity=".6"/></g>
+      <circle id="h2_ped1" cx="340" cy="175" r="22" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(340,170)"><circle r="6" fill="#F78F1E" cy="-6"/><rect x="-4" y="0" width="8" height="12" rx="3" fill="#F78F1E"/></g>
+      <g class="found-label" id="l2_ped1"><rect x="305" y="145" width="70" height="18" rx="4" fill="var(--gamer-green)"/><text x="340" y="158" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Pedestrian</text></g>
+      <circle id="h2_moto" cx="450" cy="120" r="24" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(450,120)"><ellipse rx="15" ry="6" fill="#67308F" opacity=".9"/><rect x="-8" y="-15" width="8" height="12" rx="2" fill="#67308F"/><circle r="3" fill="#374151" cx="-12" cy="6"/><circle r="3" fill="#374151" cx="12" cy="6"/></g>
+      <g class="found-label" id="l2_moto"><rect x="410" y="90" width="80" height="18" rx="4" fill="var(--gamer-green)"/><text x="450" y="103" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Motorcycle</text></g>
+      <circle id="h2_cyclist" cx="520" cy="260" r="22" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(520,260)"><circle r="7" fill="none" stroke="#374151" stroke-width="1.5" cx="-8"/><circle r="7" fill="none" stroke="#374151" stroke-width="1.5" cx="8"/><circle r="4" fill="#22C55E" cy="-10"/><rect x="-3" y="-6" width="6" height="8" rx="2" fill="#22C55E"/></g>
+      <g class="found-label" id="l2_cyclist"><rect x="485" y="232" width="70" height="18" rx="4" fill="var(--gamer-green)"/><text x="520" y="245" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Cyclist</text></g>
+      <circle id="h2_ped2" cx="490" cy="305" r="22" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(490,300)"><circle r="5" fill="#A855F7" cy="-5"/><rect x="-4" y="0" width="8" height="10" rx="2" fill="#A855F7"/><rect x="4" y="-2" width="12" height="8" rx="2" fill="#BAE6FD" opacity=".8"/></g>
+      <g class="found-label" id="l2_ped2"><rect x="448" y="275" width="85" height="18" rx="4" fill="var(--gamer-green)"/><text x="490" y="288" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Distracted ped</text></g>
+      <circle id="h2_truck" cx="200" cy="200" r="30" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(200,200)"><rect x="-28" y="-12" width="56" height="24" rx="4" fill="#374151"/><rect x="-22" y="-18" width="20" height="10" rx="3" fill="#374151" opacity=".8"/><rect x="-20" y="-16" width="7" height="6" rx="1" fill="#BAE6FD" opacity=".5"/><rect x="-10" y="-16" width="7" height="6" rx="1" fill="#BAE6FD" opacity=".5"/><circle cx="-18" cy="14" r="5" fill="#1f2937"/><circle cx="0" cy="14" r="5" fill="#1f2937"/><circle cx="18" cy="14" r="5" fill="#1f2937"/></g>
+      <g class="found-label" id="l2_truck"><rect x="158" y="170" width="85" height="18" rx="4" fill="var(--gamer-green)"/><text x="200" y="183" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Turning truck</text></g>
+    </svg>`,
+    hazards: [
+      {id:"h2_ped1",label:"l2_ped1",name:"Pedestrian in crosswalk",desc:"A pedestrian is crossing at the intersection. Always check crosswalks before turning."},
+      {id:"h2_moto",label:"l2_moto",name:"Motorcycle approaching",desc:"A motorcycle is approaching the intersection. They're smaller and harder to see — double-check before turning left across their path."},
+      {id:"h2_cyclist",label:"l2_cyclist",name:"Cyclist at intersection",desc:"A cyclist is riding through the intersection. They have the same rights as motor vehicles and may go straight from a right lane."},
+      {id:"h2_ped2",label:"l2_ped2",name:"Distracted pedestrian on phone",desc:"This pedestrian is looking at their phone, not the road. They may step into traffic without checking. It's still your responsibility to avoid them."},
+      {id:"h2_truck",label:"l2_truck",name:"Truck making wide turn",desc:"A large truck is turning and may swing wide into adjacent lanes. Give trucks extra space at intersections."}
+    ]
+  },
+  {
+    id: 3,
+    title: "Night Scene — Reduced Visibility",
+    subtitle: "Find all 4 hazards in this low-light scenario",
+    totalHazards: 4,
+    svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="450" fill="#0f172a"/>
+      <circle cx="650" cy="60" r="20" fill="#FCD34D" opacity=".4"/><circle cx="650" cy="60" r="12" fill="#FCD34D" opacity=".7"/>
+      <rect x="0" y="200" width="800" height="250" fill="#1e293b"/>
+      <rect x="200" y="200" width="400" height="250" fill="#374151"/>
+      <line x1="400" y1="210" x2="400" y2="450" stroke="#FBBF24" stroke-width="3" stroke-dasharray="15,10"/>
+      <line x1="210" y1="200" x2="210" y2="450" stroke="white" stroke-width="2"/>
+      <line x1="590" y1="200" x2="590" y2="450" stroke="white" stroke-width="2"/>
+      <ellipse cx="400" cy="350" rx="150" ry="80" fill="#FCD34D" opacity=".06"/>
+      <ellipse cx="400" cy="380" rx="100" ry="50" fill="#FCD34D" opacity=".08"/>
+      <circle id="h3_ped" cx="260" cy="310" r="24" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(260,305)" opacity=".7"><circle r="6" fill="#9CA3AF" cy="-6"/><rect x="-4" y="0" width="8" height="14" rx="3" fill="#374151"/><line x1="-3" y1="14" x2="-5" y2="24" stroke="#374151" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="14" x2="5" y2="24" stroke="#374151" stroke-width="2" stroke-linecap="round"/></g>
+      <g class="found-label" id="l3_ped"><rect x="222" y="275" width="76" height="18" rx="4" fill="var(--gamer-green)"/><text x="260" y="288" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Dark pedestrian</text></g>
+      <circle id="h3_cyclist" cx="530" cy="370" r="24" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(530,370)" opacity=".6"><circle r="7" fill="none" stroke="#6B7280" stroke-width="1.5" cx="-9"/><circle r="7" fill="none" stroke="#6B7280" stroke-width="1.5" cx="9"/><circle r="4" fill="#6B7280" cy="-10"/><rect x="-3" y="-6" width="6" height="8" rx="2" fill="#6B7280"/><circle r="2" fill="#EF4444" cx="9" cy="-4"/>
+      </g>
+      <g class="found-label" id="l3_cyclist"><rect x="488" y="340" width="85" height="18" rx="4" fill="var(--gamer-green)"/><text x="530" y="353" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Unlit cyclist</text></g>
+      <circle id="h3_moto" cx="350" cy="260" r="22" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(350,260)"><circle r="4" fill="#FCD34D" cx="0" cy="-2"/><ellipse rx="12" ry="5" fill="#4B5563"/><circle r="2" fill="#374151" cx="-8" cy="5"/><circle r="2" fill="#374151" cx="8" cy="5"/></g>
+      <g class="found-label" id="l3_moto"><rect x="310" y="232" width="80" height="18" rx="4" fill="var(--gamer-green)"/><text x="350" y="245" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Motorcycle</text></g>
+      <circle id="h3_animal" cx="180" cy="350" r="20" fill="red" class="hotspot" opacity="0"/>
+      <g transform="translate(180,350)" opacity=".5"><ellipse rx="12" ry="6" fill="#92400E"/><circle r="4" fill="#92400E" cx="-10" cy="-5"/><circle r="1" fill="#FCD34D" cx="-11" cy="-6"/><circle r="1" fill="#FCD34D" cx="-9" cy="-6"/></g>
+      <g class="found-label" id="l3_animal"><rect x="144" y="322" width="72" height="18" rx="4" fill="var(--gamer-green)"/><text x="180" y="335" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-display)" font-weight="700">Animal</text></g>
+    </svg>`,
+    hazards: [
+      {id:"h3_ped",label:"l3_ped",name:"Pedestrian in dark clothing",desc:"A pedestrian wearing dark clothing is nearly invisible at night. Over 75% of pedestrian fatalities occur in dark conditions. Scan sidewalks and road edges."},
+      {id:"h3_cyclist",label:"l3_cyclist",name:"Cyclist without proper lights",desc:"This cyclist has only a small rear reflector — very hard to see. Florida law requires a front white light and rear red light/reflector, but not all comply."},
+      {id:"h3_moto",label:"l3_moto",name:"Motorcycle with single headlight",desc:"A motorcycle's single headlight can be mistaken for a distant car or overlooked entirely. At night, actively scan for single headlights at intersections."},
+      {id:"h3_animal",label:"l3_animal",name:"Animal near road edge",desc:"Animals near the road can dart into traffic without warning. Common in Florida suburbs and rural areas, especially at dawn and dusk."}
+    ]
+  }
+];
+
+let currentScene = 0;
+let found = {};
+let sceneComplete = {};
+let totalCompleted = 0;
+
+function init(){
+  scenes.forEach(s => { found[s.id] = new Set(); sceneComplete[s.id] = false; });
+  render();
+}
+
+function render(){
+  const s = scenes[currentScene];
+  const f = found[s.id];
+  const root = document.getElementById('appRoot');
+  
+  root.innerHTML = `
+    <div class="nav-dots">${scenes.map((sc,i) => `<button class="dot ${i===currentScene?'active':''} ${sceneComplete[sc.id]?'done':''}" onclick="goTo(${i})">${i+1}</button>`).join('')}</div>
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">Scene ${currentScene+1}: ${s.title}</div>
+        <div class="scene-subtitle">${s.subtitle} — Click on hazards to identify them</div>
+      </div>
+      <div class="scene-svg-wrap" id="svgWrap">${s.svg}</div>
+      <div class="scene-info">
+        <div class="score-display">Found: ${f.size} / ${s.totalHazards}</div>
+        <div class="found-list">
+          ${s.hazards.map(h => `<span class="found-tag ${f.has(h.id)?'yes':'no'}">${f.has(h.id)?'✅':'⬜'} ${h.name}</span>`).join('')}
+        </div>
+      </div>
+      ${f.size === s.totalHazards && !sceneComplete[s.id] ? `
+        <div class="feedback-bar correct"><strong>🎉 All hazards found!</strong></div>
+      ` : f.size > 0 && f.size < s.totalHazards ? `
+        <div class="feedback-bar hint">💡 Keep looking — there are more hazards to find!</div>
+      ` : ''}
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px">
+      <button class="btn btn-secondary" onclick="goTo(${Math.max(0,currentScene-1)})" ${currentScene===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+      ${f.size === s.totalHazards ? `
+        <button class="btn btn-primary" onclick="${currentScene < scenes.length-1 ? `completeAndNext(${s.id},${currentScene+1})` : `completeAndResults(${s.id})`}">
+          ${currentScene < scenes.length-1 ? 'Next Scene' : 'View Results'}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      ` : `<span style="font-size:14px;color:#6b7280;display:flex;align-items:center">Find all hazards to continue</span>`}
+    </div>
+  `;
+  
+  // Attach click handlers to hotspots
+  s.hazards.forEach(h => {
+    const el = document.getElementById(h.id);
+    if(el){
+      el.style.cursor = 'pointer';
+      el.onclick = () => spotHazard(s.id, h);
+    }
+    if(f.has(h.id)){
+      if(el) el.classList.add('found');
+      const label = document.getElementById(h.label);
+      if(label) label.classList.add('show');
+    }
+  });
+}
+
+function spotHazard(sceneId, hazard){
+  if(found[sceneId].has(hazard.id)) return;
+  found[sceneId].add(hazard.id);
+  
+  const el = document.getElementById(hazard.id);
+  if(el){ el.classList.add('found'); el.style.fill='var(--gamer-green)'; el.style.opacity='0.3'; }
+  const label = document.getElementById(hazard.label);
+  if(label) label.classList.add('show');
+  
+  render();
+}
+
+function completeAndNext(sceneId, nextIdx){
+  if(!sceneComplete[sceneId]){
+    sceneComplete[sceneId] = true;
+    totalCompleted++;
+    updateProgress();
+  }
+  goTo(nextIdx);
+}
+
+function completeAndResults(sceneId){
+  if(!sceneComplete[sceneId]){
+    sceneComplete[sceneId] = true;
+    totalCompleted++;
+    updateProgress();
+  }
+  showResults();
+}
+
+function updateProgress(){
+  document.getElementById('progressCount').textContent = `${totalCompleted} / ${scenes.length} Complete`;
+  document.getElementById('progressBar').style.width = `${(totalCompleted/scenes.length)*100}%`;
+}
+
+function goTo(idx){
+  currentScene = idx;
+  render();
+  window.scrollTo({top:document.querySelector('.scene-card')?.offsetTop - 80, behavior:'smooth'});
+}
+
+function showResults(){
+  let totalFound = 0, totalPossible = 0;
+  scenes.forEach(s => { totalFound += found[s.id].size; totalPossible += s.totalHazards; });
+  const pct = Math.round((totalFound/totalPossible)*100);
+  
+  document.getElementById('appRoot').innerHTML = `
+    <div class="results-card">
+      <div style="font-size:48px;margin-bottom:12px">🔍</div>
+      <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">Spot the Risk Complete!</div>
+      <div class="results-score">${totalFound}/${totalPossible}</div>
+      <div style="font-size:18px;color:#6b7280;margin-bottom:8px">Hazards identified across all scenes</div>
+      <div class="results-xp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>+150 XP Earned!</div>
+      <p style="margin-top:20px;color:#6b7280;max-width:500px;margin:20px auto 0">Great job! You've demonstrated strong hazard identification skills. Remember — in real driving, you need to spot these hazards in seconds, not minutes. Practice your scanning habits every time you're in a car.</p>
+    </div>
+  `;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+init();
+</script>
+</body>
+</html>
