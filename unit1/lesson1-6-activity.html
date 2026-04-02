@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.6 Activity: Multi-Hazard Driving Simulation | OAO Driver's Ed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Wix Madefor Text', sans-serif;
+            background: linear-gradient(135deg, #0E1C42 0%, #1a2d5f 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lesson-badge {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #C7922C 0%, #F78F1E 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(199, 146, 44, 0.3);
+        }
+
+        .title-section h1 {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0E1C42;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #67308F;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Activity Container */
+        .activity-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .activity-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .activity-intro h2 {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 32px;
+            color: #0E1C42;
+            margin-bottom: 15px;
+        }
+
+        .activity-intro p {
+            font-size: 18px;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Scenario Display */
+        .scenario-display {
+            display: none;
+        }
+
+        .scenario-display.active {
+            display: block;
+        }
+
+        .scenario-visual {
+            background: linear-gradient(180deg, #87CEEB 0%, #E8F4F8 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #55C8E8;
+        }
+
+        .road-scene {
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenario-description {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF3D4 100%);
+            border-left: 5px solid #C7922C;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .scenario-description h3 {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 22px;
+            color: #0E1C42;
+            margin-bottom: 10px;
+        }
+
+        .scenario-description p {
+            font-size: 17px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* IPDE Steps Display */
+        .ipde-tracker {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .ipde-step {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .ipde-step.active {
+            background: linear-gradient(135deg, #55C8E8 0%, #3BADD6 100%);
+            color: white;
+            border-color: #0E1C42;
+            transform: scale(1.05);
+        }
+
+        .ipde-step-label {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .ipde-step-name {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Question Section */
+        .question-section {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0E1C42;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #E8F8FF 0%, #D4F1FF 100%);
+            border-radius: 8px;
+            border-left: 5px solid #55C8E8;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .answer-option {
+            background: white;
+            border: 3px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .answer-option:hover {
+            border-color: #55C8E8;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(85, 200, 232, 0.2);
+        }
+
+        .answer-option.selected {
+            border-color: #0E1C42;
+            background: linear-gradient(135deg, #E8F8FF 0%, #D4F1FF 100%);
+        }
+
+        .answer-option.correct {
+            border-color: #76C043;
+            background: linear-gradient(135deg, #E8F8E8 0%, #D4F1D4 100%);
+        }
+
+        .answer-option.incorrect {
+            border-color: #E53935;
+            background: linear-gradient(135deg, #FFE8E8 0%, #FFD4D4 100%);
+        }
+
+        .answer-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            background: #0E1C42;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .answer-option.correct .option-letter {
+            background: #76C043;
+        }
+
+        .answer-option.incorrect .option-letter {
+            background: #E53935;
+        }
+
+        .option-text {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Feedback */
+        .feedback {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #E8F8E8 0%, #D4F1D4 100%);
+            border-left: 5px solid #76C043;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #FFE8E8 0%, #FFD4D4 100%);
+            border-left: 5px solid #E53935;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            font-size: 24px;
+        }
+
+        .feedback-title {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .feedback-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #E0E0E0;
+            height: 10px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #76C043 0%, #5AA032 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 600;
+            color: #0E1C42;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0E1C42 0%, #1a2d5f 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 28, 66, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 28, 66, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #55C8E8 0%, #3BADD6 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(85, 200, 232, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(85, 200, 232, 0.4);
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .results-screen.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-header {
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #0E1C42;
+            margin-bottom: 15px;
+        }
+
+        .score-display {
+            font-size: 72px;
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(135deg, #C7922C 0%, #F78F1E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .performance-message {
+            font-size: 22px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .xp-award {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 25px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .xp-text {
+            font-family: 'Wix Madefor Display', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0E1C42;
+        }
+
+        .results-breakdown {
+            background: #F5F5F5;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 16px;
+        }
+
+        .breakdown-row:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            font-weight: 600;
+            color: #0E1C42;
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+            color: #55C8E8;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .activity-card {
+                padding: 20px;
+            }
+
+            .activity-intro h2 {
+                font-size: 24px;
+            }
+
+            .ipde-tracker {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .title-section h1 {
+                font-size: 22px;
+            }
+
+            .score-display {
+                font-size: 56px;
+            }
+
+            .results-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="lesson-badge">1.6</div>
+                    <div class="title-section">
+                        <h1>Multi-Hazard Driving Simulation</h1>
+                        <div class="subtitle">Interactive Activity • Unit 1: Driving Defensively</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Card -->
+        <div class="activity-card">
+            <!-- Introduction Screen -->
+            <div class="activity-intro" id="introScreen">
+                <h2>🚗 Multi-Hazard Route Challenge</h2>
+                <p>You're about to drive through a route with multiple hazards. At each scenario, you'll need to apply the IPDE Process and Smith System principles to make safe driving decisions. Your goal is to identify hazards, predict outcomes, decide on actions, and execute safely. Good luck!</p>
+                <div class="button-container">
+                    <button class="btn btn-primary" onclick="startActivity()">Begin Simulation →</button>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div id="activityContent" style="display: none;">
+                <div class="progress-text" id="progressText">Scenario 1 of 5</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <!-- IPDE Tracker -->
+                <div class="ipde-tracker">
+                    <div class="ipde-step" id="ipde-identify">
+                        <div class="ipde-step-label">I</div>
+                        <div class="ipde-step-name">Identify</div>
+                    </div>
+                    <div class="ipde-step" id="ipde-predict">
+                        <div class="ipde-step-label">P</div>
+                        <div class="ipde-step-name">Predict</div>
+                    </div>
+                    <div class="ipde-step" id="ipde-decide">
+                        <div class="ipde-step-label">D</div>
+                        <div class="ipde-step-name">Decide</div>
+                    </div>
+                    <div class="ipde-step" id="ipde-execute">
+                        <div class="ipde-step-label">E</div>
+                        <div class="ipde-step-name">Execute</div>
+                    </div>
+                </div>
+
+                <!-- Scenario Display -->
+                <div class="scenario-display" id="scenario-container">
+                    <!-- Scenarios will be dynamically loaded here -->
+                </div>
+
+                <!-- Results Screen -->
+                <div class="results-screen" id="resultsScreen">
+                    <div class="results-header">
+                        <div class="results-title">Simulation Complete!</div>
+                        <div class="score-display" id="finalScore">0/5</div>
+                        <div class="performance-message" id="performanceMessage"></div>
+                    </div>
+
+                    <div class="xp-award">
+                        <div class="xp-text" id="xpAward">+0 XP Earned</div>
+                    </div>
+
+                    <div class="results-breakdown">
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Total Scenarios:</span>
+                            <span class="breakdown-value">5</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Correct Decisions:</span>
+                            <span class="breakdown-value" id="correctCount">0</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Accuracy:</span>
+                            <span class="breakdown-value" id="accuracyPercent">0%</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Smith System Keys Applied:</span>
+                            <span class="breakdown-value" id="smithKeysCount">0</span>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button class="btn btn-secondary" onclick="restartActivity()">Try Again</button>
+                        <button class="btn btn-primary" onclick="window.parent.postMessage({type: 'activityComplete', score: currentScore, totalQuestions: scenarios.length}, '*')">Continue to Quiz →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Activity State
+        let currentScenario = 0;
+        let currentScore = 0;
+        let scenarios = [];
+        let smithKeysApplied = 0;
+
+        // Scenario Data
+        const scenarioData = [
+            {
+                id: 1,
+                title: "School Zone with Pedestrians",
+                description: "You're approaching a school zone at 8:15 AM on a weekday. The school zone sign shows 15 MPH when children are present. You see several students walking on the sidewalk near the crosswalk ahead, and a crossing guard is standing at the corner.",
+                svg: `<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Road -->
+                    <rect x="0" y="100" width="800" height="150" fill="#666"/>
+                    <line x1="0" y1="175" x2="800" y2="175" stroke="yellow" stroke-width="4" stroke-dasharray="20,15"/>
+                    
+                    <!-- School Building -->
+                    <rect x="650" y="40" width="120" height="110" fill="#C7922C"/>
+                    <rect x="665" y="60" width="25" height="30" fill="#55C8E8"/>
+                    <rect x="705" y="60" width="25" height="30" fill="#55C8E8"/>
+                    <rect x="685" y="110" width="30" height="40" fill="#8B4513"/>
+                    <text x="710" y="35" font-size="20" font-weight="bold" fill="#0E1C42" text-anchor="middle">SCHOOL</text>
+                    
+                    <!-- School Zone Sign -->
+                    <rect x="550" y="50" width="60" height="60" fill="#FFD700" stroke="#000" stroke-width="2"/>
+                    <text x="580" y="75" font-size="16" font-weight="bold" text-anchor="middle">SCHOOL</text>
+                    <text x="580" y="95" font-size="20" font-weight="bold" text-anchor="middle">15</text>
+                    <circle cx="550" cy="50" r="5" fill="red"/>
+                    <circle cx="550" cy="110" r="5" fill="red"/>
+                    
+                    <!-- Crosswalk -->
+                    <rect x="450" y="100" width="15" height="150" fill="white"/>
+                    <rect x="480" y="100" width="15" height="150" fill="white"/>
+                    <rect x="510" y="100" width="15" height="150" fill="white"/>
+                    
+                    <!-- Pedestrians -->
+                    <circle cx="470" cy="80" r="8" fill="#FFD8B8"/>
+                    <rect x="465" y="88" width="10" height="15" fill="#55C8E8"/>
+                    <circle cx="500" cy="80" r="8" fill="#FFD8B8"/>
+                    <rect x="495" y="88" width="10" height="15" fill="#F78F1E"/>
+                    
+                    <!-- Crossing Guard -->
+                    <circle cx="530" cy="85" r="10" fill="#FFD8B8"/>
+                    <rect x="523" y="95" width="14" height="20" fill="#FFD700"/>
+                    <rect x="515" y="100" width="30" height="3" fill="#FFD700"/>
+                    <circle cx="545" cy="105" r="12" fill="red" opacity="0.8"/>
+                    <text x="545" y="110" font-size="16" font-weight="bold" fill="white" text-anchor="middle">STOP</text>
+                    
+                    <!-- Your Car -->
+                    <rect x="100" y="140" width="70" height="40" rx="5" fill="#0E1C42"/>
+                    <rect x="110" y="145" width="15" height="12" fill="#55C8E8"/>
+                    <rect x="135" y="145" width="15" height="12" fill="#55C8E8"/>
+                    <circle cx="120" cy="180" r="8" fill="#333"/>
+                    <circle cx="150" cy="180" r="8" fill="#333"/>
+                </svg>`,
+                ipdeStep: "identify",
+                question: "You're currently going 25 MPH. What should you do first? (IDENTIFY the hazard)",
+                options: [
+                    { text: "Maintain speed since you're not in the school zone yet", correct: false, smithKey: null },
+                    { text: "Immediately reduce speed to 15 MPH and watch for children who might enter the crosswalk", correct: true, smithKey: "aim-high" },
+                    { text: "Speed up to get through the zone before children cross", correct: false, smithKey: null },
+                    { text: "Honk to alert the pedestrians that you're coming through", correct: false, smithKey: null }
+                ],
+                feedback: {
+                    correct: "Excellent! You correctly identified the school zone hazard and the presence of children near the crosswalk. Reducing to 15 MPH immediately shows you're applying the Smith System's 'Aim High in Steering' - you're looking ahead and preparing early. School zones require immediate speed reduction when children are present.",
+                    incorrect: "Remember to IDENTIFY all hazards early. School zones require 15 MPH when children are present or when lights are flashing. You should reduce speed immediately when entering a school zone, not maintain higher speeds or try to rush through. The crossing guard and pedestrians near the crosswalk are clear indicators that children are present."
+                }
+            },
+            {
+                id: 2,
+                title: "Large Truck Merging",
+                description: "You're driving in the right lane of a two-lane highway at 55 MPH. A large semi-truck is merging onto the highway from an on-ramp ahead on your right. The truck's turn signal is on, and you can see it's struggling to accelerate up the ramp.",
+                svg: `<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Highway -->
+                    <rect x="0" y="80" width="800" height="180" fill="#555"/>
+                    <line x1="0" y1="170" x2="800" y2="170" stroke="white" stroke-width="4"/>
+                    <line x1="0" y1="220" x2="800" y2="220" stroke="yellow" stroke-width="3" stroke-dasharray="15,10"/>
+                    
+                    <!-- Merge Lane -->
+                    <path d="M 700 260 Q 650 240 600 220" stroke="white" stroke-width="3" fill="none"/>
+                    
+                    <!-- Your Car (left lane) -->
+                    <rect x="250" y="185" width="60" height="35" rx="5" fill="#0E1C42"/>
+                    <rect x="258" y="190" width="12" height="10" fill="#55C8E8"/>
+                    <rect x="278" y="190" width="12" height="10" fill="#55C8E8"/>
+                    <circle cx="265" cy="220" r="7" fill="#333"/>
+                    <circle cx="295" cy="220" r="7" fill="#333"/>
+                    
+                    <!-- Large Truck on ramp -->
+                    <rect x="580" y="225" width="100" height="35" rx="3" fill="#C41E3A"/>
+                    <rect x="585" y="230" width="20" height="15" fill="#FFD700"/>
+                    <circle cx="595" cy="260" r="8" fill="#333"/>
+                    <circle cx="625" cy="260" r="8" fill="#333"/>
+                    <circle cx="655" cy="260" r="8" fill="#333"/>
+                    <circle cx="665" cy="260" r="8" fill="#333"/>
+                    
+                    <!-- Turn Signal -->
+                    <circle cx="575" cy="240" r="6" fill="#FFA500" opacity="0.8">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    
+                    <!-- Road Signs -->
+                    <rect x="730" y="40" width="50" height="50" fill="#FFD700"/>
+                    <path d="M 755 50 L 745 70 L 765 70 Z" fill="#000"/>
+                    <text x="755" y="90" font-size="12" text-anchor="middle" font-weight="bold">MERGE</text>
+                    
+                    <!-- Speed Limit Sign -->
+                    <rect x="50" y="40" width="45" height="60" fill="white" stroke="#000" stroke-width="2"/>
+                    <text x="72" y="60" font-size="12" text-anchor="middle">SPEED</text>
+                    <text x="72" y="75" font-size="12" text-anchor="middle">LIMIT</text>
+                    <text x="72" y="95" font-size="24" font-weight="bold" text-anchor="middle">55</text>
+                </svg>`,
+                ipdeStep: "predict",
+                question: "What should you PREDICT will happen, and how should you respond?",
+                options: [
+                    { text: "The truck will wait for me to pass, so I should maintain my speed and lane", correct: false, smithKey: null },
+                    { text: "The truck may not see me in its No-Zone; I should move to the left lane if safe to do so", correct: true, smithKey: "get-big-picture" },
+                    { text: "I should speed up to get past the truck before it merges", correct: false, smithKey: null },
+                    { text: "I should slow down significantly and let the truck merge in front of me", correct: false, smithKey: null }
+                ],
+                feedback: {
+                    correct: "Perfect prediction! You correctly anticipated that you might be in the truck's blind spot (No-Zone) and chose the safest option: moving to the left lane. This shows you're applying 'Get the Big Picture' - you're aware of your surroundings and giving the truck space to merge. Moving over is safer than slowing down unnecessarily or staying in the merge zone.",
+                    incorrect: "Remember the PREDICT step means anticipating what other road users might do. Large trucks have extensive No-Zones where they cannot see you. Never assume the truck driver sees you. The safest response is to move to the left lane (if clear) to give the truck room to merge. Speeding up or suddenly slowing can create dangerous situations."
+                }
+            },
+            {
+                id: 3,
+                title: "Cyclist in Your Lane",
+                description: "You're driving on a two-lane residential street (one lane each direction) at 30 MPH. Ahead, you see a cyclist riding in your lane about 100 feet in front of you. There's oncoming traffic, so you cannot pass immediately. The cyclist appears to be maintaining a steady speed.",
+                svg: `<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Road -->
+                    <rect x="0" y="100" width="800" height="120" fill="#666"/>
+                    <line x1="0" y1="160" x2="800" y2="160" stroke="yellow" stroke-width="4" stroke-dasharray="15,10"/>
+                    
+                    <!-- Cyclist -->
+                    <circle cx="500" cy="140" r="12" fill="#FFD8B8"/>
+                    <rect x="492" y="152" width="16" height="25" fill="#55C8E8"/>
+                    <line x1="500" y1="165" x2="490" y2="185" stroke="#FFD8B8" stroke-width="3"/>
+                    <line x1="500" y1="165" x2="510" y2="185" stroke="#FFD8B8" stroke-width="3"/>
+                    <!-- Bicycle -->
+                    <circle cx="485" cy="185" r="15" fill="none" stroke="#333" stroke-width="3"/>
+                    <circle cx="515" cy="185" r="15" fill="none" stroke="#333" stroke-width="3"/>
+                    <line x1="485" y1="185" x2="515" y2="185" stroke="#C7922C" stroke-width="4"/>
+                    <line x1="500" y1="170" x2="500" y2="185" stroke="#C7922C" stroke-width="4"/>
+                    
+                    <!-- Your Car -->
+                    <rect x="180" y="125" width="70" height="40" rx="5" fill="#0E1C42"/>
+                    <rect x="190" y="130" width="15" height="12" fill="#55C8E8"/>
+                    <rect x="215" y="130" width="15" height="12" fill="#55C8E8"/>
+                    <circle cx="200" cy="165" r="8" fill="#333"/>
+                    <circle cx="230" cy="165" r="8" fill="#333"/>
+                    
+                    <!-- Oncoming Car -->
+                    <rect x="650" y="175" width="70" height="40" rx="5" fill="#888"/>
+                    <rect x="705" y="180" width="15" height="12" fill="#FFF"/>
+                    <rect x="680" y="180" width="15" height="12" fill="#FFF"/>
+                    <circle cx="665" cy="215" r="8" fill="#333"/>
+                    <circle cx="695" cy="215" r="8" fill="#333"/>
+                    
+                    <!-- Sidewalk -->
+                    <rect x="0" y="80" width="800" height="15" fill="#CCC"/>
+                    <rect x="0" y="225" width="800" height="15" fill="#CCC"/>
+                </svg>`,
+                ipdeStep: "decide",
+                question: "What is the BEST decision to make in this situation?",
+                options: [
+                    { text: "Honk repeatedly to get the cyclist to move to the side of the road", correct: false, smithKey: null },
+                    { text: "Slow down, maintain a safe following distance, and wait for a safe opportunity to pass with at least 3 feet of clearance", correct: true, smithKey: "keep-eyes-moving" },
+                    { text: "Pass the cyclist closely since there's not much room", correct: false, smithKey: null },
+                    { text: "Pull up right behind the cyclist to pressure them to go faster", correct: false, smithKey: null }
+                ],
+                feedback: {
+                    correct: "Excellent decision! You're following Florida's 3-foot passing law and prioritizing safety. By slowing down, maintaining a safe following distance, and waiting for a clear opportunity to pass, you're showing respect for the cyclist's right to use the road. This also demonstrates 'Keep Your Eyes Moving' - you're continuously scanning for a safe passing opportunity.",
+                    incorrect: "Remember to DECIDE on the safest action. Florida law requires drivers to give cyclists at least 3 feet of clearance when passing. Honking, tailgating, or passing too closely endangers the cyclist. Cyclists have the right to use the full lane. The safe decision is to slow down, maintain a safe following distance, and wait until you can pass with adequate clearance and no oncoming traffic."
+                }
+            },
+            {
+                id: 4,
+                title: "Construction Zone Ahead",
+                description: "You're driving at 55 MPH and see signs indicating a construction zone ahead. The first sign says 'Road Work Ahead,' followed by a sign showing the speed limit reduced to 35 MPH. You can see orange cones narrowing the lanes and workers visible near the roadway about 500 feet ahead.",
+                svg: `<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Road -->
+                    <rect x="0" y="100" width="800" height="150" fill="#666"/>
+                    <line x1="0" y1="175" x2="800" y2="175" stroke="white" stroke-width="4"/>
+                    
+                    <!-- Construction Zone -->
+                    <rect x="550" y="100" width="250" height="150" fill="#FFA500" opacity="0.3"/>
+                    
+                    <!-- Orange Cones -->
+                    <path d="M 540 110 L 550 145 L 530 145 Z" fill="#F78F1E"/>
+                    <path d="M 540 160 L 550 195 L 530 195 Z" fill="#F78F1E"/>
+                    <path d="M 540 210 L 550 245 L 530 245 Z" fill="#F78F1E"/>
+                    <path d="M 600 110 L 610 145 L 590 145 Z" fill="#F78F1E"/>
+                    <path d="M 600 160 L 610 195 L 590 195 Z" fill="#F78F1E"/>
+                    <path d="M 600 210 L 610 245 L 590 245 Z" fill="#F78F1E"/>
+                    
+                    <!-- Workers -->
+                    <circle cx="680" cy="130" r="8" fill="#FFD8B8"/>
+                    <rect x="675" y="138" width="10" height="15" fill="#FFA500"/>
+                    <circle cx="720" cy="135" r="8" fill="#FFD8B8"/>
+                    <rect x="715" y="143" width="10" height="15" fill="#FFA500"/>
+                    
+                    <!-- Construction Sign -->
+                    <rect x="350" y="40" width="80" height="70" fill="#F78F1E" stroke="#000" stroke-width="3"/>
+                    <text x="390" y="60" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">ROAD</text>
+                    <text x="390" y="78" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">WORK</text>
+                    <text x="390" y="96" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">AHEAD</text>
+                    
+                    <!-- Speed Limit Sign -->
+                    <rect x="450" y="45" width="60" height="80" fill="#F78F1E" stroke="#000" stroke-width="3"/>
+                    <text x="480" y="65" font-size="12" text-anchor="middle" font-weight="bold">SPEED</text>
+                    <text x="480" y="80" font-size="12" text-anchor="middle" font-weight="bold">LIMIT</text>
+                    <text x="480" y="110" font-size="32" font-weight="bold" text-anchor="middle">35</text>
+                    
+                    <!-- Your Car -->
+                    <rect x="120" y="140" width="70" height="40" rx="5" fill="#0E1C42"/>
+                    <rect x="130" y="145" width="15" height="12" fill="#55C8E8"/>
+                    <rect x="155" y="145" width="15" height="12" fill="#55C8E8"/>
+                    <circle cx="140" cy="180" r="8" fill="#333"/>
+                    <circle cx="170" cy="180" r="8" fill="#333"/>
+                    
+                    <!-- Speed indicator -->
+                    <rect x="100" y="190" width="50" height="25" fill="white" opacity="0.9" stroke="#000" stroke-width="2"/>
+                    <text x="125" y="207" font-size="16" font-weight="bold" text-anchor="middle" fill="#E53935">55 MPH</text>
+                </svg>`,
+                ipdeStep: "execute",
+                question: "How should you EXECUTE your driving response to this construction zone?",
+                options: [
+                    { text: "Immediately brake hard to get to 35 MPH as quickly as possible", correct: false, smithKey: null },
+                    { text: "Gradually reduce speed to 35 MPH, increase following distance, stay alert for workers and changing conditions", correct: true, smithKey: "make-sure-seen" },
+                    { text: "Maintain 55 MPH until you reach the cones, then brake", correct: false, smithKey: null },
+                    { text: "Slow to 45 MPH since that's close enough to 35 MPH", correct: false, smithKey: null }
+                ],
+                feedback: {
+                    correct: "Perfect execution! You're properly responding to the construction zone by gradually reducing speed (avoiding sudden braking that could cause rear-end collisions), reducing to the posted limit, increasing following distance, and staying alert. This shows 'Make Sure They See You' - you're being predictable and controlled. Construction zone fines are doubled in Florida, and worker safety is paramount.",
+                    incorrect: "Remember to EXECUTE smoothly and safely. Construction zones require gradual speed reduction to the posted limit - sudden braking is dangerous. You must reduce to exactly 35 MPH (not 'close enough'), increase your following distance, and stay highly alert for workers, equipment, and changing conditions. Construction zone violations carry doubled fines in Florida."
+                }
+            },
+            {
+                id: 5,
+                title: "Unexpected Hazard - Deer Near Road",
+                description: "You're driving on a rural two-lane road at dusk (6:30 PM) at 45 MPH. The speed limit is 55 MPH. Suddenly, you see a deer standing at the edge of the road about 150 feet ahead on your right. There is oncoming traffic in the opposite lane.",
+                svg: `<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Dusk Sky -->
+                    <rect x="0" y="0" width="800" height="100" fill="#4A5568" opacity="0.7"/>
+                    
+                    <!-- Road -->
+                    <rect x="0" y="100" width="800" height="150" fill="#555"/>
+                    <line x1="0" y1="175" x2="800" y2="175" stroke="yellow" stroke-width="4" stroke-dasharray="20,15"/>
+                    
+                    <!-- Trees (background) -->
+                    <circle cx="700" cy="70" r="25" fill="#2D5016"/>
+                    <rect x="695" y="70" width="10" height="30" fill="#654321"/>
+                    <circle cx="750" cy="60" r="30" fill="#2D5016"/>
+                    <rect x="745" y="60" width="10" height="40" fill="#654321"/>
+                    
+                    <!-- Deer -->
+                    <ellipse cx="650" cy="95" rx="12" ry="18" fill="#8B4513"/>
+                    <circle cx="650" cy="85" r="8" fill="#8B4513"/>
+                    <line x1="648" y1="80" x2="645" y2="73" stroke="#8B4513" stroke-width="2"/>
+                    <line x1="652" y1="80" x2="655" y2="73" stroke="#8B4513" stroke-width="2"/>
+                    <rect x="645" y="95" width="4" height="15" fill="#8B4513"/>
+                    <rect x="651" y="95" width="4" height="15" fill="#8B4513"/>
+                    <circle cx="647" cy="87" r="2" fill="#FFF"/>
+                    <circle cx="653" cy="87" r="2" fill="#FFF"/>
+                    
+                    <!-- Roadside -->
+                    <rect x="600" y="80" width="200" height="20" fill="#4A5016"/>
+                    <rect x="0" y="80" width="200" height="20" fill="#4A5016"/>
+                    
+                    <!-- Your Car -->
+                    <rect x="200" y="135" width="70" height="40" rx="5" fill="#0E1C42"/>
+                    <!-- Headlights on -->
+                    <ellipse cx="185" cy="155" rx="15" ry="8" fill="#FFFF99" opacity="0.7"/>
+                    <rect x="210" y="140" width="15" height="12" fill="#55C8E8"/>
+                    <rect x="235" y="140" width="15" height="12" fill="#55C8E8"/>
+                    <circle cx="220" cy="175" r="8" fill="#333"/>
+                    <circle cx="250" cy="175" r="8" fill="#333"/>
+                    
+                    <!-- Oncoming Car -->
+                    <rect x="550" y="185" width="70" height="40" rx="5" fill="#888"/>
+                    <ellipse cx="635" cy="205" rx="15" ry="8" fill="#FFFF99" opacity="0.7"/>
+                    <circle cx="565" cy="225" r="8" fill="#333"/>
+                    <circle cx="595" cy="225" r="8" fill="#333"/>
+                    
+                    <!-- Deer Crossing Sign -->
+                    <rect x="100" y="40" width="50" height="50" fill="#FFD700" transform="rotate(45 125 65)"/>
+                    <path d="M 125 50 L 115 75 L 135 75 Z M 120 65 L 118 72 L 122 72 L 120 65 M 130 65 L 128 72 L 132 72 L 130 65" fill="#000"/>
+                </svg>`,
+                ipdeStep: "execute",
+                question: "What is the SAFEST way to execute your response to this unexpected hazard?",
+                options: [
+                    { text: "Swerve into the oncoming lane to avoid hitting the deer", correct: false, smithKey: null },
+                    { text: "Ease off the gas, cover the brake, honk the horn once, and be prepared to brake firmly if needed - but stay in your lane", correct: true, smithKey: "leave-yourself-out" },
+                    { text: "Speed up quickly to get past the deer before it moves", correct: false, smithKey: null },
+                    { text: "Slam on the brakes immediately and come to a complete stop", correct: false, smithKey: null }
+                ],
+                feedback: {
+                    correct: "Excellent response to an unexpected hazard! You correctly applied the Smith System key 'Leave Yourself an Out' by staying in your lane and being prepared to stop. Swerving into oncoming traffic or off the road often causes more serious collisions than hitting a deer. Easing off the gas, covering the brake, and honking gives the deer a chance to move while keeping you safe. You're maintaining control and not creating additional hazards.",
+                    incorrect: "When encountering wildlife, the safest response is to stay in your lane, slow down, and brake if needed - NOT swerve. Swerving into oncoming traffic or off the road causes far more serious crashes than hitting a deer. Speeding up increases impact severity. Slamming brakes suddenly could cause a rear-end collision. The best response: ease off gas, cover brake, honk once, and brake firmly if needed while staying in your lane."
+                }
+            }
+        ];
+
+        function startActivity() {
+            document.getElementById('introScreen').style.display = 'none';
+            document.getElementById('activityContent').style.display = 'block';
+            scenarios = [...scenarioData];
+            currentScenario = 0;
+            currentScore = 0;
+            smithKeysApplied = 0;
+            loadScenario();
+        }
+
+        function loadScenario() {
+            if (currentScenario >= scenarios.length) {
+                showResults();
+                return;
+            }
+
+            const scenario = scenarios[currentScenario];
+            updateProgress();
+            updateIPDETracker(scenario.ipdeStep);
+
+            const container = document.getElementById('scenario-container');
+            container.innerHTML = `
+                <div class="scenario-visual">
+                    ${scenario.svg}
+                </div>
+                
+                <div class="scenario-description">
+                    <h3>${scenario.title}</h3>
+                    <p>${scenario.description}</p>
+                </div>
+
+                <div class="question-section">
+                    <div class="question-text">${scenario.question}</div>
+                    <div class="answer-options" id="answerOptions">
+                        ${scenario.options.map((option, index) => `
+                            <div class="answer-option" onclick="selectAnswer(${index})">
+                                <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                                <div class="option-text">${option.text}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextScenario()" disabled>Next Scenario →</button>
+                </div>
+            `;
+
+            container.classList.add('active');
+        }
+
+        function updateProgress() {
+            const progress = ((currentScenario) / scenarios.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Scenario ${currentScenario + 1} of ${scenarios.length}`;
+        }
+
+        function updateIPDETracker(step) {
+            const steps = ['identify', 'predict', 'decide', 'execute'];
+            steps.forEach(s => {
+                document.getElementById(`ipde-${s}`).classList.remove('active');
+            });
+            document.getElementById(`ipde-${step}`).classList.add('active');
+        }
+
+        function selectAnswer(index) {
+            const scenario = scenarios[currentScenario];
+            const options = document.querySelectorAll('.answer-option');
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                opt.onclick = null;
+            });
+
+            // Mark selected
+            options[index].classList.add('selected');
+
+            // Check if correct
+            const isCorrect = scenario.options[index].correct;
+            
+            if (isCorrect) {
+                options[index].classList.add('correct');
+                currentScore++;
+                if (scenario.options[index].smithKey) {
+                    smithKeysApplied++;
+                }
+            } else {
+                options[index].classList.add('incorrect');
+                // Show correct answer
+                scenario.options.forEach((opt, i) => {
+                    if (opt.correct) {
+                        options[i].classList.add('correct');
+                    }
+                });
+            }
+
+            // Show feedback
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `
+                <div class="feedback-header">
+                    <span class="feedback-icon">${isCorrect ? '✓' : '✗'}</span>
+                    <span class="feedback-title">${isCorrect ? 'Correct!' : 'Not Quite'}</span>
+                </div>
+                <div class="feedback-text">
+                    ${isCorrect ? scenario.feedback.correct : scenario.feedback.incorrect}
+                </div>
+            `;
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextScenario() {
+            currentScenario++;
+            document.getElementById('scenario-container').classList.remove('active');
+            setTimeout(() => {
+                loadScenario();
+            }, 300);
+        }
+
+        function showResults() {
+            document.getElementById('scenario-container').style.display = 'none';
+            const resultsScreen = document.getElementById('resultsScreen');
+            resultsScreen.classList.add('show');
+
+            const percentage = (currentScore / scenarios.length) * 100;
+            const xp = currentScore * 20;
+
+            document.getElementById('finalScore').textContent = `${currentScore}/${scenarios.length}`;
+            document.getElementById('xpAward').textContent = `+${xp} XP Earned`;
+            document.getElementById('correctCount').textContent = currentScore;
+            document.getElementById('accuracyPercent').textContent = Math.round(percentage) + '%';
+            document.getElementById('smithKeysCount').textContent = smithKeysApplied;
+
+            let message = '';
+            if (percentage === 100) {
+                message = '🌟 Perfect! You\'re a defensive driving expert!';
+            } else if (percentage >= 80) {
+                message = '🎉 Excellent work! You made safe decisions!';
+            } else if (percentage >= 60) {
+                message = '👍 Good job! Review the feedback to improve!';
+            } else {
+                message = '📚 Keep practicing! Review the lessons and try again!';
+            }
+            document.getElementById('performanceMessage').textContent = message;
+        }
+
+        function restartActivity() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
