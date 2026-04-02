@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 1.5 — Stopping Distance Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.activity-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.activity-title{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--binary-blue);margin-bottom:10px}
+.activity-desc{font-size:17px;color:#6b7280;line-height:1.6;margin-bottom:24px}
+.calc-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.calc-header{padding:20px 24px;background:var(--binary-blue);color:#fff}
+.calc-header h2{font-family:var(--font-display);font-size:20px;font-weight:700}
+.calc-body{padding:24px}
+.control-group{margin-bottom:24px}
+.control-label{font-family:var(--font-display);font-weight:700;color:var(--binary-blue);font-size:15px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.control-value{font-size:18px;color:var(--bitstream-blue)}
+.slider{-webkit-appearance:none;width:100%;height:10px;border-radius:5px;background:#e5e7eb;outline:none;margin:8px 0}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--bitstream-blue);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.slider::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--bitstream-blue);cursor:pointer;border:none}
+.condition-btns{display:flex;gap:8px;flex-wrap:wrap}
+.cond-btn{padding:10px 18px;border:2px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--binary-blue);transition:all .2s}
+.cond-btn:hover{border-color:var(--bitstream-blue)}
+.cond-btn.active{border-color:var(--bitstream-blue);background:#e0f2fe;color:var(--dark-bitstream)}
+/* Results display */
+.results-display{background:linear-gradient(135deg,#0E1C42,#1e293b);border-radius:16px;padding:32px;color:#fff;margin-top:24px}
+.result-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.result-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.result-label{font-size:15px;opacity:.8}
+.result-value{font-family:var(--font-display);font-size:28px;font-weight:800}
+.result-bar-track{width:100%;height:16px;background:rgba(255,255,255,.1);border-radius:8px;margin-top:8px;overflow:hidden}
+.result-bar{height:100%;border-radius:8px;transition:width .5s ease}
+.total-result{text-align:center;padding-top:20px;border-top:2px solid rgba(255,255,255,.15);margin-top:20px}
+.total-label{font-size:16px;opacity:.8;margin-bottom:4px}
+.total-value{font-family:var(--font-display);font-size:56px;font-weight:800;color:var(--bitstream-blue)}
+.total-unit{font-size:18px;opacity:.7}
+.total-context{font-size:14px;opacity:.6;margin-top:8px}
+/* Visual road representation */
+.road-visual{background:#6B7280;border-radius:12px;padding:24px;margin-top:24px;position:relative;overflow:hidden;min-height:120px}
+.road-car{position:absolute;left:20px;top:50%;transform:translateY(-50%)}
+.road-marker{position:absolute;top:10px;font-family:var(--font-display);font-weight:700;font-size:12px;color:#fff;text-align:center;border-left:2px dashed rgba(255,255,255,.5);padding-left:8px;height:calc(100% - 20px);display:flex;align-items:center}
+.road-reaction{background:var(--odyssey-orange);opacity:.4;position:absolute;top:0;height:100%;border-radius:4px}
+.road-braking{background:#DC2626;opacity:.4;position:absolute;top:0;height:100%;border-radius:4px}
+.road-labels{display:flex;justify-content:center;gap:24px;margin-top:12px;font-size:13px}
+.road-labels span{display:flex;align-items:center;gap:6px}
+.label-dot{width:12px;height:12px;border-radius:3px}
+/* Comparison section */
+.comparison{margin-top:32px}
+.comp-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--binary-blue);margin-bottom:16px}
+.comp-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;padding:12px 16px;background:#fff;border:2px solid #e5e7eb;border-radius:10px}
+.comp-speed{font-family:var(--font-display);font-weight:800;color:var(--binary-blue);width:70px;font-size:16px;flex-shrink:0}
+.comp-bar-track{flex:1;height:24px;background:#f3f4f6;border-radius:6px;overflow:hidden;position:relative}
+.comp-bar-reaction{height:100%;position:absolute;left:0;top:0;border-radius:6px 0 0 6px}
+.comp-bar-braking{height:100%;position:absolute;top:0;border-radius:0 6px 6px 0}
+.comp-value{font-family:var(--font-display);font-weight:700;width:80px;text-align:right;font-size:14px;flex-shrink:0}
+.challenge-card{background:linear-gradient(135deg,#eff6ff,#ecfeff);border:2px solid var(--bitstream-blue);border-radius:16px;padding:24px;margin-top:32px}
+.challenge-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--binary-blue);margin-bottom:12px}
+.challenge-q{font-size:15px;margin-bottom:16px}
+.challenge-opts{display:flex;flex-direction:column;gap:8px}
+.ch-btn{padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;font-family:var(--font-text);font-size:14px;color:var(--binary-blue);text-align:left;width:100%;transition:all .2s}
+.ch-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.ch-btn.correct{border-color:var(--gamer-green);background:#f0fdf4}
+.ch-btn.wrong{border-color:#DC2626;background:#fef2f2}
+.ch-btn.selected{border-color:var(--bitstream-blue);background:#e0f2fe}
+.ch-feedback{margin-top:12px;padding:12px;border-radius:8px;font-size:14px}
+.ch-feedback.ok{background:#f0fdf4;border:1px solid var(--gamer-green);color:#166534}
+.ch-feedback.no{background:#fef2f2;border:1px solid #DC2626;color:#991b1b}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4)}.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}.btn svg{width:18px;height:18px}
+.results-card{background:#fff;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px;margin-top:16px}
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:768px){.container{padding:24px 16px 60px}.activity-title{font-size:26px}.result-value{font-size:22px}.total-value{font-size:42px}.comp-row{flex-wrap:wrap}.comp-speed{width:100%}.comp-value{width:100%;text-align:left}.bottom-nav{flex-direction:column}.bottom-nav .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>800 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Unit 1</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span class="current">Activity: Stopping Distance Calculator</span></div></nav>
+
+<main class="container">
+<div class="activity-badge">🎮 INTERACTIVE ACTIVITY</div>
+<h1 class="activity-title">🛑 Stopping Distance Calculator</h1>
+<p class="activity-desc">Adjust the speed, road conditions, and reaction time to see how stopping distance changes. Watch how even small speed increases dramatically affect your ability to stop.</p>
+
+<div class="calc-card">
+<div class="calc-header"><h2>⚙️ Adjust the Variables</h2></div>
+<div class="calc-body">
+<!-- Speed slider -->
+<div class="control-group">
+<div class="control-label"><span>🚗 Speed</span><span class="control-value" id="speedVal">45 mph</span></div>
+<input type="range" class="slider" id="speedSlider" min="15" max="80" value="45" oninput="calculate()">
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#9ca3af"><span>15 mph</span><span>80 mph</span></div>
+</div>
+
+<!-- Road condition -->
+<div class="control-group">
+<div class="control-label"><span>🛣️ Road Condition</span><span class="control-value" id="condVal">Dry</span></div>
+<div class="condition-btns">
+<button class="cond-btn active" data-cond="dry" onclick="setCond('dry',this)">☀️ Dry</button>
+<button class="cond-btn" data-cond="wet" onclick="setCond('wet',this)">🌧️ Wet</button>
+<button class="cond-btn" data-cond="icy" onclick="setCond('icy',this)">🧊 Icy/Flooded</button>
+<button class="cond-btn" data-cond="gravel" onclick="setCond('gravel',this)">🪨 Gravel/Sand</button>
+</div>
+</div>
+
+<!-- Reaction time -->
+<div class="control-group">
+<div class="control-label"><span>⏱️ Reaction Time</span><span class="control-value" id="rtVal">1.5 sec (Average)</span></div>
+<input type="range" class="slider" id="rtSlider" min="10" max="40" value="15" oninput="calculate()">
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#9ca3af"><span>1.0s (Alert)</span><span>4.0s (Distracted)</span></div>
+</div>
+</div>
+</div>
+
+<!-- Results -->
+<div class="results-display" id="resultsDisplay"></div>
+
+<!-- Visual road -->
+<div style="margin-top:24px">
+<div style="font-family:var(--font-display);font-weight:700;color:var(--binary-blue);margin-bottom:8px">Visual: Your Stopping Distance</div>
+<div class="road-visual" id="roadVisual"></div>
+<div class="road-labels">
+<span><div class="label-dot" style="background:var(--odyssey-orange)"></div> Reaction Distance</span>
+<span><div class="label-dot" style="background:#DC2626"></div> Braking Distance</span>
+</div>
+</div>
+
+<!-- Comparison chart -->
+<div class="comparison" id="compSection"></div>
+
+<!-- Challenge questions -->
+<div id="challengeSection"></div>
+
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.5</a>
+<a href="#" class="btn btn-primary">Next: Knowledge Check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+</main>
+
+<script>
+let speed = 45;
+let condition = 'dry';
+let reactionTime = 1.5;
+
+const frictionCoeffs = { dry: 0.7, wet: 0.4, icy: 0.15, gravel: 0.35 };
+const condLabels = { dry: 'Dry', wet: 'Wet', icy: 'Icy/Flooded', gravel: 'Gravel/Sand' };
+
+function setCond(c, btn) {
+  condition = c;
+  document.querySelectorAll('.cond-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('condVal').textContent = condLabels[c];
+  calculate();
+}
+
+function calcStopping(mph, rt, friction) {
+  const fps = mph * 1.467; // mph to feet per second
+  const reactionDist = fps * rt;
+  const brakingDist = (fps * fps) / (2 * 32.2 * friction);
+  return { reaction: Math.round(reactionDist), braking: Math.round(brakingDist), total: Math.round(reactionDist + brakingDist) };
+}
+
+function getContext(feet) {
+  if (feet < 50) return "About 3 car lengths";
+  if (feet < 100) return "About half a city block";
+  if (feet < 200) return "About 2/3 of a football field";
+  if (feet < 300) return "About a full football field";
+  if (feet < 500) return "About 1.5 football fields";
+  if (feet < 700) return "About 2 football fields";
+  return "Over 2 football fields — massive distance!";
+}
+
+function getDangerLevel(total, speed) {
+  if (speed <= 25) return { color: '#22C55E', label: 'Low Risk' };
+  if (speed <= 45 && condition === 'dry') return { color: '#F59E0B', label: 'Moderate Risk' };
+  if (speed <= 55 && condition === 'dry') return { color: '#F78F1E', label: 'Elevated Risk' };
+  return { color: '#DC2626', label: 'High Risk' };
+}
+
+function calculate() {
+  speed = parseInt(document.getElementById('speedSlider').value);
+  reactionTime = parseInt(document.getElementById('rtSlider').value) / 10;
+  
+  document.getElementById('speedVal').textContent = speed + ' mph';
+  const rtLabels = { 1: 'Alert', 1.5: 'Average', 2: 'Tired', 2.5: 'Very Tired', 3: 'Distracted', 3.5: 'Very Distracted', 4: 'Phone Use' };
+  const rtLabel = rtLabels[reactionTime] || (reactionTime <= 1.5 ? 'Alert' : reactionTime <= 2.5 ? 'Tired' : 'Distracted');
+  document.getElementById('rtVal').textContent = reactionTime.toFixed(1) + ' sec (' + rtLabel + ')';
+  
+  const result = calcStopping(speed, reactionTime, frictionCoeffs[condition]);
+  const danger = getDangerLevel(result.total, speed);
+  const maxDist = 800;
+  
+  // Results display
+  document.getElementById('resultsDisplay').innerHTML = `
+    <div class="result-row">
+      <div><div class="result-label">⏱️ Reaction Distance</div>
+      <div class="result-bar-track"><div class="result-bar" style="width:${Math.min(result.reaction/maxDist*100,100)}%;background:var(--odyssey-orange)"></div></div></div>
+      <div class="result-value" style="color:var(--odyssey-orange)">${result.reaction} ft</div>
+    </div>
+    <div class="result-row">
+      <div><div class="result-label">🛑 Braking Distance</div>
+      <div class="result-bar-track"><div class="result-bar" style="width:${Math.min(result.braking/maxDist*100,100)}%;background:#DC2626"></div></div></div>
+      <div class="result-value" style="color:#DC2626">${result.braking} ft</div>
+    </div>
+    <div class="total-result">
+      <div class="total-label">Total Stopping Distance</div>
+      <div class="total-value">${result.total}<span class="total-unit"> feet</span></div>
+      <div class="total-context">${getContext(result.total)}</div>
+      <div style="margin-top:12px;display:inline-block;padding:6px 16px;border-radius:20px;background:${danger.color};font-family:var(--font-display);font-weight:700;font-size:14px">${danger.label}</div>
+    </div>
+  `;
+  
+  // Road visual
+  const roadWidth = 800;
+  const scale = roadWidth / Math.max(result.total * 1.3, 200);
+  const reactionW = Math.max(result.reaction * scale, 5);
+  const brakingW = Math.max(result.braking * scale, 5);
+  
+  document.getElementById('roadVisual').innerHTML = `
+    <div class="road-reaction" style="left:60px;width:${reactionW}px"></div>
+    <div class="road-braking" style="left:${60 + reactionW}px;width:${brakingW}px"></div>
+    <div class="road-car">
+      <svg width="40" height="20" viewBox="0 0 40 20"><rect x="0" y="2" width="40" height="16" rx="6" fill="var(--bitstream-blue)"/><rect x="5" y="0" width="28" height="8" rx="4" fill="var(--bitstream-blue)" opacity=".8"/><circle cx="8" cy="20" r="4" fill="#1f2937"/><circle cx="32" cy="20" r="4" fill="#1f2937"/></svg>
+    </div>
+    <div class="road-marker" style="left:${60 + reactionW + brakingW + 5}px;color:#fff">
+      🛑 STOP<br>${result.total} ft
+    </div>
+    <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(255,255,255,.5);font-family:var(--font-display)">
+      ${speed} mph on ${condLabels[condition].toLowerCase()} road • ${reactionTime}s reaction time
+    </div>
+  `;
+  
+  // Comparison chart
+  const speeds = [25, 35, 45, 55, 65, 75];
+  const compMax = calcStopping(75, reactionTime, frictionCoeffs[condition]).total;
+  document.getElementById('compSection').innerHTML = `
+    <div class="comp-title">📊 Speed Comparison (${condLabels[condition]} road, ${reactionTime}s reaction)</div>
+    ${speeds.map(s => {
+      const r = calcStopping(s, reactionTime, frictionCoeffs[condition]);
+      const rPct = (r.reaction / compMax) * 100;
+      const bPct = (r.braking / compMax) * 100;
+      const isActive = s === speed;
+      return `<div class="comp-row" style="${isActive ? 'border-color:var(--bitstream-blue);background:#f0f9ff' : ''}">
+        <div class="comp-speed">${s} mph</div>
+        <div class="comp-bar-track">
+          <div class="comp-bar-reaction" style="width:${rPct}%;background:var(--odyssey-orange);opacity:.6"></div>
+          <div class="comp-bar-braking" style="left:${rPct}%;width:${bPct}%;background:#DC2626;opacity:.6"></div>
+        </div>
+        <div class="comp-value" style="${isActive ? 'color:var(--bitstream-blue)' : 'color:var(--binary-blue)'}">${r.total} ft</div>
+      </div>`;
+    }).join('')}
+  `;
+  
+  // Challenge questions
+  renderChallenges();
+}
+
+const challenges = [
+  {q:"If you double your speed from 30 to 60 mph, what happens to your braking distance?",opts:["It doubles","It triples","It quadruples (4x)","It stays the same"],correct:2,fb:{ok:"Correct! Braking distance increases with the SQUARE of speed. Double the speed = 4x the braking distance. This is the most important speed relationship to understand.",no:"Braking distance increases with the square of speed. Double your speed = 4x the braking distance. At 30 mph braking might be 45 ft; at 60 mph it's about 180 ft."}},
+  {q:"You're driving 55 mph on a wet road and texting (3 second reaction time). Your total stopping distance is approximately:",opts:["About 200 feet","About 350 feet","About 550 feet","About 100 feet"],correct:2,fb:{ok:"Correct! At 55 mph on wet roads with a 3-second distracted reaction time, your stopping distance is roughly 550 feet — nearly two football fields. This is why texting while driving is so dangerous.",no:"Use the calculator: 55 mph + wet road + 3s reaction = about 550 feet. That's nearly two football fields of uncontrolled travel. Distraction + speed + bad conditions = disaster."}},
+  {q:"Florida's Basic Speed Law says you can be ticketed for speeding even if you're under the posted limit. When?",opts:["Never — the posted limit is the only rule","When driving too fast for current conditions (rain, fog, traffic)","Only in school zones","Only during rush hour"],correct:1,fb:{ok:"Correct! The Basic Speed Law requires you to drive at a speed reasonable for conditions. In heavy rain, fog, or traffic, the safe speed may be well below the posted limit.",no:"The Basic Speed Law says you must never drive faster than is reasonable for current conditions — even if under the posted limit. Heavy rain at 55 mph in a 55 zone can still earn you a ticket."}}
+];
+let challengeAnswers = {};
+
+function renderChallenges() {
+  document.getElementById('challengeSection').innerHTML = `
+    <div style="margin-top:32px;font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">🧠 Speed Challenge Questions</div>
+    ${challenges.map((c,i) => {
+      const a = challengeAnswers[i];
+      return `<div class="challenge-card" style="margin-bottom:16px">
+        <div class="challenge-title">Question ${i+1}</div>
+        <div class="challenge-q">${c.q}</div>
+        <div class="challenge-opts">${c.opts.map((o,j) => {
+          let cls='';
+          if(a?.submitted){if(j===c.correct)cls='correct';else if(j===a.sel&&j!==c.correct)cls='wrong'}
+          else if(a?.sel===j)cls='selected';
+          return `<button class="ch-btn ${cls}" onclick="selChallenge(${i},${j})" ${a?.submitted?'disabled':''}>${o}</button>`;
+        }).join('')}</div>
+        ${!a?.submitted && a?.sel !== undefined ? `<div style="text-align:right;margin-top:8px"><button class="btn btn-primary" onclick="subChallenge(${i})" style="padding:8px 16px;font-size:13px">Check</button></div>` : ''}
+        ${a?.submitted ? `<div class="ch-feedback ${a.sel===c.correct?'ok':'no'}"><strong>${a.sel===c.correct?'✅ Correct!':'❌ Incorrect'}</strong> — ${a.sel===c.correct?c.fb.ok:c.fb.no}</div>` : ''}
+      </div>`;
+    }).join('')}
+    ${Object.keys(challengeAnswers).filter(k=>challengeAnswers[k].submitted).length === challenges.length ? `
+      <div class="results-card" style="margin-top:24px">
+        <div style="font-size:36px;margin-bottom:8px">🛑</div>
+        <div style="font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">Calculator Activity Complete!</div>
+        <div class="results-xp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>+150 XP Earned!</div>
+        <p style="margin-top:16px;color:#6b7280;font-size:15px">You now understand how speed, road conditions, and reaction time all multiply stopping distance. Remember: speed is always a choice, and that choice has physics behind it.</p>
+      </div>
+    ` : ''}
+  `;
+}
+
+function selChallenge(qi, oi) { if(challengeAnswers[qi]?.submitted) return; challengeAnswers[qi] = {sel:oi}; renderChallenges(); }
+function subChallenge(qi) { challengeAnswers[qi].submitted = true; renderChallenges(); }
+
+// Initialize
+calculate();
+</script>
+</body>
+</html>
