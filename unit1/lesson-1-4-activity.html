@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 1.4 — No-Zone Navigator</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--dark-bitstream:#0E5568;--font-display:'Wix Madefor Display',sans-serif;--font-text:'Wix Madefor Text',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-text);font-size:16px;line-height:1.7;color:#374151;background:#f8f9fa}
+.oao-header{background:var(--binary-blue);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}.oao-logo-area{display:flex;align-items:center;gap:16px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}.oao-header-course{font-family:var(--font-display);font-size:14px;color:var(--bitstream-blue);font-weight:600}.oao-header-sub{font-size:12px;color:rgba(255,255,255,.7)}.oao-xp-badge{display:flex;align-items:center;gap:8px;background:var(--gateway-gold);color:#fff;padding:6px 14px;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--font-display)}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e5e7eb}.breadcrumb-inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:8px;font-size:14px;color:#6b7280;flex-wrap:wrap}.breadcrumb-inner a{color:#6b7280;text-decoration:none}.breadcrumb-inner a:hover{color:var(--bitstream-blue)}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}.breadcrumb-sep{width:16px;height:16px;fill:none;stroke:#9ca3af;stroke-width:2}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.activity-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff;font-size:13px;font-weight:700;font-family:var(--font-display);border-radius:20px;margin-bottom:16px}
+.activity-title{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--binary-blue);margin-bottom:10px}
+.activity-desc{font-size:17px;color:#6b7280;line-height:1.6;margin-bottom:24px}
+.game-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;overflow:hidden;margin-bottom:24px}
+.game-header{padding:20px 24px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.game-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--binary-blue)}
+.timer{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--odyssey-orange);display:flex;align-items:center;gap:6px}
+.score-display{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--gamer-green)}
+.game-svg{display:block;width:100%;cursor:crosshair}
+.zone{cursor:pointer;transition:all .2s}
+.zone:hover{opacity:.5}
+.zone.found{opacity:.8;cursor:default}
+.game-info{padding:20px 24px}
+.found-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.found-tag{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;font-family:var(--font-display)}
+.found-tag.yes{background:#f0fdf4;color:var(--gamer-green);border:1px solid var(--gamer-green)}
+.found-tag.no{background:#f3f4f6;color:#9ca3af;border:1px solid #e5e7eb}
+.feedback-msg{padding:16px 24px;border-top:1px solid #e5e7eb;font-size:15px}
+.feedback-msg.success{background:#f0fdf4;color:#166534}
+.feedback-msg.info{background:#eff6ff;color:#1e40af}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--bitstream-blue),var(--dark-bitstream));color:#fff}.btn-primary:hover{box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-secondary{background:#fff;color:var(--binary-blue);border:2px solid #d1d5db}
+.btn-green{background:linear-gradient(135deg,var(--gamer-green),#5FA035);color:#fff}
+.btn svg{width:18px;height:18px}
+.results-card{background:#fff;border-radius:20px;padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.results-score{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--binary-blue)}
+.results-xp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--gateway-gold);padding:10px 24px;border-radius:12px;font-family:var(--font-display);font-weight:700;color:var(--gateway-gold);font-size:18px;margin-top:16px}
+/* Scenario cards for part 2 */
+.scenario-card{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:24px;margin-bottom:16px}
+.scenario-q{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--binary-blue);margin-bottom:16px}
+.scenario-opts{display:flex;flex-direction:column;gap:8px}
+.opt-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;border:2px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;transition:all .2s;font-family:var(--font-text);font-size:15px;color:var(--binary-blue);text-align:left;width:100%}
+.opt-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.opt-btn.selected{border-color:var(--bitstream-blue);background:#e0f2fe}
+.opt-btn.correct{border-color:var(--gamer-green);background:#f0fdf4}
+.opt-btn.wrong{border-color:#DC2626;background:#fef2f2}
+.opt-letter{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;flex-shrink:0;background:#f3f4f6;color:#6b7280}
+.opt-btn.selected .opt-letter{background:var(--bitstream-blue);color:#fff}
+.opt-btn.correct .opt-letter{background:var(--gamer-green);color:#fff}
+.opt-btn.wrong .opt-letter{background:#DC2626;color:#fff}
+.scenario-feedback{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px}
+.scenario-feedback.ok{background:#f0fdf4;border:1px solid var(--gamer-green);color:#166534}
+.scenario-feedback.no{background:#fef2f2;border:1px solid #DC2626;color:#991b1b}
+.bottom-nav{margin-top:48px;padding-top:32px;border-top:2px solid #e5e7eb;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:768px){.container{padding:24px 16px 60px}.activity-title{font-size:26px}.bottom-nav{flex-direction:column}.bottom-nav .btn{width:100%;justify-content:center}.game-header{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area"><svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg><div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div><div class="oao-xp-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>600 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><a href="#">Unit 1</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span class="current">Activity: No-Zone Navigator</span></div></nav>
+
+<main class="container">
+<div class="activity-badge">🎮 INTERACTIVE ACTIVITY</div>
+<h1 class="activity-title">🚛 No-Zone Navigator</h1>
+<p class="activity-desc">Part 1: Click on all four No-Zone blind spots around the truck. Part 2: Answer scenario questions about sharing the road with big vehicles.</p>
+
+<div id="appRoot"></div>
+
+<div class="bottom-nav">
+<a href="#" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Lesson 1.4</a>
+<a href="#" class="btn btn-primary">Next: Knowledge Check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+</div>
+</main>
+
+<script>
+const zones = [
+  {id:'front',label:'Front No-Zone',desc:'20 feet ahead of the truck. The driver cannot see cars directly in front.',size:'20 feet'},
+  {id:'rear',label:'Rear No-Zone',desc:'200 feet behind the truck. The driver has no rearview mirror — they cannot see you tailgating.',size:'200 feet'},
+  {id:'left',label:'Left Side No-Zone',desc:'One lane wide along the left. Pass quickly — don\'t linger here.',size:'1 lane'},
+  {id:'right',label:'Right Side No-Zone',desc:'Two lanes wide along the right. The largest and most dangerous blind spot.',size:'2+ lanes'}
+];
+
+const scenarios = [
+  {q:"You're driving behind a semi-truck on the highway. How much following distance should you maintain?",opts:["2 seconds","3 seconds","At least 4 seconds","1 car length"],correct:2,fb:{ok:"Correct! Behind a truck, maintain at least 4 seconds of following distance — more than the standard 3 seconds for cars.",no:"Behind trucks, you need at least 4 seconds of following distance. Trucks have a large rear blind spot and take much longer to stop."}},
+  {q:"A truck ahead of you is signaling a right turn at an intersection. It swings slightly left before turning. You should:",opts:["Pass quickly on the right while there's space","Stay back and give the truck room to complete its wide turn","Honk to let them know you're there","Pull alongside on the right to turn with them"],correct:1,fb:{ok:"Correct! Trucks make wide right turns by swinging left first. Never try to squeeze between a turning truck and the curb — this is the deadly 'right-turn squeeze.'",no:"Never pass a turning truck on the right. Trucks swing wide left to complete right turns. Squeezing between the truck and curb is one of the most dangerous things a driver can do."}},
+  {q:"You're approaching a railroad crossing. The red lights are flashing and the gates are coming down. You should:",opts:["Speed up to cross before the gates close","Stop at least 15 feet from the nearest rail and wait","Stop on the tracks if traffic is backed up ahead","Look both ways and proceed with caution"],correct:1,fb:{ok:"Correct! Stop at least 15 feet from the nearest rail and wait until the gates are fully raised and lights stop flashing. Never try to beat a train.",no:"When railroad lights are flashing and gates are lowering, you must stop at least 15 feet from the nearest rail. Wait until gates are fully up and lights stop. Never race a train."}},
+  {q:"A school bus ahead of you stops and extends its stop sign on a two-lane road with no median. You must:",opts:["Slow down but continue if no children are visible","Stop only if you're behind the bus","Stop — traffic in BOTH directions must stop","Only stop if the bus honks at you"],correct:2,fb:{ok:"Correct! On a two-lane road without a median, traffic in BOTH directions must stop when a school bus displays its stop sign and red lights.",no:"On a two-lane road with no median, ALL traffic in BOTH directions must stop for a school bus with its stop sign extended. This applies even if you don't see children."}}
+];
+
+let foundZones = new Set();
+let timerStarted = false;
+let startTime = 0;
+let elapsed = 0;
+let timerInterval = null;
+let phase = 'zones'; // 'zones' | 'scenarios' | 'results'
+let scenarioAnswers = {};
+let currentScenario = 0;
+
+function render(){
+  const root = document.getElementById('appRoot');
+  
+  if(phase === 'zones'){
+    root.innerHTML = `
+      <div class="game-card">
+        <div class="game-header">
+          <div class="game-title">Part 1: Find All 4 No-Zones</div>
+          <div class="timer">⏱️ <span id="timerDisplay">${formatTime(elapsed)}</span></div>
+          <div class="score-display">${foundZones.size}/4 Found</div>
+        </div>
+        <svg class="game-svg" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+          <rect width="700" height="450" fill="#f1f5f9"/>
+          <text x="350" y="30" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="#6b7280">Click on each No-Zone blind spot area</text>
+          <!-- Road surface -->
+          <rect x="50" y="80" width="600" height="300" fill="#e2e8f0" rx="8"/>
+          <!-- Lane lines -->
+          <line x1="350" y1="80" x2="350" y2="380" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="10,8"/>
+          <!-- Truck body -->
+          <rect x="220" y="160" width="260" height="110" rx="6" fill="#374151" stroke="#4B5563" stroke-width="2"/>
+          <rect x="440" y="168" width="60" height="94" rx="8" fill="#1e40af" stroke="#1e3a8a" stroke-width="2"/>
+          <rect x="448" y="178" width="18" height="14" rx="2" fill="#BAE6FD" opacity=".6"/>
+          <rect x="472" y="178" width="18" height="14" rx="2" fill="#BAE6FD" opacity=".6"/>
+          <text x="350" y="222" text-anchor="middle" font-family="var(--font-display)" font-size="16" font-weight="700" fill="white">TRUCK</text>
+          <!-- Wheels -->
+          <rect x="240" y="270" width="24" height="12" rx="4" fill="#1f2937"/><rect x="275" y="270" width="24" height="12" rx="4" fill="#1f2937"/>
+          <rect x="400" y="270" width="24" height="12" rx="4" fill="#1f2937"/><rect x="460" y="270" width="24" height="12" rx="4" fill="#1f2937"/>
+          <rect x="240" y="148" width="24" height="12" rx="4" fill="#1f2937"/><rect x="275" y="148" width="24" height="12" rx="4" fill="#1f2937"/>
+          <rect x="400" y="148" width="24" height="12" rx="4" fill="#1f2937"/><rect x="460" y="148" width="24" height="12" rx="4" fill="#1f2937"/>
+          <!-- Direction -->
+          <text x="540" y="150" font-family="var(--font-display)" font-size="12" fill="#94a3b8">→ Direction</text>
+          
+          <!-- CLICKABLE ZONES -->
+          <!-- Front -->
+          <rect id="zone_front" class="zone ${foundZones.has('front')?'found':''}" x="500" y="170" width="130" height="90" rx="10" 
+            fill="${foundZones.has('front')?'#22C55E':'#DC2626'}" opacity="${foundZones.has('front')?'.25':'.08'}" 
+            stroke="${foundZones.has('front')?'#22C55E':'transparent'}" stroke-width="2" onclick="clickZone('front')"/>
+          ${foundZones.has('front')?`<text x="565" y="210" text-anchor="middle" font-family="var(--font-display)" font-size="11" font-weight="700" fill="#166534">✅ FRONT</text><text x="565" y="225" text-anchor="middle" font-size="10" fill="#166534">20 feet</text>`:''}
+          
+          <!-- Rear -->
+          <rect id="zone_rear" class="zone ${foundZones.has('rear')?'found':''}" x="70" y="155" width="150" height="120" rx="10" 
+            fill="${foundZones.has('rear')?'#22C55E':'#DC2626'}" opacity="${foundZones.has('rear')?'.25':'.08'}" 
+            stroke="${foundZones.has('rear')?'#22C55E':'transparent'}" stroke-width="2" onclick="clickZone('rear')"/>
+          ${foundZones.has('rear')?`<text x="145" y="210" text-anchor="middle" font-family="var(--font-display)" font-size="11" font-weight="700" fill="#166534">✅ REAR</text><text x="145" y="225" text-anchor="middle" font-size="10" fill="#166534">200 feet</text>`:''}
+          
+          <!-- Left side (bottom of diagram = driver's left) -->
+          <rect id="zone_left" class="zone ${foundZones.has('left')?'found':''}" x="280" y="280" width="200" height="70" rx="10" 
+            fill="${foundZones.has('left')?'#22C55E':'#F78F1E'}" opacity="${foundZones.has('left')?'.25':'.08'}" 
+            stroke="${foundZones.has('left')?'#22C55E':'transparent'}" stroke-width="2" onclick="clickZone('left')"/>
+          ${foundZones.has('left')?`<text x="380" y="318" text-anchor="middle" font-family="var(--font-display)" font-size="11" font-weight="700" fill="#166534">✅ LEFT SIDE</text><text x="380" y="333" text-anchor="middle" font-size="10" fill="#166534">1 lane</text>`:''}
+          
+          <!-- Right side (top of diagram = driver's right, BIGGEST) -->
+          <rect id="zone_right" class="zone ${foundZones.has('right')?'found':''}" x="240" y="82" width="280" height="66" rx="10" 
+            fill="${foundZones.has('right')?'#22C55E':'#DC2626'}" opacity="${foundZones.has('right')?'.25':'.08'}" 
+            stroke="${foundZones.has('right')?'#22C55E':'transparent'}" stroke-width="2" onclick="clickZone('right')"/>
+          ${foundZones.has('right')?`<text x="380" y="113" text-anchor="middle" font-family="var(--font-display)" font-size="11" font-weight="700" fill="#166534">✅ RIGHT SIDE ⚠️</text><text x="380" y="128" text-anchor="middle" font-size="10" fill="#166534">2+ lanes — MOST DANGEROUS</text>`:''}
+          
+          <!-- Labels -->
+          <text x="350" y="420" text-anchor="middle" font-family="var(--font-display)" font-size="12" fill="#94a3b8">Top = Passenger side (Right) | Bottom = Driver side (Left)</text>
+          <text x="350" y="440" text-anchor="middle" font-family="var(--font-display)" font-size="12" fill="#94a3b8">🚫 If you can't see the driver's mirrors, they can't see you</text>
+        </svg>
+        <div class="game-info">
+          <div class="found-list">
+            ${zones.map(z => `<span class="found-tag ${foundZones.has(z.id)?'yes':'no'}">${foundZones.has(z.id)?'✅':'⬜'} ${z.label}</span>`).join('')}
+          </div>
+        </div>
+        ${foundZones.size === 4 ? `
+          <div class="feedback-msg success">
+            <strong>🎉 All 4 No-Zones identified!</strong> Time: ${formatTime(elapsed)}
+            <div style="margin-top:12px"><button class="btn btn-primary" onclick="startScenarios()">Continue to Part 2: Scenarios →</button></div>
+          </div>
+        ` : `
+          <div class="feedback-msg info">💡 Click on the blind spot areas around the truck. Look for zones where a car would be invisible to the driver.</div>
+        `}
+      </div>
+    `;
+  } else if(phase === 'scenarios'){
+    const s = scenarios[currentScenario];
+    const a = scenarioAnswers[currentScenario];
+    root.innerHTML = `
+      <div style="text-align:center;margin-bottom:16px;font-family:var(--font-display);font-weight:700;color:var(--binary-blue)">Part 2: Scenario Questions (${currentScenario+1}/${scenarios.length})</div>
+      <div class="scenario-card">
+        <div class="scenario-q">${s.q}</div>
+        <div class="scenario-opts">
+          ${s.opts.map((o,i) => {
+            let cls='';
+            if(a?.submitted){if(i===s.correct)cls='correct';else if(i===a.selected&&i!==s.correct)cls='wrong'}
+            else if(a?.selected===i)cls='selected';
+            return `<button class="opt-btn ${cls}" onclick="selScenario(${i})" ${a?.submitted?'disabled':''}><div class="opt-letter">${'ABCD'[i]}</div><span>${o}</span></button>`
+          }).join('')}
+        </div>
+        ${!a?.submitted && a?.selected !== undefined ? `<div style="text-align:right;margin-top:12px"><button class="btn btn-primary" onclick="submitScenario()" style="padding:8px 20px;font-size:14px">Check Answer</button></div>` : ''}
+        ${a?.submitted ? `<div class="scenario-feedback ${a.selected===s.correct?'ok':'no'}"><strong>${a.selected===s.correct?'✅ Correct!':'❌ Incorrect'}</strong> — ${a.selected===s.correct?s.fb.ok:s.fb.no}</div>` : ''}
+      </div>
+      ${a?.submitted ? `
+        <div style="text-align:center;margin-top:16px">
+          ${currentScenario < scenarios.length-1 ? 
+            `<button class="btn btn-primary" onclick="nextScenario()">Next Scenario →</button>` :
+            `<button class="btn btn-green" onclick="showResults()">View Results 🏆</button>`
+          }
+        </div>
+      ` : ''}
+    `;
+  } else {
+    let correct = 0;
+    scenarios.forEach((s,i) => { if(scenarioAnswers[i]?.selected === s.correct) correct++; });
+    const totalScore = 4 + correct; // 4 zones + scenario answers
+    const totalPossible = 4 + scenarios.length;
+    root.innerHTML = `
+      <div class="results-card">
+        <div style="font-size:48px;margin-bottom:12px">🚛</div>
+        <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--binary-blue);margin-bottom:8px">No-Zone Navigator Complete!</div>
+        <div class="results-score">${totalScore}/${totalPossible}</div>
+        <div style="font-size:16px;color:#6b7280;margin-bottom:4px">No-Zones found: 4/4 | Scenarios: ${correct}/${scenarios.length}</div>
+        <div style="font-size:14px;color:#6b7280;margin-bottom:8px">No-Zone time: ${formatTime(elapsed)}</div>
+        <div class="results-xp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>+150 XP Earned!</div>
+        <p style="margin-top:20px;color:#6b7280;max-width:500px;margin:20px auto 0">You now know the four critical blind spots around a truck and how to safely interact with big vehicles. Remember: if you can't see the truck driver's mirrors, they can't see you!</p>
+      </div>
+    `;
+  }
+}
+
+function clickZone(id){
+  if(foundZones.has(id)) return;
+  if(!timerStarted){ timerStarted=true; startTime=Date.now(); timerInterval=setInterval(updateTimer,100); }
+  foundZones.add(id);
+  if(foundZones.size===4 && timerInterval){ clearInterval(timerInterval); elapsed=Math.floor((Date.now()-startTime)/1000); }
+  render();
+}
+
+function updateTimer(){
+  elapsed = Math.floor((Date.now()-startTime)/1000);
+  const el = document.getElementById('timerDisplay');
+  if(el) el.textContent = formatTime(elapsed);
+}
+
+function formatTime(s){ return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
+
+function startScenarios(){ phase='scenarios'; currentScenario=0; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function selScenario(idx){
+  if(scenarioAnswers[currentScenario]?.submitted) return;
+  scenarioAnswers[currentScenario] = {selected:idx};
+  render();
+}
+
+function submitScenario(){
+  scenarioAnswers[currentScenario].submitted = true;
+  render();
+}
+
+function nextScenario(){ currentScenario++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function showResults(){ phase='results'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+render();
+</script>
+</body>
+</html>
