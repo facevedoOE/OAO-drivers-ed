@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.4: Right-of-Way Rules | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--font-display:'Wix Madefor Display',sans-serif;--font-body:'Wix Madefor Text',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);color:#1a1a2e;background:#f0f4f8;line-height:1.7;font-size:16px}
+.oao-header{background:linear-gradient(135deg,var(--binary-blue) 0%,#1a2a5e 100%);padding:16px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(14,28,66,.3)}
+.oao-header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.oao-logo-area{display:flex;align-items:center;gap:12px}
+.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2);margin:0 4px}
+.oao-header-course{color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px}
+.oao-header-sub{color:rgba(255,255,255,.6);font-size:11px}
+.oao-xp-badge{background:linear-gradient(135deg,var(--gateway-gold),#e8a93e);color:var(--binary-blue);font-family:var(--font-display);font-weight:700;font-size:13px;padding:6px 14px;border-radius:20px;display:flex;align-items:center;gap:6px}
+.oao-xp-badge svg{width:16px;height:16px}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 24px}
+.breadcrumb-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:#64748b}
+.breadcrumb-inner a{color:var(--bitstream-blue);text-decoration:none}
+.breadcrumb-inner a:hover{text-decoration:underline}
+.breadcrumb-sep{width:14px;height:14px;stroke:#94a3b8;fill:none;stroke-width:2}
+.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}
+.lesson-container{max-width:900px;margin:0 auto;padding:32px 24px 60px}
+.lesson-badge{display:inline-block;background:linear-gradient(135deg,var(--portal-purple),#8b45b8);color:#fff;font-family:var(--font-display);font-weight:700;font-size:12px;padding:5px 14px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.lesson-title{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--binary-blue);line-height:1.2;margin-bottom:12px}
+.lesson-desc{font-size:18px;color:#475569;line-height:1.6;margin-bottom:28px}
+.hero-container{width:100%;border-radius:16px;overflow:hidden;margin-bottom:32px;box-shadow:0 4px 24px rgba(14,28,66,.12)}
+.hero-container svg{width:100%;height:auto;display:block}
+.standards-box{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-left:4px solid var(--portal-purple);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:28px}
+.standards-label{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--portal-purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.standards-box p{font-size:14px;color:#4338ca}
+.objectives-box{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:32px;border:2px solid #e2e8f0}
+.objectives-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.objectives-list{list-style:none;padding:0}
+.objectives-list li{padding:6px 0 6px 28px;position:relative;font-size:15px;color:#334155}
+.objectives-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--gamer-green);font-weight:700;font-size:16px}
+.content-block{border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.block-read{background:#fff;border:1px solid #e2e8f0}
+.block-think{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa}
+.block-fact{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe}
+.block-achievement{background:linear-gradient(135deg,#fefce8,#fef3c7);border:1px solid #fde68a}
+.block-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.block-icon{width:28px;height:28px;flex-shrink:0}
+.block-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue)}
+.block-body p{margin-bottom:12px}.block-body p:last-child{margin-bottom:0}
+.block-body ul,.block-body ol{margin:8px 0 12px 20px}.block-body li{margin-bottom:6px}
+.block-body strong{color:var(--binary-blue)}
+.section-divider{display:flex;align-items:center;justify-content:center;margin:36px 0;position:relative}
+.section-divider::before{content:'';position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,#cbd5e1,transparent)}
+.section-divider-icon{background:#f0f4f8;padding:0 16px;position:relative;z-index:1}
+.section-divider-icon svg{width:24px;height:24px;stroke:var(--bitstream-blue);fill:none;stroke-width:2}
+.diagram-container{background:#fff;border-radius:12px;padding:20px;margin:20px 0;border:2px solid #e2e8f0;overflow-x:auto}
+.diagram-container svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:32px}
+.vocab-card{background:#fff;border-radius:10px;padding:16px;border-left:4px solid var(--bitstream-blue);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.vocab-term{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);margin-bottom:4px}
+.vocab-def{font-size:14px;color:#475569}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid #e2e8f0}
+.btn-nav{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:15px;transition:all .2s}
+.btn-prev{background:#fff;color:var(--binary-blue);border:2px solid #e2e8f0}
+.btn-prev:hover{background:#f1f5f9;border-color:#cbd5e1}
+.btn-next{background:linear-gradient(135deg,var(--bitstream-blue),#3ab0d4);color:#fff;border:none}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeInUp .5s ease-out forwards;opacity:0}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+@media(max-width:640px){.lesson-title{font-size:26px}.lesson-desc{font-size:16px}.vocab-grid{grid-template-columns:1fr}.oao-xp-badge{font-size:11px;padding:4px 10px}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg>
+<div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div>
+<div class="oao-xp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>300 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner">
+<a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<a href="#">Unit 2: The Language of the Road</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<span class="current">Lesson 2.4: Right-of-Way Rules</span>
+</div></nav>
+
+<main class="lesson-container">
+
+<div class="animate-in">
+  <div class="lesson-badge">UNIT 2 • LESSON 4</div>
+  <h1 class="lesson-title">Right-of-Way Rules</h1>
+  <p class="lesson-desc">Right-of-way isn't something you "have" — it's something you yield. Understanding who goes first at every intersection, crosswalk, and merge point prevents confusion, conflict, and crashes.</p>
+</div>
+
+<!-- HERO -->
+<div class="hero-container animate-in delay-1">
+  <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87CEEB"/><stop offset="100%" stop-color="#c9e8f7"/></linearGradient></defs>
+    <rect width="900" height="380" fill="url(#sky4)"/>
+    <rect x="0" y="220" width="900" height="160" fill="#5a9e4b"/>
+    <!-- Intersection roads -->
+    <rect x="0" y="260" width="900" height="90" fill="#555"/>
+    <rect x="370" y="140" width="160" height="240" fill="#555"/>
+    <!-- Center yellow lines -->
+    <line x1="0" y1="305" x2="370" y2="305" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="14,8"/>
+    <line x1="530" y1="305" x2="900" y2="305" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="14,8"/>
+    <line x1="450" y1="140" x2="450" y2="260" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="14,8"/>
+    <line x1="450" y1="350" x2="450" y2="380" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="14,8"/>
+    <!-- Stop lines -->
+    <rect x="370" y="256" width="10" height="3" fill="#fff"/>
+    <rect x="385" y="256" width="40" height="3" fill="#fff"/>
+    <rect x="520" y="347" width="10" height="3" fill="#fff"/>
+    <rect x="475" y="347" width="40" height="3" fill="#fff"/>
+    <!-- Crosswalk stripes -->
+    <rect x="372" y="350" width="14" height="4" fill="#fff"/><rect x="392" y="350" width="14" height="4" fill="#fff"/><rect x="412" y="350" width="14" height="4" fill="#fff"/><rect x="432" y="350" width="14" height="4" fill="#fff"/><rect x="452" y="350" width="14" height="4" fill="#fff"/><rect x="472" y="350" width="14" height="4" fill="#fff"/><rect x="492" y="350" width="14" height="4" fill="#fff"/><rect x="512" y="350" width="14" height="4" fill="#fff"/>
+    <!-- Stop signs at intersection -->
+    <rect x="356" y="210" width="4" height="50" fill="#888"/>
+    <polygon points="358,178 372,170 382,178 382,192 372,200 358,192" fill="#cc0000" stroke="#fff" stroke-width="1.5"/>
+    <text x="370" y="188" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6" fill="#fff">STOP</text>
+    <rect x="540" y="310" width="4" height="40" fill="#888"/>
+    <polygon points="542,278 556,270 566,278 566,292 556,300 542,292" fill="#cc0000" stroke="#fff" stroke-width="1.5"/>
+    <text x="554" y="288" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6" fill="#fff">STOP</text>
+    <!-- Cars -->
+    <rect x="290" y="272" width="50" height="28" rx="6" fill="#3b82f6"/><rect x="295" y="276" width="14" height="10" rx="2" fill="#aadcf0"/><rect x="318" y="276" width="14" height="10" rx="2" fill="#aadcf0"/>
+    <rect x="460" y="310" width="28" height="50" rx="6" fill="#ef4444"/><rect x="464" y="315" width="10" height="14" rx="2" fill="#aadcf0"/><rect x="464" y="338" width="10" height="14" rx="2" fill="#aadcf0"/>
+    <!-- Pedestrian -->
+    <circle cx="420" cy="358" r="4" fill="#333"/><line x1="420" y1="362" x2="420" y2="374" stroke="#333" stroke-width="2"/><line x1="414" y1="367" x2="426" y2="367" stroke="#333" stroke-width="2"/>
+    <!-- Title -->
+    <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,.85)"/>
+    <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">Right-of-Way: Who Goes First?</text>
+  </svg>
+</div>
+
+<div class="standards-box animate-in delay-2">
+  <div class="standards-label">Florida Standards Alignment</div>
+  <p>Apply right-of-way rules at controlled and uncontrolled intersections, crosswalks, roundabouts, and when encountering emergency vehicles, pedestrians, and special situations.</p>
+</div>
+
+<div class="objectives-box animate-in delay-3">
+  <div class="objectives-title">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    Learning Objectives
+  </div>
+  <ul class="objectives-list">
+    <li>Apply right-of-way rules at four-way stops and uncontrolled intersections</li>
+    <li>Navigate T-intersections and roundabouts correctly</li>
+    <li>Yield appropriately to pedestrians at crosswalks</li>
+    <li>Respond correctly to emergency vehicles and funeral processions</li>
+    <li>Know Florida-specific right-of-way laws</li>
+  </ul>
+</div>
+
+<!-- THE KEY PRINCIPLE -->
+<div class="content-block block-fact animate-in delay-4">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 The #1 Right-of-Way Principle</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>No one "has" the right-of-way.</strong> The law only says who must <strong>yield</strong> it. Even if it's legally "your turn," you should never insist on going if another driver or pedestrian is in your path. Defensive drivers give the right-of-way freely — because being right doesn't protect you from a collision.</p>
+  </div>
+</div>
+
+<!-- FOUR-WAY STOPS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Four-Way Stops</h2>
+  </div>
+  <div class="block-body">
+    <p>At a four-way (or all-way) stop, every approach has a stop sign. Here's the order of priority:</p>
+    <ul>
+      <li><strong>First to stop = first to go.</strong> The vehicle that arrived and stopped first proceeds first.</li>
+      <li><strong>Arrived at the same time?</strong> The vehicle on the <strong>right</strong> goes first. If you're facing another car and you're to their left, yield to them.</li>
+      <li><strong>Facing each other?</strong> If two vehicles arrive at the same time from opposite directions, both can go straight. But if one is turning left, the <strong>left-turner must yield</strong> to the vehicle going straight.</li>
+    </ul>
+    <p><strong>In practice:</strong> If it's unclear who arrived first, make eye contact, use hand gestures, and err on the side of yielding. It's better to wait an extra second than to cause a collision.</p>
+  </div>
+</div>
+
+<!-- FOUR-WAY DIAGRAM -->
+<div class="diagram-container">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#5a9e4b" rx="8"/>
+    <!-- Roads -->
+    <rect x="150" y="0" width="100" height="400" fill="#555"/>
+    <rect x="0" y="150" width="400" height="100" fill="#555"/>
+    <!-- Center intersection -->
+    <rect x="150" y="150" width="100" height="100" fill="#555"/>
+    <!-- Lane lines -->
+    <line x1="200" y1="0" x2="200" y2="140" stroke="#ffd700" stroke-width="2" stroke-dasharray="10,6"/>
+    <line x1="200" y1="260" x2="200" y2="400" stroke="#ffd700" stroke-width="2" stroke-dasharray="10,6"/>
+    <line x1="0" y1="200" x2="140" y2="200" stroke="#ffd700" stroke-width="2" stroke-dasharray="10,6"/>
+    <line x1="260" y1="200" x2="400" y2="200" stroke="#ffd700" stroke-width="2" stroke-dasharray="10,6"/>
+    <!-- Stop lines -->
+    <rect x="152" y="145" width="45" height="3" fill="#fff"/><rect x="203" y="252" width="45" height="3" fill="#fff"/>
+    <rect x="145" y="203" width="3" height="45" fill="#fff"/><rect x="252" y="152" width="3" height="45" fill="#fff"/>
+    <!-- Car A (left approach) - arrived first -->
+    <rect x="85" y="207" width="50" height="26" rx="5" fill="#3b82f6"/>
+    <text x="110" y="224" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#fff">A</text>
+    <!-- Car B (top approach) - arrived second -->
+    <rect x="157" y="85" width="26" height="50" rx="5" fill="#ef4444"/>
+    <text x="170" y="114" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#fff">B</text>
+    <!-- Labels -->
+    <text x="110" y="195" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">1st to arrive</text>
+    <text x="170" y="78" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">2nd to arrive</text>
+    <text x="200" y="380" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="600" font-size="12" fill="#fff">Car A goes first (arrived first)</text>
+  </svg>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- UNCONTROLLED & T-INTERSECTIONS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Uncontrolled Intersections and T-Intersections</h2>
+  </div>
+  <div class="block-body">
+    <p>An <strong>uncontrolled intersection</strong> has no signs or signals. These are common in residential neighborhoods. At an uncontrolled intersection:</p>
+    <ul>
+      <li><strong>Slow down</strong> and be prepared to stop</li>
+      <li><strong>Yield to the vehicle on your right</strong> if you arrive at the same time</li>
+      <li><strong>Yield to any vehicle already in the intersection</strong></li>
+    </ul>
+    <p>A <strong>T-intersection</strong> is where a smaller road ends at a larger through road (forming a "T" shape). The rules are:</p>
+    <ul>
+      <li>The vehicle on the <strong>through road</strong> (the top of the "T") has the right-of-way</li>
+      <li>The vehicle on the <strong>terminating road</strong> (the stem of the "T") must yield and wait for a safe gap to enter or cross</li>
+      <li>If there's a stop sign on the stem, treat it like any stop sign — stop completely, then proceed when safe</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- ROUNDABOUTS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Roundabouts</h2>
+  </div>
+  <div class="block-body">
+    <p>Roundabouts (traffic circles) are becoming more common in Florida. Traffic flows in a <strong>counterclockwise</strong> direction around a central island. Key rules:</p>
+    <ul>
+      <li><strong>Yield to traffic already in the roundabout</strong> — vehicles inside the circle have the right-of-way</li>
+      <li><strong>Enter when there's a safe gap</strong> — look to your left for approaching traffic</li>
+      <li><strong>Do not stop inside the roundabout</strong> (unless avoiding a collision)</li>
+      <li><strong>Signal right when exiting</strong> to let other drivers know you're leaving the circle</li>
+      <li><strong>Never pass or change lanes</strong> inside a roundabout</li>
+      <li><strong>Yield to pedestrians</strong> at crosswalks before entering and after exiting</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ROUNDABOUT DIAGRAM -->
+<div class="diagram-container">
+  <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="320" fill="#5a9e4b" rx="8"/>
+    <!-- Entry/exit roads -->
+    <rect x="170" y="0" width="60" height="80" fill="#555"/>
+    <rect x="170" y="240" width="60" height="80" fill="#555"/>
+    <rect x="0" y="130" width="80" height="60" fill="#555"/>
+    <rect x="320" y="130" width="80" height="60" fill="#555"/>
+    <!-- Roundabout ring -->
+    <circle cx="200" cy="160" r="90" fill="#555"/>
+    <circle cx="200" cy="160" r="45" fill="#5a9e4b" stroke="#fff" stroke-width="2"/>
+    <!-- Direction arrows in circle -->
+    <path d="M200,72 A88,88 0 0,1 288,160" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="8,5"/>
+    <polygon points="285,155 295,160 285,165" fill="#ffd700"/>
+    <path d="M288,160 A88,88 0 0,1 200,248" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="8,5"/>
+    <polygon points="205,245 200,255 195,245" fill="#ffd700"/>
+    <path d="M200,248 A88,88 0 0,1 112,160" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="8,5"/>
+    <polygon points="115,165 105,160 115,155" fill="#ffd700"/>
+    <path d="M112,160 A88,88 0 0,1 200,72" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="8,5"/>
+    <polygon points="195,75 200,65 205,75" fill="#ffd700"/>
+    <!-- Yield signs at entries -->
+    <polygon points="200,85 208,75 192,75" fill="#fff" stroke="#cc0000" stroke-width="1.5"/>
+    <polygon points="200,235 208,245 192,245" fill="#fff" stroke="#cc0000" stroke-width="1.5"/>
+    <polygon points="85,160 75,168 75,152" fill="#fff" stroke="#cc0000" stroke-width="1.5"/>
+    <polygon points="315,160 325,168 325,152" fill="#fff" stroke="#cc0000" stroke-width="1.5"/>
+    <!-- Car in roundabout -->
+    <rect x="250" y="95" width="24" height="40" rx="5" fill="#3b82f6" transform="rotate(30 262 115)"/>
+    <!-- Car approaching -->
+    <rect x="185" y="255" width="28" height="40" rx="5" fill="#ef4444"/>
+    <!-- Labels -->
+    <text x="200" y="165" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="10" fill="#fff">CENTER</text>
+    <text x="200" y="175" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="10" fill="#fff">ISLAND</text>
+    <text x="200" y="310" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="600" font-size="11" fill="#fff">Yield to vehicles already in the roundabout</text>
+  </svg>
+</div>
+
+<div class="content-block block-think">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">🤔 Think About It</h2>
+  </div>
+  <div class="block-body">
+    <p>You're entering a roundabout and see a vehicle already circling inside. You think you can squeeze in before they reach you. Should you go? <em>No — always yield to traffic inside the roundabout. Trying to "beat" them into the circle creates exactly the kind of collision roundabouts are designed to prevent.</em></p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- PEDESTRIANS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Pedestrians and Crosswalks</h2>
+  </div>
+  <div class="block-body">
+    <p>In Florida, <strong>pedestrians always have the right-of-way in a crosswalk</strong> — whether the crosswalk is marked or unmarked. An unmarked crosswalk exists at every intersection where sidewalks are present, even without painted lines.</p>
+    <ul>
+      <li><strong>Marked crosswalks:</strong> You must yield to pedestrians who are in or entering the crosswalk on your half of the road</li>
+      <li><strong>Unmarked crosswalks:</strong> Same rule applies — yield to pedestrians crossing at any intersection</li>
+      <li><strong>Turning drivers:</strong> When turning right or left at a green light, you must yield to pedestrians in the crosswalk</li>
+      <li><strong>Blind pedestrians:</strong> A pedestrian using a white cane or guide dog always has the right-of-way. You must come to a complete stop.</li>
+    </ul>
+    <p><strong>Florida law:</strong> Failing to yield to a pedestrian in a crosswalk can result in a fine and points on your license. If you cause injury, penalties are significantly more severe.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- EMERGENCY VEHICLES & SPECIAL SITUATIONS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Emergency Vehicles and Special Situations</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Emergency vehicles</strong> (police, fire, ambulance) with lights and sirens activated always have the right-of-way. When you hear or see one approaching:</p>
+    <ul>
+      <li><strong>Pull over to the right side of the road</strong> and stop</li>
+      <li>If you're in an intersection, <strong>clear the intersection first</strong>, then pull over</li>
+      <li><strong>Stay stopped</strong> until the emergency vehicle has passed</li>
+      <li><strong>Do not follow</strong> an emergency vehicle within 500 feet</li>
+      <li><strong>Do not block intersections</strong> where emergency vehicles need to pass</li>
+    </ul>
+    <p><strong>Florida's "Move Over" law</strong> also requires you to move over one lane (or slow to 20 mph below the speed limit) when passing any stopped emergency vehicle, tow truck, or road maintenance vehicle with flashing lights on the side of the road.</p>
+    <p><strong>Funeral processions:</strong> In Florida, vehicles in a funeral procession with headlights on and a lead escort have the right-of-way. You must yield to the entire procession — do not cut in between vehicles or try to pass. The procession may proceed through red lights and stop signs as a group.</p>
+    <p><strong>Entering/exiting driveways and parking lots:</strong> Vehicles entering a road from a driveway or parking lot must yield to all traffic on the road and to pedestrians on the sidewalk. When exiting, you do not have the right-of-way until you are fully on the roadway and flowing with traffic.</p>
+  </div>
+</div>
+
+<div class="content-block block-fact">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 Florida Fact: Move Over Law</h2>
+  </div>
+  <div class="block-body">
+    <p>Florida's Move Over law (F.S. 316.126) is one of the most heavily enforced right-of-way laws in the state. If you see <strong>any vehicle with flashing lights</strong> stopped on the shoulder — police, ambulance, fire truck, tow truck, or even road rangers — you must move over one full lane if possible. If you can't move over safely, you must <strong>slow to 20 mph below the posted speed limit</strong>. Violating this law is a <strong>non-criminal moving violation</strong> with significant fines, and if the violation results in injury or death, it becomes a felony.</p>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT -->
+<div class="content-block block-achievement">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+    <h2 class="block-title">🏆 Achievement Unlocked: Yield Master</h2>
+  </div>
+  <div class="block-body">
+    <p>You now understand who goes when — and more importantly, when to give way. Right-of-way isn't about winning; it's about keeping everyone safe. A driver who yields confidently is a driver who avoids crashes.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- VOCABULARY -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">📘 Key Vocabulary</h2>
+<div class="vocab-grid">
+  <div class="vocab-card"><div class="vocab-term">Right-of-Way</div><div class="vocab-def">The legal right to proceed first. In practice, it's something you yield to others — not something you claim for yourself.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Four-Way Stop</div><div class="vocab-def">An intersection where all approaches have stop signs. First to arrive goes first; if tied, the vehicle to the right goes first.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Uncontrolled Intersection</div><div class="vocab-def">An intersection with no signs, signals, or markings. Yield to the vehicle on your right and to any vehicle already in the intersection.</div></div>
+  <div class="vocab-card"><div class="vocab-term">T-Intersection</div><div class="vocab-def">Where one road ends at another, forming a T shape. The vehicle on the through road has the right-of-way.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Roundabout</div><div class="vocab-def">A circular intersection where traffic flows counterclockwise. Yield to vehicles already inside the roundabout before entering.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Move Over Law</div><div class="vocab-def">Florida law requiring drivers to change lanes or slow down when passing stopped emergency or service vehicles with flashing lights.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Unmarked Crosswalk</div><div class="vocab-def">A crosswalk that exists at every intersection where sidewalks are present, even without painted lines. Pedestrians still have the right-of-way.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Funeral Procession</div><div class="vocab-def">A group of vehicles following a hearse with headlights on. The procession has the right-of-way and may proceed through red lights together.</div></div>
+</div>
+
+<!-- REFLECTION -->
+<div class="content-block block-think" style="margin-top:32px">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💭 Reflection</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Imagine you're at a four-way stop.</strong> You arrived at the same time as another car to your right. What should you do? Now imagine you're at a roundabout for the first time. How would you feel? What would you watch for?</p>
+    <p>Right-of-way rules seem simple on paper, but they require split-second judgment in real life. The best approach: when in doubt, yield. Being cautious costs you a few seconds. Being wrong can cost much more.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="lesson-2-3-reading.html" class="btn-nav btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Lesson 2.3</a>
+  <a href="lesson-2-4-activity.html" class="btn-nav btn-next">Lesson 2.4 Activity<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+</div>
+
+</main>
+</body>
+</html>
