@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.2 Activity: Intersection Signal Simulator | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --binary-blue: #0E1C42;
+  --bitstream-blue: #55C8E8;
+  --gateway-gold: #C7922C;
+  --portal-purple: #67308F;
+  --gamer-green: #76C043;
+  --odyssey-orange: #F78F1E;
+  --font-display: 'Wix Madefor Display', sans-serif;
+  --font-body: 'Wix Madefor Text', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background: #f0f4f8; color: #1a1a2e; min-height: 100vh; }
+
+.oao-header { background: linear-gradient(135deg, var(--binary-blue) 0%, #1a2a5e 100%); padding: 16px 24px; box-shadow: 0 2px 20px rgba(14,28,66,0.3); }
+.oao-header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.oao-logo-area { display: flex; align-items: center; gap: 12px; }
+.oao-header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); }
+.oao-header-course { color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+.oao-header-sub { color: rgba(255,255,255,0.6); font-size: 11px; }
+
+.progress-container { max-width: 900px; margin: 0 auto; padding: 20px 24px 0; }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress-label { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--binary-blue); }
+.progress-count { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--portal-purple); }
+.progress-track { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--bitstream-blue), var(--gamer-green)); border-radius: 10px; transition: width 0.5s ease; width: 0%; }
+
+.activity-container { max-width: 900px; margin: 0 auto; padding: 24px; }
+.screen { display: none; }
+.screen.active { display: block; }
+
+.start-card, .results-card { background: #fff; border-radius: 16px; padding: 40px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.start-badge { display: inline-block; background: linear-gradient(135deg, var(--portal-purple), #8b45b8); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 12px; padding: 5px 16px; border-radius: 20px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+.start-title { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--binary-blue); margin-bottom: 12px; }
+.start-desc { font-size: 16px; color: #475569; margin-bottom: 24px; line-height: 1.6; max-width: 540px; margin-left: auto; margin-right: auto; }
+.start-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 28px; flex-wrap: wrap; }
+.stat-item { text-align: center; }
+.stat-value { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--bitstream-blue); }
+.stat-label { font-size: 13px; color: #64748b; font-weight: 500; }
+
+.btn-start { background: linear-gradient(135deg, var(--gamer-green), #5fad32); color: #fff; border: none; padding: 14px 40px; border-radius: 12px; font-family: var(--font-display); font-weight: 700; font-size: 17px; cursor: pointer; transition: all 0.2s; }
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(118,192,67,0.4); }
+
+.question-card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-bottom: 20px; }
+.question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.q-number { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--portal-purple); text-transform: uppercase; letter-spacing: 1px; }
+.timer { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--binary-blue); }
+.timer svg { width: 20px; height: 20px; }
+.timer.warning { color: var(--odyssey-orange); }
+.timer.danger { color: #dc2626; animation: pulse 0.5s ease infinite alternate; }
+@keyframes pulse { from{opacity:1} to{opacity:0.5} }
+
+.scenario-display { display: flex; justify-content: center; align-items: center; padding: 20px; margin-bottom: 16px; background: #1a1a2e; border-radius: 12px; min-height: 180px; }
+.scenario-display svg { max-width: 100%; height: auto; }
+
+.question-text { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--binary-blue); text-align: center; margin-bottom: 20px; line-height: 1.4; }
+
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.option-btn { background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--binary-blue); text-align: left; }
+.option-btn:hover { border-color: var(--bitstream-blue); background: #f0f9ff; }
+.option-btn.correct { border-color: var(--gamer-green); background: #f0fdf4; color: #166534; animation: correctPop 0.3s ease; }
+.option-btn.incorrect { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.option-btn.disabled { pointer-events: none; opacity: 0.6; }
+@keyframes correctPop { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+
+.feedback-box { margin-top: 16px; padding: 14px 18px; border-radius: 10px; font-size: 14px; line-height: 1.5; display: none; }
+.feedback-box.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+.feedback-box.incorrect { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+.feedback-box.show { display: block; animation: fadeIn 0.3s ease; }
+
+.btn-next-q { display: none; margin: 20px auto 0; padding: 12px 32px; border: none; background: linear-gradient(135deg, var(--bitstream-blue), #3ab0d4); color: #fff; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s; }
+.btn-next-q:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(85,200,232,0.4); }
+.btn-next-q.show { display: block; }
+
+.results-score { font-family: var(--font-display); font-weight: 800; font-size: 64px; background: linear-gradient(135deg, var(--bitstream-blue), var(--gamer-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.results-label { font-size: 16px; color: #64748b; margin-bottom: 16px; }
+.results-message { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--binary-blue); margin-bottom: 8px; }
+.results-sub { font-size: 15px; color: #475569; margin-bottom: 28px; }
+.xp-earned { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--gateway-gold), #e8a93e); color: var(--binary-blue); font-family: var(--font-display); font-weight: 700; font-size: 18px; padding: 10px 24px; border-radius: 25px; margin-bottom: 24px; }
+.xp-earned svg { width: 22px; height: 22px; }
+.results-breakdown { display: flex; justify-content: center; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
+.breakdown-item { background: #f8fafc; padding: 12px 20px; border-radius: 10px; text-align: center; }
+.breakdown-value { font-family: var(--font-display); font-weight: 800; font-size: 24px; }
+.breakdown-label { font-size: 12px; color: #64748b; }
+.btn-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn-replay { background: #fff; color: var(--binary-blue); border: 2px solid #e2e8f0; padding: 12px 28px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-replay:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.btn-continue { background: linear-gradient(135deg, var(--gamer-green), #5fad32); color: #fff; border: none; padding: 12px 28px; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s; }
+.btn-continue:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(118,192,67,0.4); }
+
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@media (max-width: 640px) {
+  .options-grid { grid-template-columns: 1fr; }
+  .start-title { font-size: 24px; }
+  .question-card { padding: 20px; }
+  .results-score { font-size: 48px; }
+  .scenario-display { min-height: 140px; padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header class="oao-header">
+  <div class="oao-header-inner">
+    <div class="oao-logo-area">
+      <svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/>
+        <path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/>
+        <path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/>
+        <circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/>
+        <path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text>
+        <text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text>
+      </svg>
+      <div class="oao-header-divider"></div>
+      <div>
+        <div class="oao-header-course">Driver's Education</div>
+        <div class="oao-header-sub">Florida High School</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-container" id="progressArea" style="display:none;">
+  <div class="progress-header">
+    <span class="progress-label">Intersection Signal Simulator</span>
+    <span class="progress-count" id="progressCount">0 / 10</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="activity-container">
+
+  <!-- START -->
+  <div class="screen active" id="startScreen">
+    <div class="start-card">
+      <div class="start-badge">LESSON 2.2 ACTIVITY</div>
+      <h1 class="start-title">🚦 Intersection Signal Simulator</h1>
+      <p class="start-desc">You're approaching intersections with different signals and pavement markings. For each scenario, choose the correct driving action. React quickly — the timer is ticking!</p>
+      <div class="start-stats">
+        <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">Scenarios</div></div>
+        <div class="stat-item"><div class="stat-value">12s</div><div class="stat-label">Per Scenario</div></div>
+        <div class="stat-item"><div class="stat-value">200</div><div class="stat-label">Max XP</div></div>
+      </div>
+      <button class="btn-start" onclick="startActivity()">Start Simulator</button>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="screen" id="questionScreen">
+    <div class="question-card">
+      <div class="question-meta">
+        <span class="q-number" id="qNumber">Scenario 1 of 10</span>
+        <div class="timer" id="timer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="timerText">12</span>
+        </div>
+      </div>
+      <div class="scenario-display" id="scenarioDisplay"></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options-grid" id="optionsGrid"></div>
+      <div class="feedback-box" id="feedbackBox"></div>
+      <button class="btn-next-q" id="btnNextQ" onclick="nextQuestion()">Next Scenario →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="screen" id="resultsScreen">
+    <div class="results-card">
+      <div class="results-score" id="resultsScore">0%</div>
+      <div class="results-label">Final Score</div>
+      <div class="results-message" id="resultsMessage"></div>
+      <div class="results-sub" id="resultsSub"></div>
+      <div class="xp-earned" id="xpEarned">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span id="xpValue">+0 XP</span>
+      </div>
+      <div class="results-breakdown">
+        <div class="breakdown-item"><div class="breakdown-value" id="correctCount" style="color:var(--gamer-green)">0</div><div class="breakdown-label">Correct</div></div>
+        <div class="breakdown-item"><div class="breakdown-value" id="incorrectCount" style="color:#dc2626">0</div><div class="breakdown-label">Incorrect</div></div>
+        <div class="breakdown-item"><div class="breakdown-value" id="avgTime" style="color:var(--bitstream-blue)">0s</div><div class="breakdown-label">Avg Time</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-replay" onclick="restartActivity()">Try Again</button>
+        <a href="lesson-2-2-reading.html" class="btn-replay">Review Lesson</a>
+        <button class="btn-continue" onclick="goToQuiz()">Continue to Quiz →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function trafficLight(r,y,g) {
+  const rc = r ? '#cc0000' : '#330000', yc = y ? '#F78F1E' : '#332200', gc = g ? '#76C043' : '#003300';
+  const glow = r ? `<circle cx="45" cy="30" r="16" fill="rgba(204,0,0,0.2)"/>` : g ? `<circle cx="45" cy="90" r="16" fill="rgba(118,192,67,0.2)"/>` : y ? `<circle cx="45" cy="60" r="16" fill="rgba(247,143,30,0.2)"/>` : '';
+  return `<svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="70" height="110" rx="10" fill="#222"/>${glow}<circle cx="45" cy="30" r="13" fill="${rc}"/><circle cx="45" cy="60" r="13" fill="${yc}"/><circle cx="45" cy="90" r="13" fill="${gc}"/></svg>`;
+}
+function arrowSignal(color, dir) {
+  const c = color === 'green' ? '#76C043' : color === 'yellow' ? '#F78F1E' : '#cc0000';
+  const rot = dir === 'left' ? 'rotate(-90 45 60)' : dir === 'right' ? 'rotate(90 45 60)' : '';
+  return `<svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="70" height="100" rx="10" fill="#222"/><g transform="${rot}"><polygon points="45,25 65,50 55,50 55,85 35,85 35,50 25,50" fill="${c}"/></g></svg>`;
+}
+function roadScene(markingType) {
+  const scenes = {
+    'double-yellow': `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="160" fill="#444" rx="8"/><line x1="150" y1="0" x2="150" y2="160" stroke="#ffd700" stroke-width="3"/><line x1="156" y1="0" x2="156" y2="160" stroke="#ffd700" stroke-width="3"/><text x="75" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">Your lane ↑</text><text x="225" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">↓ Oncoming</text><line x1="10" y1="0" x2="10" y2="160" stroke="#fff" stroke-width="2"/><line x1="290" y1="0" x2="290" y2="160" stroke="#fff" stroke-width="2"/></svg>`,
+    'broken-white': `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="160" fill="#444" rx="8"/><line x1="150" y1="0" x2="150" y2="160" stroke="#fff" stroke-width="3" stroke-dasharray="20,14"/><text x="75" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">Lane 1 ↑</text><text x="225" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">Lane 2 ↑</text><line x1="10" y1="0" x2="10" y2="160" stroke="#fff" stroke-width="2"/><line x1="290" y1="0" x2="290" y2="160" stroke="#fff" stroke-width="2"/></svg>`,
+    'solid-white': `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="160" fill="#444" rx="8"/><line x1="150" y1="0" x2="150" y2="160" stroke="#fff" stroke-width="3"/><text x="75" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">Lane 1 ↑</text><text x="225" y="85" text-anchor="middle" font-family="Arial" font-size="11" fill="#ccc">Lane 2 ↑</text><line x1="10" y1="0" x2="10" y2="160" stroke="#fff" stroke-width="2"/><line x1="290" y1="0" x2="290" y2="160" stroke="#fff" stroke-width="2"/></svg>`,
+    'turn-lane': `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="160" fill="#444" rx="8"/><line x1="100" y1="0" x2="100" y2="160" stroke="#ffd700" stroke-width="3"/><line x1="106" y1="0" x2="106" y2="160" stroke="#ffd700" stroke-width="3" stroke-dasharray="20,12"/><line x1="194" y1="0" x2="194" y2="160" stroke="#ffd700" stroke-width="3" stroke-dasharray="20,12"/><line x1="200" y1="0" x2="200" y2="160" stroke="#ffd700" stroke-width="3"/><polygon points="150,50 160,70 155,70 155,100 145,100 145,70 140,70" fill="rgba(255,255,255,0.4)" transform="rotate(180 150 75)"/><text x="150" y="130" text-anchor="middle" font-family="Arial" font-size="10" fill="#ccc">Center Turn Lane</text></svg>`
+  };
+  return scenes[markingType] || '';
+}
+
+const allQuestions = [
+  {
+    visual: trafficLight(false, false, true),
+    question: "You're at an intersection and the light is solid green. What should you do?",
+    options: ["Stop and wait", "Proceed if the intersection is clear", "Speed up to get through quickly", "Honk and go"],
+    correct: 1,
+    fb_correct: "Correct! A steady green means you may proceed — but only if the intersection is clear. Always check for pedestrians and cross traffic.",
+    fb_incorrect: "A steady green means go if the intersection is clear. You don't need to stop, but you should always check for pedestrians and other vehicles before proceeding."
+  },
+  {
+    visual: trafficLight(false, true, false),
+    question: "The light just turned yellow. You're 4 car lengths from the intersection. What should you do?",
+    options: ["Speed up to make it through", "Stop safely before the intersection", "Swerve to the right lane", "Flash your headlights"],
+    correct: 1,
+    fb_correct: "Right! If you can stop safely before the intersection, you must stop on yellow. Trying to 'beat the light' is a major cause of intersection crashes.",
+    fb_incorrect: "When the light turns yellow and you can stop safely, you must stop. At 4 car lengths away, you have enough room. Speeding up through a yellow light is dangerous and often illegal."
+  },
+  {
+    visual: trafficLight(true, false, false),
+    question: "You're at a steady red light with no 'No Turn on Red' sign. You want to turn right. What's the correct action?",
+    options: ["Turn right immediately", "Stop completely, then turn right when safe", "Wait for green — no turns on red", "Turn right without stopping if no one is coming"],
+    correct: 1,
+    fb_correct: "Correct! In Florida, you may turn right on a steady red light after coming to a complete stop, unless a sign prohibits it. Always check for pedestrians and cross traffic first.",
+    fb_incorrect: "In Florida, right on red is allowed after a complete stop (unless a sign says otherwise). You must stop first, check for pedestrians and traffic, then turn when safe."
+  },
+  {
+    visual: arrowSignal('green', 'left'),
+    question: "You see a green left-turn arrow. What does this mean?",
+    options: ["Yield to oncoming traffic, then turn", "You have a protected left turn — oncoming traffic is stopped", "Left lane is for straight only", "Turn left only if no pedestrians are visible"],
+    correct: 1,
+    fb_correct: "Correct! A green arrow means you have a protected turn — oncoming traffic has a red light. Still watch for pedestrians in the crosswalk.",
+    fb_incorrect: "A green arrow gives you a protected turn. Oncoming traffic has a red signal, so you don't need to wait for a gap — but always watch for pedestrians."
+  },
+  {
+    visual: arrowSignal('red', 'left'),
+    question: "The signal shows a red left-turn arrow. What should you do?",
+    options: ["Turn left after yielding", "Do NOT turn left — wait for the arrow to change", "Treat it like a yield sign", "Turn left if no cars are coming"],
+    correct: 1,
+    fb_correct: "Right! A red arrow means absolutely no turning in that direction. Wait until you get a green arrow or green circular signal. In Florida, you cannot turn on a red arrow.",
+    fb_incorrect: "A red arrow prohibits turning in that direction — no exceptions. Unlike a steady red circle (which allows right turns after stopping), a red arrow means wait until the signal changes."
+  },
+  {
+    visual: `<svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="70" height="100" rx="10" fill="#222"/><polygon points="45,30 65,55 55,55 55,85 35,85 35,55 25,55" fill="#F78F1E" opacity=".6" transform="rotate(-90 45 57)"/><polygon points="45,30 65,55 55,55 55,85 35,85 35,55 25,55" fill="none" stroke="#F78F1E" stroke-width="1.5" transform="rotate(-90 45 57)"/></svg>`,
+    question: "You see a flashing yellow left-turn arrow. What does it mean?",
+    options: ["You have a protected left turn", "Stop completely before turning left", "You may turn left but must yield to oncoming traffic", "Left turns are not allowed at this time"],
+    correct: 2,
+    fb_correct: "Correct! A flashing yellow arrow means you may turn, but it's unprotected — you must yield to oncoming traffic and pedestrians before turning.",
+    fb_incorrect: "A flashing yellow arrow means you're allowed to turn, but it's an unprotected turn. You must yield to oncoming traffic and pedestrians — no one is being stopped for you."
+  },
+  {
+    visual: roadScene('double-yellow'),
+    question: "You're driving on a road with double solid yellow center lines. A slow vehicle is ahead. Can you pass?",
+    options: ["Yes, if no oncoming traffic is visible", "No — double solid yellow lines prohibit passing", "Yes, but only in a school zone", "Yes, if you signal first"],
+    correct: 1,
+    fb_correct: "Correct! Double solid yellow lines mean no passing in either direction. You may only cross them to turn into a driveway or side road — never to pass another vehicle.",
+    fb_incorrect: "Double solid yellow lines prohibit passing in both directions. You may cross them only to turn into a driveway or side road, never to pass another vehicle."
+  },
+  {
+    visual: roadScene('broken-white'),
+    question: "The lanes on a highway are separated by broken (dashed) white lines. What does this mean?",
+    options: ["No lane changes allowed", "Lane changes are permitted", "This is a bike lane", "You must exit at the next ramp"],
+    correct: 1,
+    fb_correct: "Right! Broken white lines separate same-direction traffic and mean lane changes are allowed. Always check mirrors and blind spots before changing lanes.",
+    fb_incorrect: "Broken (dashed) white lines separate lanes going the same direction and indicate that lane changes are permitted. Solid white lines discourage or prohibit lane changes."
+  },
+  {
+    visual: roadScene('turn-lane'),
+    question: "You see a center lane bordered by solid and dashed yellow lines with turn arrows painted on it. What is this lane for?",
+    options: ["Passing slow vehicles", "Left turns only (shared by both directions)", "Emergency vehicles only", "High-speed through traffic"],
+    correct: 1,
+    fb_correct: "Correct! This is a center left-turn lane — shared by traffic from both directions for making left turns only. Never use it as a travel lane or for passing.",
+    fb_incorrect: "This is a center left-turn lane. It's shared by traffic from both directions, used only for making left turns. Using it as a driving lane or for passing is illegal and dangerous."
+  },
+  {
+    visual: `<svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="70" height="100" rx="10" fill="#222"/><circle cx="45" cy="35" r="13" fill="#cc0000" opacity=".6"/><circle cx="45" cy="35" r="18" fill="rgba(204,0,0,0.15)"/><circle cx="45" cy="65" r="13" fill="#332200"/><circle cx="45" cy="95" r="13" fill="#003300"/></svg>`,
+    question: "You approach an intersection with a flashing red light. How should you respond?",
+    options: ["Slow down and proceed with caution", "Treat it as a stop sign — stop completely, then go when safe", "Stop only if other cars are present", "It means the light is broken — ignore it"],
+    correct: 1,
+    fb_correct: "Correct! A flashing red light is treated exactly like a stop sign. Come to a complete stop, check for traffic, then proceed when it's safe.",
+    fb_incorrect: "A flashing red light works exactly like a stop sign. You must come to a complete stop, look for traffic and pedestrians, and proceed only when it's safe."
+  }
+];
+
+let currentQuestions = [], currentIndex = 0, score = 0, timeLeft = 12, timerInterval = null, totalTime = 0, questionTimes = [];
+
+function shuffleArray(a) { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+
+function startActivity() {
+  currentQuestions = shuffleArray(allQuestions).slice(0, 10);
+  currentIndex = 0; score = 0; totalTime = 0; questionTimes = [];
+  document.getElementById('progressArea').style.display = 'block';
+  showScreen('questionScreen');
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const q = currentQuestions[currentIndex];
+  document.getElementById('qNumber').textContent = `Scenario ${currentIndex+1} of ${currentQuestions.length}`;
+  document.getElementById('progressCount').textContent = `${currentIndex} / ${currentQuestions.length}`;
+  document.getElementById('progressFill').style.width = `${(currentIndex/currentQuestions.length)*100}%`;
+  document.getElementById('scenarioDisplay').innerHTML = q.visual;
+  document.getElementById('questionText').textContent = q.question;
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    grid.appendChild(btn);
+  });
+  document.getElementById('feedbackBox').className = 'feedback-box';
+  document.getElementById('feedbackBox').textContent = '';
+  document.getElementById('btnNextQ').className = 'btn-next-q';
+  timeLeft = 12;
+  updateTimer();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => { timeLeft--; updateTimer(); if(timeLeft<=0){clearInterval(timerInterval);timeUp();} }, 1000);
+}
+
+function updateTimer() {
+  document.getElementById('timerText').textContent = timeLeft;
+  const t = document.getElementById('timer');
+  t.className = 'timer';
+  if(timeLeft<=3) t.classList.add('danger');
+  else if(timeLeft<=6) t.classList.add('warning');
+}
+
+function selectAnswer(i) {
+  clearInterval(timerInterval);
+  const q = currentQuestions[currentIndex];
+  const taken = 12 - timeLeft; questionTimes.push(taken); totalTime += taken;
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach((b,idx) => { b.classList.add('disabled'); if(idx===q.correct) b.classList.add('correct'); if(idx===i && idx!==q.correct) b.classList.add('incorrect'); });
+  const fb = document.getElementById('feedbackBox');
+  if(i===q.correct) { score++; fb.className='feedback-box correct show'; fb.textContent=q.fb_correct; }
+  else { fb.className='feedback-box incorrect show'; fb.textContent=q.fb_incorrect; }
+  document.getElementById('btnNextQ').className = 'btn-next-q show';
+}
+
+function timeUp() {
+  questionTimes.push(12); totalTime+=12;
+  const q = currentQuestions[currentIndex];
+  document.querySelectorAll('.option-btn').forEach((b,i)=>{b.classList.add('disabled');if(i===q.correct)b.classList.add('correct');});
+  const fb = document.getElementById('feedbackBox');
+  fb.className='feedback-box incorrect show'; fb.textContent="⏰ Time's up! "+q.fb_incorrect;
+  document.getElementById('btnNextQ').className='btn-next-q show';
+}
+
+function nextQuestion() { currentIndex++; if(currentIndex>=currentQuestions.length) showResults(); else loadQuestion(); }
+
+function showResults() {
+  clearInterval(timerInterval);
+  document.getElementById('progressArea').style.display='none';
+  showScreen('resultsScreen');
+  const pct = Math.round((score/currentQuestions.length)*100);
+  const avg = questionTimes.length ? (totalTime/questionTimes.length).toFixed(1) : 0;
+  let xp = score * 15;
+  if(pct===100) xp+=50;
+  if(parseFloat(avg)<5) xp+=25;
+  document.getElementById('resultsScore').textContent = pct+'%';
+  document.getElementById('correctCount').textContent = score;
+  document.getElementById('incorrectCount').textContent = currentQuestions.length - score;
+  document.getElementById('avgTime').textContent = avg+'s';
+  document.getElementById('xpValue').textContent = '+'+xp+' XP';
+  let msg, sub;
+  if(pct===100){msg="Perfect Score! 🏆";sub="You nailed every signal and marking. Intersection pro!";}
+  else if(pct>=80){msg="Excellent! 🌟";sub="Great signal awareness. Review any you missed for a perfect run.";}
+  else if(pct>=60){msg="Good Effort! 👍";sub="You're learning! Revisit the lesson sections on signals you missed.";}
+  else{msg="Keep Practicing! 📚";sub="Signals and markings are vital. Review Lesson 2.2 and try again.";}
+  document.getElementById('resultsMessage').textContent=msg;
+  document.getElementById('resultsSub').textContent=sub;
+  try{window.parent.postMessage({type:'activity_complete',score:pct,xp:xp,lesson:'2.2'},'*');}catch(e){}
+}
+
+function restartActivity(){startActivity();}
+function goToQuiz(){window.location.href='lesson-2-2-quiz.html';}
+</script>
+</body>
+</html>

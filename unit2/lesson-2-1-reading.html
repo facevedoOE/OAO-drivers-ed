@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.1: Traffic Signs — Recognition and Response | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --binary-blue: #0E1C42;
+  --bitstream-blue: #55C8E8;
+  --gateway-gold: #C7922C;
+  --portal-purple: #67308F;
+  --gamer-green: #76C043;
+  --odyssey-orange: #F78F1E;
+  --font-display: 'Wix Madefor Display', sans-serif;
+  --font-body: 'Wix Madefor Text', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  color: #1a1a2e;
+  background: #f0f4f8;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* HEADER */
+.oao-header {
+  background: linear-gradient(135deg, var(--binary-blue) 0%, #1a2a5e 100%);
+  padding: 16px 24px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 20px rgba(14,28,66,0.3);
+}
+.oao-header-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.oao-logo-area { display: flex; align-items: center; gap: 12px; }
+.oao-header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); margin: 0 4px; }
+.oao-header-course { color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+.oao-header-sub { color: rgba(255,255,255,0.6); font-size: 11px; }
+.oao-xp-badge {
+  background: linear-gradient(135deg, var(--gateway-gold), #e8a93e);
+  color: var(--binary-blue); font-family: var(--font-display); font-weight: 700;
+  font-size: 13px; padding: 6px 14px; border-radius: 20px;
+  display: flex; align-items: center; gap: 6px;
+}
+.oao-xp-badge svg { width: 16px; height: 16px; }
+
+/* BREADCRUMB */
+.breadcrumb-bar {
+  background: #fff; border-bottom: 1px solid #e2e8f0; padding: 10px 24px;
+}
+.breadcrumb-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 13px; color: #64748b;
+}
+.breadcrumb-inner a { color: var(--bitstream-blue); text-decoration: none; }
+.breadcrumb-inner a:hover { text-decoration: underline; }
+.breadcrumb-sep { width: 14px; height: 14px; stroke: #94a3b8; fill: none; stroke-width: 2; }
+.breadcrumb-inner .current { color: var(--binary-blue); font-weight: 600; }
+
+/* MAIN CONTAINER */
+.lesson-container {
+  max-width: 900px; margin: 0 auto; padding: 32px 24px 60px;
+}
+
+/* LESSON HEADER */
+.lesson-badge {
+  display: inline-block; background: linear-gradient(135deg, var(--portal-purple), #8b45b8);
+  color: #fff; font-family: var(--font-display); font-weight: 700;
+  font-size: 12px; padding: 5px 14px; border-radius: 20px;
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;
+}
+.lesson-title {
+  font-family: var(--font-display); font-size: 36px; font-weight: 800;
+  color: var(--binary-blue); line-height: 1.2; margin-bottom: 12px;
+}
+.lesson-desc {
+  font-size: 18px; color: #475569; line-height: 1.6; margin-bottom: 28px;
+}
+
+/* HERO SVG */
+.hero-container {
+  width: 100%; border-radius: 16px; overflow: hidden;
+  margin-bottom: 32px; box-shadow: 0 4px 24px rgba(14,28,66,0.12);
+}
+.hero-container svg { width: 100%; height: auto; display: block; }
+
+/* STANDARDS BOX */
+.standards-box {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  border-left: 4px solid var(--portal-purple);
+  border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 28px;
+}
+.standards-label {
+  font-family: var(--font-display); font-weight: 700; font-size: 13px;
+  color: var(--portal-purple); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+}
+.standards-box p { font-size: 14px; color: #4338ca; }
+
+/* OBJECTIVES */
+.objectives-box {
+  background: #fff; border-radius: 12px; padding: 20px 24px;
+  margin-bottom: 32px; border: 2px solid #e2e8f0;
+}
+.objectives-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  color: var(--binary-blue); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.objectives-list { list-style: none; padding: 0; }
+.objectives-list li {
+  padding: 6px 0 6px 28px; position: relative; font-size: 15px; color: #334155;
+}
+.objectives-list li::before {
+  content: '✓'; position: absolute; left: 0; top: 6px;
+  color: var(--gamer-green); font-weight: 700; font-size: 16px;
+}
+
+/* CONTENT BLOCKS */
+.content-block {
+  border-radius: 12px; padding: 24px; margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.block-read { background: #fff; border: 1px solid #e2e8f0; }
+.block-think {
+  background: linear-gradient(135deg, #fff7ed, #ffedd5);
+  border: 1px solid #fed7aa;
+}
+.block-fact {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #bfdbfe;
+}
+.block-achievement {
+  background: linear-gradient(135deg, #fefce8, #fef3c7);
+  border: 1px solid #fde68a;
+}
+.block-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.block-icon { width: 28px; height: 28px; flex-shrink: 0; }
+.block-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  color: var(--binary-blue);
+}
+.block-body p { margin-bottom: 12px; }
+.block-body p:last-child { margin-bottom: 0; }
+.block-body ul, .block-body ol { margin: 8px 0 12px 20px; }
+.block-body li { margin-bottom: 6px; }
+.block-body strong { color: var(--binary-blue); }
+
+/* SECTION DIVIDER */
+.section-divider {
+  display: flex; align-items: center; justify-content: center;
+  margin: 36px 0; position: relative;
+}
+.section-divider::before {
+  content: ''; position: absolute; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+}
+.section-divider-icon {
+  background: #f0f4f8; padding: 0 16px; position: relative; z-index: 1;
+}
+.section-divider-icon svg {
+  width: 24px; height: 24px; stroke: var(--bitstream-blue); fill: none; stroke-width: 2;
+}
+
+/* SIGN GALLERY */
+.sign-gallery {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px; margin: 16px 0;
+}
+.sign-card {
+  background: #fff; border-radius: 12px; padding: 16px; text-align: center;
+  border: 2px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s;
+}
+.sign-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+.sign-card svg { width: 72px; height: 72px; margin-bottom: 8px; }
+.sign-card .sign-name {
+  font-family: var(--font-display); font-weight: 600; font-size: 13px;
+  color: var(--binary-blue);
+}
+
+/* VOCABULARY */
+.vocab-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px; margin-bottom: 32px;
+}
+.vocab-card {
+  background: #fff; border-radius: 10px; padding: 16px;
+  border-left: 4px solid var(--bitstream-blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.vocab-term {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  color: var(--binary-blue); margin-bottom: 4px;
+}
+.vocab-def { font-size: 14px; color: #475569; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 40px; padding-top: 24px; border-top: 2px solid #e2e8f0;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: 10px; text-decoration: none;
+  font-family: var(--font-display); font-weight: 600; font-size: 15px;
+  transition: all 0.2s;
+}
+.btn-prev {
+  background: #fff; color: var(--binary-blue); border: 2px solid #e2e8f0;
+}
+.btn-prev:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.btn-next {
+  background: linear-gradient(135deg, var(--bitstream-blue), #3ab0d4);
+  color: #fff; border: none;
+}
+.btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(85,200,232,0.4); }
+.btn-nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.animate-in { animation: fadeInUp 0.5s ease-out forwards; opacity: 0; }
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .lesson-title { font-size: 26px; }
+  .lesson-desc { font-size: 16px; }
+  .sign-gallery { grid-template-columns: repeat(2, 1fr); }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .oao-xp-badge { font-size: 11px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="oao-header">
+  <div class="oao-header-inner">
+    <div class="oao-logo-area">
+      <svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/>
+        <path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/>
+        <path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/>
+        <circle cx="17" cy="20" r="1.5" fill="#fff"/>
+        <circle cx="23" cy="20" r="1.5" fill="#fff"/>
+        <path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text>
+        <text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text>
+      </svg>
+      <div class="oao-header-divider"></div>
+      <div>
+        <div class="oao-header-course">Driver's Education</div>
+        <div class="oao-header-sub">Florida High School</div>
+      </div>
+    </div>
+    <div class="oao-xp-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      300 XP
+    </div>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="#">Course Home</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="#">Unit 2: The Language of the Road</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span class="current">Lesson 2.1: Traffic Signs</span>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-container">
+
+  <!-- LESSON HEADER -->
+  <div class="animate-in">
+    <div class="lesson-badge">UNIT 2 • LESSON 1</div>
+    <h1 class="lesson-title">Traffic Signs: Recognition and Response</h1>
+    <p class="lesson-desc">Traffic signs are the silent guides of every road. They tell you where to go, what to watch for, and what the law requires — even before you see another car. Learning their shapes, colors, and meanings is the first step to reading the road like a pro.</p>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="hero-container animate-in delay-1">
+    <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky -->
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#87CEEB"/>
+          <stop offset="100%" stop-color="#c9e8f7"/>
+        </linearGradient>
+        <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#555"/>
+          <stop offset="100%" stop-color="#444"/>
+        </linearGradient>
+      </defs>
+      <rect width="900" height="380" fill="url(#sky)"/>
+      <!-- Clouds -->
+      <ellipse cx="150" cy="60" rx="70" ry="25" fill="#fff" opacity=".6"/>
+      <ellipse cx="190" cy="50" rx="50" ry="20" fill="#fff" opacity=".5"/>
+      <ellipse cx="650" cy="80" rx="60" ry="22" fill="#fff" opacity=".5"/>
+      <ellipse cx="700" cy="70" rx="45" ry="18" fill="#fff" opacity=".4"/>
+      <!-- Ground -->
+      <rect x="0" y="240" width="900" height="140" fill="#5a9e4b"/>
+      <!-- Road -->
+      <polygon points="350,240 550,240 750,380 150,380" fill="url(#road)"/>
+      <polygon points="350,240 550,240 560,240 340,240" fill="#555"/>
+      <!-- Lane lines -->
+      <line x1="450" y1="250" x2="450" y2="270" stroke="#ffd700" stroke-width="2" stroke-dasharray="12,8"/>
+      <line x1="450" y1="275" x2="450" y2="305" stroke="#ffd700" stroke-width="3" stroke-dasharray="14,8"/>
+      <line x1="450" y1="310" x2="450" y2="350" stroke="#ffd700" stroke-width="4" stroke-dasharray="16,8"/>
+      <line x1="450" y1="355" x2="450" y2="380" stroke="#ffd700" stroke-width="5"/>
+      <!-- Roadside signs -->
+      <!-- Stop Sign (left) -->
+      <rect x="120" y="160" width="4" height="90" fill="#888"/>
+      <polygon points="122,112 139,100 156,112 156,132 139,144 122,132" fill="#cc0000" stroke="#fff" stroke-width="2"/>
+      <text x="139" y="130" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#fff">STOP</text>
+      <!-- Speed Limit Sign (right) -->
+      <rect x="738" y="160" width="4" height="90" fill="#888"/>
+      <rect x="718" y="105" width="44" height="56" rx="3" fill="#fff" stroke="#111" stroke-width="2"/>
+      <text x="740" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">SPEED</text>
+      <text x="740" y="131" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">LIMIT</text>
+      <text x="740" y="152" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="20" fill="#111">45</text>
+      <!-- Yield Sign (center-left) -->
+      <rect x="288" y="175" width="3" height="70" fill="#888"/>
+      <polygon points="290,130 310,170 270,170" fill="#fff" stroke="#cc0000" stroke-width="3"/>
+      <text x="290" y="160" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#cc0000">YIELD</text>
+      <!-- Warning Sign (center-right) -->
+      <rect x="598" y="170" width="3" height="75" fill="#888"/>
+      <polygon points="600,125 625,165 575,165" fill="#ffd700" stroke="#111" stroke-width="2"/>
+      <text x="600" y="158" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#111">!</text>
+      <!-- Palm trees -->
+      <rect x="60" y="200" width="8" height="100" fill="#8B6914" rx="3"/>
+      <ellipse cx="64" cy="195" rx="30" ry="14" fill="#2d8a4e"/>
+      <ellipse cx="64" cy="188" rx="25" ry="10" fill="#3aaa5e"/>
+      <rect x="800" y="195" width="8" height="100" fill="#8B6914" rx="3"/>
+      <ellipse cx="804" cy="190" rx="30" ry="14" fill="#2d8a4e"/>
+      <ellipse cx="804" cy="183" rx="25" ry="10" fill="#3aaa5e"/>
+      <!-- Title overlay -->
+      <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,0.85)"/>
+      <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">The Language of the Road: Traffic Signs</text>
+    </svg>
+  </div>
+
+  <!-- STANDARDS -->
+  <div class="standards-box animate-in delay-2">
+    <div class="standards-label">Florida Standards Alignment</div>
+    <p>Identify and explain the meaning of regulatory, warning, and guide signs by their shape, color, and symbols. Demonstrate proper driver response to each sign category.</p>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="objectives-box animate-in delay-3">
+    <div class="objectives-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+      Learning Objectives
+    </div>
+    <ul class="objectives-list">
+      <li>Identify traffic signs by shape, color, and symbol</li>
+      <li>Distinguish between regulatory, warning, and guide signs</li>
+      <li>Explain the correct driver response to each type of sign</li>
+      <li>Recognize Florida-specific signs and their meanings</li>
+      <li>Understand how sign placement communicates urgency and distance</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1: WHY SIGNS MATTER -->
+  <div class="content-block block-read animate-in delay-4">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Why Traffic Signs Matter</h2>
+    </div>
+    <div class="block-body">
+      <p>Imagine driving on a road with no signs at all — no speed limits, no stop signs, no warnings about curves. Every intersection would be a guessing game, and every driver would have to make up their own rules. Traffic signs create a <strong>universal language</strong> that every driver can understand, regardless of what language they speak at home.</p>
+      <p>In the United States, traffic signs follow the <strong>Manual on Uniform Traffic Control Devices (MUTCD)</strong>, which standardizes shapes, colors, and symbols so they look the same in every state. Florida adds some state-specific signs, but the basic system is consistent nationwide.</p>
+      <p>There are three main categories of traffic signs:</p>
+      <ul>
+        <li><strong>Regulatory signs</strong> — Tell you what the law requires or prohibits</li>
+        <li><strong>Warning signs</strong> — Alert you to upcoming hazards or changes</li>
+        <li><strong>Guide signs</strong> — Help you navigate to destinations and find services</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION: SHAPE AND COLOR -->
+  <div class="content-block block-fact">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💡 Shape = Message (Even From Far Away)</h2>
+    </div>
+    <div class="block-body">
+      <p>Traffic signs are designed so you can recognize them by <strong>shape alone</strong>, even if the sign is faded, covered in snow, or too far to read the text. Here's what each shape means:</p>
+      <ul>
+        <li><strong>Octagon (8 sides)</strong> — Stop. This shape is used only for stop signs.</li>
+        <li><strong>Inverted triangle</strong> — Yield. Give the right of way to others.</li>
+        <li><strong>Diamond</strong> — Warning. Be alert for a hazard ahead.</li>
+        <li><strong>Rectangle (vertical)</strong> — Regulatory. Speed limits, parking rules, lane restrictions.</li>
+        <li><strong>Rectangle (horizontal)</strong> — Guide. Directions, distances, and services.</li>
+        <li><strong>Pentagon (5 sides)</strong> — School zone. Slow down — children may be present.</li>
+        <li><strong>Circle</strong> — Railroad crossing ahead (advance warning).</li>
+        <li><strong>Crossbuck (X-shape)</strong> — Railroad crossing (at the tracks).</li>
+        <li><strong>Pennant (isosceles triangle)</strong> — No passing zone.</li>
+      </ul>
+      <p><strong>Color also communicates meaning:</strong></p>
+      <ul>
+        <li><strong>Red</strong> — Stop, yield, or prohibition</li>
+        <li><strong>Yellow</strong> — General warning</li>
+        <li><strong>Orange</strong> — Construction/work zone</li>
+        <li><strong>Green</strong> — Guide or direction (permitted movements)</li>
+        <li><strong>Blue</strong> — Motorist services (gas, food, hospital)</li>
+        <li><strong>Brown</strong> — Recreation and cultural interest areas</li>
+        <li><strong>White</strong> — Regulatory information</li>
+        <li><strong>Fluorescent yellow-green</strong> — School zones, pedestrian crossings</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 2: REGULATORY SIGNS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Regulatory Signs: The Rules of the Road</h2>
+    </div>
+    <div class="block-body">
+      <p>Regulatory signs tell you <strong>what you must do or cannot do</strong>. Violating them is breaking the law, and you can be cited by law enforcement. Most regulatory signs are <strong>white rectangles with black text</strong>, but the most critical ones — stop and yield — have special shapes and colors.</p>
+    </div>
+  </div>
+
+  <!-- SIGN GALLERY: REGULATORY -->
+  <div class="sign-gallery">
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,5 70,18 70,62 40,75 10,62 10,18" fill="#cc0000" stroke="#fff" stroke-width="3"/>
+        <text x="40" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#fff">STOP</text>
+      </svg>
+      <div class="sign-name">Stop</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,10 72,65 8,65" fill="#fff" stroke="#cc0000" stroke-width="4"/>
+        <text x="40" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#cc0000">YIELD</text>
+      </svg>
+      <div class="sign-name">Yield</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="8" width="52" height="64" rx="3" fill="#fff" stroke="#111" stroke-width="2.5"/>
+        <text x="40" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">SPEED</text>
+        <text x="40" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">LIMIT</text>
+        <text x="40" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="24" fill="#111">35</text>
+      </svg>
+      <div class="sign-name">Speed Limit</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="60" height="50" rx="3" fill="#fff" stroke="#111" stroke-width="2.5"/>
+        <text x="40" y="37" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">DO NOT</text>
+        <text x="40" y="50" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">ENTER</text>
+        <circle cx="40" cy="43" r="18" fill="none" stroke="#cc0000" stroke-width="3"/>
+        <rect x="25" y="40" width="30" height="6" fill="#cc0000"/>
+      </svg>
+      <div class="sign-name">Do Not Enter</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="20" width="60" height="40" rx="3" fill="#111" stroke="#fff" stroke-width="2"/>
+        <polygon points="30,30 30,50 55,40" fill="#fff"/>
+        <text x="40" y="68" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">ONE WAY</text>
+      </svg>
+      <div class="sign-name">One Way</div>
+    </div>
+  </div>
+
+  <div class="content-block block-think">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">🤔 Think About It</h2>
+    </div>
+    <div class="block-body">
+      <p>A stop sign is the only sign with an octagon shape and the only one that's red with white text. Why do you think traffic engineers made it so unique? <em>Think about how quickly you need to identify it — and what happens if you miss it.</em></p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 3: WARNING SIGNS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Warning Signs: Heads Up!</h2>
+    </div>
+    <div class="block-body">
+      <p>Warning signs are <strong>yellow diamonds with black symbols</strong>. They don't tell you what to do — they tell you what's <strong>ahead</strong> so you can prepare. When you see a warning sign, you should slow down and stay alert.</p>
+      <p>Common warning signs include:</p>
+      <ul>
+        <li><strong>Curve ahead</strong> — Road bends left or right; reduce speed</li>
+        <li><strong>Intersection ahead</strong> — Cross traffic or merging road approaching</li>
+        <li><strong>Pedestrian crossing</strong> — Watch for people on foot</li>
+        <li><strong>Deer/animal crossing</strong> — Wildlife may enter the road</li>
+        <li><strong>Slippery when wet</strong> — Reduce speed in rain</li>
+        <li><strong>Divided highway begins/ends</strong> — Road configuration is changing</li>
+        <li><strong>Hill ahead</strong> — Steep grade; prepare to adjust speed</li>
+        <li><strong>Merge</strong> — Traffic joining from the side</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SIGN GALLERY: WARNING -->
+  <div class="sign-gallery">
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="50" height="50" rx="3" fill="#ffd700" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+        <path d="M30 48 Q40 28 50 48" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="sign-name">Curve Ahead</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="50" height="50" rx="3" fill="#ffd700" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+        <line x1="40" y1="28" x2="40" y2="52" stroke="#111" stroke-width="3"/>
+        <line x1="28" y1="40" x2="52" y2="40" stroke="#111" stroke-width="3"/>
+      </svg>
+      <div class="sign-name">Intersection</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="50" height="50" rx="3" fill="#ffd700" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+        <circle cx="40" cy="32" r="4" fill="#111"/>
+        <line x1="40" y1="36" x2="40" y2="48" stroke="#111" stroke-width="2.5"/>
+        <line x1="33" y1="42" x2="47" y2="42" stroke="#111" stroke-width="2.5"/>
+        <line x1="40" y1="48" x2="34" y2="56" stroke="#111" stroke-width="2.5"/>
+        <line x1="40" y1="48" x2="46" y2="56" stroke="#111" stroke-width="2.5"/>
+      </svg>
+      <div class="sign-name">Pedestrian</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="50" height="50" rx="3" fill="#ffd700" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+        <path d="M30 50 Q32 42 36 40 L42 38 Q46 36 44 32 L46 28 Q48 26 46 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="48" cy="22" r="2" fill="#111"/>
+      </svg>
+      <div class="sign-name">Deer Crossing</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="50" height="50" rx="3" fill="#ffd700" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+        <path d="M28 40 L40 28 L52 40" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="40" y1="28" x2="40" y2="54" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="sign-name">Merge</div>
+    </div>
+  </div>
+
+  <div class="content-block block-fact">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💡 Florida Fact</h2>
+    </div>
+    <div class="block-body">
+      <p>Florida has unique warning signs you won't see in most other states. Because of its wildlife, Florida roads may feature <strong>panther crossing</strong>, <strong>manatee zone</strong> (in waterway areas), <strong>alligator warning</strong>, and <strong>bear crossing</strong> signs. The Florida panther crossing sign is especially important in South Florida near the Everglades, where the endangered Florida panther is most active at dawn and dusk.</p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 4: GUIDE SIGNS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Guide Signs: Finding Your Way</h2>
+    </div>
+    <div class="block-body">
+      <p>Guide signs help you <strong>navigate</strong>. They show you which route you're on, how far it is to the next city, and where to find services like gas stations and hospitals. These signs don't require you to do anything — they just provide information.</p>
+      <p><strong>Green signs</strong> give destinations and distances. You'll see them on highways showing exits, mileage, and city names. <strong>Blue signs</strong> indicate motorist services: food, gas, lodging, and hospitals. <strong>Brown signs</strong> point to parks, recreation areas, and cultural landmarks.</p>
+      <p>Florida also uses <strong>route markers</strong> to identify roads:</p>
+      <ul>
+        <li><strong>Interstate shields (red/blue)</strong> — Federal highway system (I-95, I-75, I-4)</li>
+        <li><strong>US route shields</strong> — National highways (US 1, US 27, US 41)</li>
+        <li><strong>Florida state route markers</strong> — Shaped like the state of Florida (SR 836, SR 528)</li>
+        <li><strong>County road markers</strong> — Local routes within a county</li>
+      </ul>
+      <p><strong>Mile markers</strong> are small green signs on the right shoulder that count the miles from the southern or western border of the state (or county). They help you report your location in an emergency and track your position on long drives.</p>
+    </div>
+  </div>
+
+  <!-- SIGN GALLERY: GUIDE -->
+  <div class="sign-gallery">
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="60" height="50" rx="4" fill="#006b3f" stroke="#fff" stroke-width="2"/>
+        <text x="40" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#fff">Orlando</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Arial,sans-serif" font-weight="400" font-size="9" fill="#fff">45 mi</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#fff">EXIT 42</text>
+      </svg>
+      <div class="sign-name">Destination</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="60" height="50" rx="4" fill="#003399" stroke="#fff" stroke-width="2"/>
+        <text x="40" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#fff">GAS</text>
+        <text x="40" y="44" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#fff">FOOD</text>
+        <text x="40" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#fff">LODGING</text>
+      </svg>
+      <div class="sign-name">Services</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="60" height="50" rx="4" fill="#6B3A1F" stroke="#fff" stroke-width="2"/>
+        <text x="40" y="37" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#fff">STATE</text>
+        <text x="40" y="50" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#fff">PARK</text>
+        <text x="40" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="400" font-size="8" fill="#fff">→ 2 mi</text>
+      </svg>
+      <div class="sign-name">Recreation</div>
+    </div>
+    <div class="sign-card">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- Interstate shield -->
+        <path d="M25,20 L55,20 Q62,20 62,28 L62,48 Q62,58 52,62 L40,68 L28,62 Q18,58 18,48 L18,28 Q18,20 25,20Z" fill="#003399" stroke="#fff" stroke-width="2"/>
+        <rect x="22" y="22" width="36" height="14" fill="#cc0000"/>
+        <text x="40" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#fff">INTERSTATE</text>
+        <text x="40" y="53" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="#fff">95</text>
+      </svg>
+      <div class="sign-name">Interstate</div>
+    </div>
+  </div>
+
+  <div class="content-block block-achievement">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+      <h2 class="block-title">🏆 Achievement Unlocked: Sign Spotter</h2>
+    </div>
+    <div class="block-body">
+      <p>You can now identify the three major categories of traffic signs and understand what each color and shape means. Next time you're a passenger, try spotting at least one sign from each category — regulatory, warning, and guide. You'll be surprised how many you notice once you start looking!</p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+    </div>
+  </div>
+
+  <!-- VOCABULARY -->
+  <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--binary-blue); margin-bottom: 16px;">📘 Key Vocabulary</h2>
+  <div class="vocab-grid">
+    <div class="vocab-card">
+      <div class="vocab-term">Regulatory Sign</div>
+      <div class="vocab-def">A sign that communicates a traffic law — you must obey it or risk a citation.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Warning Sign</div>
+      <div class="vocab-def">A sign that alerts you to a potential hazard or change ahead so you can prepare.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Guide Sign</div>
+      <div class="vocab-def">A sign that provides navigational information such as destinations, distances, and services.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">MUTCD</div>
+      <div class="vocab-def">Manual on Uniform Traffic Control Devices — the national standard for all traffic signs, signals, and markings in the U.S.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Octagon</div>
+      <div class="vocab-def">An eight-sided shape used exclusively for stop signs — the most recognizable sign shape on the road.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Mile Marker</div>
+      <div class="vocab-def">Small green signs posted along highways showing the distance from the state's (or county's) southern or western border.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Route Marker</div>
+      <div class="vocab-def">A sign that identifies a specific road by number and type (Interstate, US Highway, State Road, or County Road).</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Pennant</div>
+      <div class="vocab-def">A triangular (isosceles) sign placed on the left side of the road to mark no-passing zones.</div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="content-block block-think" style="margin-top: 32px;">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💭 Reflection</h2>
+    </div>
+    <div class="block-body">
+      <p><strong>Think about a route you travel regularly</strong> — to school, a friend's house, or a store. How many traffic signs do you pass along the way? Can you picture what type they are (regulatory, warning, or guide)?</p>
+      <p>Next time you ride as a passenger, try counting each sign and identifying its category. You might be surprised at how many signs you've been ignoring — signs that, as a driver, you'll need to see and respond to every single time.</p>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="#" class="btn-nav btn-prev">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Previous Lesson
+    </a>
+    <a href="lesson-2-1-activity.html" class="btn-nav btn-next">
+      Lesson 2.1 Activity
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </a>
+  </div>
+
+</main>
+
+</body>
+</html>

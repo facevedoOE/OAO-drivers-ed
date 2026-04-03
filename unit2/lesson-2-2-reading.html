@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.2: Traffic Signals and Pavement Markings | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --binary-blue: #0E1C42;
+  --bitstream-blue: #55C8E8;
+  --gateway-gold: #C7922C;
+  --portal-purple: #67308F;
+  --gamer-green: #76C043;
+  --odyssey-orange: #F78F1E;
+  --font-display: 'Wix Madefor Display', sans-serif;
+  --font-body: 'Wix Madefor Text', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); color: #1a1a2e; background: #f0f4f8; line-height: 1.7; font-size: 16px; }
+
+.oao-header { background: linear-gradient(135deg, var(--binary-blue) 0%, #1a2a5e 100%); padding: 16px 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(14,28,66,0.3); }
+.oao-header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.oao-logo-area { display: flex; align-items: center; gap: 12px; }
+.oao-header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); margin: 0 4px; }
+.oao-header-course { color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+.oao-header-sub { color: rgba(255,255,255,0.6); font-size: 11px; }
+.oao-xp-badge { background: linear-gradient(135deg, var(--gateway-gold), #e8a93e); color: var(--binary-blue); font-family: var(--font-display); font-weight: 700; font-size: 13px; padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
+.oao-xp-badge svg { width: 16px; height: 16px; }
+
+.breadcrumb-bar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 10px 24px; }
+.breadcrumb-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; color: #64748b; }
+.breadcrumb-inner a { color: var(--bitstream-blue); text-decoration: none; }
+.breadcrumb-inner a:hover { text-decoration: underline; }
+.breadcrumb-sep { width: 14px; height: 14px; stroke: #94a3b8; fill: none; stroke-width: 2; }
+.breadcrumb-inner .current { color: var(--binary-blue); font-weight: 600; }
+
+.lesson-container { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+.lesson-badge { display: inline-block; background: linear-gradient(135deg, var(--portal-purple), #8b45b8); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 12px; padding: 5px 14px; border-radius: 20px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+.lesson-title { font-family: var(--font-display); font-size: 36px; font-weight: 800; color: var(--binary-blue); line-height: 1.2; margin-bottom: 12px; }
+.lesson-desc { font-size: 18px; color: #475569; line-height: 1.6; margin-bottom: 28px; }
+
+.hero-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 32px; box-shadow: 0 4px 24px rgba(14,28,66,0.12); }
+.hero-container svg { width: 100%; height: auto; display: block; }
+
+.standards-box { background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-left: 4px solid var(--portal-purple); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 28px; }
+.standards-label { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--portal-purple); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.standards-box p { font-size: 14px; color: #4338ca; }
+
+.objectives-box { background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; border: 2px solid #e2e8f0; }
+.objectives-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--binary-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.objectives-list { list-style: none; padding: 0; }
+.objectives-list li { padding: 6px 0 6px 28px; position: relative; font-size: 15px; color: #334155; }
+.objectives-list li::before { content: '✓'; position: absolute; left: 0; top: 6px; color: var(--gamer-green); font-weight: 700; font-size: 16px; }
+
+.content-block { border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.block-read { background: #fff; border: 1px solid #e2e8f0; }
+.block-think { background: linear-gradient(135deg, #fff7ed, #ffedd5); border: 1px solid #fed7aa; }
+.block-fact { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; }
+.block-achievement { background: linear-gradient(135deg, #fefce8, #fef3c7); border: 1px solid #fde68a; }
+.block-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.block-icon { width: 28px; height: 28px; flex-shrink: 0; }
+.block-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--binary-blue); }
+.block-body p { margin-bottom: 12px; }
+.block-body p:last-child { margin-bottom: 0; }
+.block-body ul, .block-body ol { margin: 8px 0 12px 20px; }
+.block-body li { margin-bottom: 6px; }
+.block-body strong { color: var(--binary-blue); }
+
+.section-divider { display: flex; align-items: center; justify-content: center; margin: 36px 0; position: relative; }
+.section-divider::before { content: ''; position: absolute; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #cbd5e1, transparent); }
+.section-divider-icon { background: #f0f4f8; padding: 0 16px; position: relative; z-index: 1; }
+.section-divider-icon svg { width: 24px; height: 24px; stroke: var(--bitstream-blue); fill: none; stroke-width: 2; }
+
+/* SIGNAL / MARKING ILLUSTRATIONS */
+.signal-row { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin: 20px 0; }
+.signal-card { background: #fff; border-radius: 12px; padding: 16px; text-align: center; border: 2px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; min-width: 130px; flex: 0 1 160px; }
+.signal-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+.signal-card svg { margin-bottom: 8px; }
+.signal-label { font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--binary-blue); }
+.signal-desc { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* MARKING DIAGRAM */
+.marking-diagram { background: #fff; border-radius: 12px; padding: 20px; margin: 20px 0; border: 2px solid #e2e8f0; overflow-x: auto; }
+.marking-diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.vocab-card { background: #fff; border-radius: 10px; padding: 16px; border-left: 4px solid var(--bitstream-blue); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.vocab-term { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--binary-blue); margin-bottom: 4px; }
+.vocab-def { font-size: 14px; color: #475569; }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 2px solid #e2e8f0; }
+.btn-nav { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 15px; transition: all 0.2s; }
+.btn-prev { background: #fff; color: var(--binary-blue); border: 2px solid #e2e8f0; }
+.btn-prev:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.btn-next { background: linear-gradient(135deg, var(--bitstream-blue), #3ab0d4); color: #fff; border: none; }
+.btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(85,200,232,0.4); }
+.btn-nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.animate-in { animation: fadeInUp 0.5s ease-out forwards; opacity: 0; }
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+
+@media (max-width: 640px) {
+  .lesson-title { font-size: 26px; }
+  .lesson-desc { font-size: 16px; }
+  .signal-row { gap: 12px; }
+  .signal-card { min-width: 110px; flex: 0 1 130px; padding: 12px; }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .oao-xp-badge { font-size: 11px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="oao-header">
+  <div class="oao-header-inner">
+    <div class="oao-logo-area">
+      <svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/>
+        <path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/>
+        <path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/>
+        <circle cx="17" cy="20" r="1.5" fill="#fff"/>
+        <circle cx="23" cy="20" r="1.5" fill="#fff"/>
+        <path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text>
+        <text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text>
+      </svg>
+      <div class="oao-header-divider"></div>
+      <div>
+        <div class="oao-header-course">Driver's Education</div>
+        <div class="oao-header-sub">Florida High School</div>
+      </div>
+    </div>
+    <div class="oao-xp-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      300 XP
+    </div>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="#">Course Home</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="#">Unit 2: The Language of the Road</a>
+    <svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span class="current">Lesson 2.2: Traffic Signals &amp; Pavement Markings</span>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-container">
+
+  <div class="animate-in">
+    <div class="lesson-badge">UNIT 2 • LESSON 2</div>
+    <h1 class="lesson-title">Traffic Signals and Pavement Markings</h1>
+    <p class="lesson-desc">Traffic lights tell you when to go. Pavement markings tell you where to go. Together, they keep millions of drivers, cyclists, and pedestrians moving safely through the most complex parts of every road — intersections.</p>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="hero-container animate-in delay-1">
+    <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a6fa1"/><stop offset="100%" stop-color="#8ab4d6"/></linearGradient>
+        <radialGradient id="greenGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#76C043" stop-opacity=".5"/><stop offset="100%" stop-color="#76C043" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="900" height="380" fill="url(#sky2)"/>
+      <!-- Buildings silhouette -->
+      <rect x="50" y="140" width="70" height="140" fill="#1a2a5e" rx="2"/>
+      <rect x="130" y="100" width="55" height="180" fill="#0E1C42" rx="2"/>
+      <rect x="200" y="160" width="60" height="120" fill="#1a2a5e" rx="2"/>
+      <rect x="640" y="120" width="65" height="160" fill="#0E1C42" rx="2"/>
+      <rect x="720" y="155" width="70" height="125" fill="#1a2a5e" rx="2"/>
+      <rect x="800" y="130" width="55" height="150" fill="#0E1C42" rx="2"/>
+      <!-- Road / Intersection -->
+      <rect x="0" y="280" width="900" height="100" fill="#444"/>
+      <rect x="370" y="160" width="160" height="220" fill="#444"/>
+      <!-- Crosswalk -->
+      <rect x="375" y="278" width="22" height="6" fill="#fff" rx="1"/>
+      <rect x="405" y="278" width="22" height="6" fill="#fff" rx="1"/>
+      <rect x="435" y="278" width="22" height="6" fill="#fff" rx="1"/>
+      <rect x="465" y="278" width="22" height="6" fill="#fff" rx="1"/>
+      <rect x="495" y="278" width="22" height="6" fill="#fff" rx="1"/>
+      <!-- Lane markings -->
+      <line x1="300" y1="330" x2="370" y2="330" stroke="#ffd700" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="530" y1="330" x2="650" y2="330" stroke="#ffd700" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="650" y1="330" x2="900" y2="330" stroke="#ffd700" stroke-width="3" stroke-dasharray="12,8"/>
+      <line x1="0" y1="330" x2="200" y2="330" stroke="#ffd700" stroke-width="3" stroke-dasharray="12,8"/>
+      <!-- Stop line -->
+      <rect x="280" y="275" width="90" height="4" fill="#fff"/>
+      <!-- Traffic light pole -->
+      <rect x="340" y="170" width="6" height="110" fill="#555"/>
+      <rect x="290" y="170" width="60" height="5" fill="#555"/>
+      <!-- Traffic light housing -->
+      <rect x="296" y="115" width="40" height="58" rx="6" fill="#222"/>
+      <circle cx="316" cy="128" r="8" fill="#440000"/>
+      <circle cx="316" cy="145" r="8" fill="#443300"/>
+      <circle cx="316" cy="162" r="8" fill="#76C043"/>
+      <circle cx="316" cy="162" r="14" fill="url(#greenGlow)"/>
+      <!-- Second traffic light (right side) -->
+      <rect x="554" y="170" width="6" height="110" fill="#555"/>
+      <rect x="554" y="170" width="60" height="5" fill="#555"/>
+      <rect x="566" y="115" width="40" height="58" rx="6" fill="#222"/>
+      <circle cx="586" cy="128" r="8" fill="#cc0000"/>
+      <circle cx="586" cy="128" r="14" fill="rgba(204,0,0,0.2)"/>
+      <circle cx="586" cy="145" r="8" fill="#443300"/>
+      <circle cx="586" cy="162" r="8" fill="#003300"/>
+      <!-- Title overlay -->
+      <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,0.85)"/>
+      <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">Signals &amp; Markings: The Road Speaks to You</text>
+    </svg>
+  </div>
+
+  <!-- STANDARDS -->
+  <div class="standards-box animate-in delay-2">
+    <div class="standards-label">Florida Standards Alignment</div>
+    <p>Explain the meaning of traffic signals (including arrows and flashing signals) and pavement markings, and describe the correct driver response to each.</p>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="objectives-box animate-in delay-3">
+    <div class="objectives-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+      Learning Objectives
+    </div>
+    <ul class="objectives-list">
+      <li>Identify the meaning of steady and flashing traffic signals</li>
+      <li>Explain arrow signal rules for turning movements</li>
+      <li>Interpret pedestrian signals and crossing rules</li>
+      <li>Distinguish between solid and dashed lane markings</li>
+      <li>Recognize special pavement markings including turn lanes, bike lanes, and HOV lanes</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1: TRAFFIC LIGHTS -->
+  <div class="content-block block-read animate-in delay-4">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Traffic Lights: Red, Yellow, Green</h2>
+    </div>
+    <div class="block-body">
+      <p>Traffic lights (also called signals) are the primary way intersections are controlled. Every new driver must know exactly what each light means — not just the color, but whether it's <strong>steady</strong> or <strong>flashing</strong>.</p>
+      <p><strong>Steady (solid) lights:</strong></p>
+      <ul>
+        <li><strong>Steady green</strong> — You may proceed through the intersection if it's clear. You may also turn left or right unless a sign prohibits it. <em>Left-turners must yield to oncoming traffic.</em></li>
+        <li><strong>Steady yellow</strong> — The light is about to turn red. If you can stop safely before the intersection, you must stop. If you're already in the intersection or too close to stop safely, proceed with caution.</li>
+        <li><strong>Steady red</strong> — Stop completely behind the stop line or crosswalk. Remain stopped until the light turns green. <em>Exception: You may turn right on red after a complete stop, unless a sign says "No Turn on Red."</em></li>
+      </ul>
+      <p><strong>Flashing lights:</strong></p>
+      <ul>
+        <li><strong>Flashing red</strong> — Treat it exactly like a stop sign. Stop completely, check for traffic, then proceed when safe.</li>
+        <li><strong>Flashing yellow</strong> — Proceed with caution. Slow down and watch for cross traffic and pedestrians, but you do not need to stop.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SIGNAL ILLUSTRATIONS -->
+  <div class="signal-row">
+    <div class="signal-card">
+      <svg width="50" height="110" viewBox="0 0 50 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="100" rx="8" fill="#222"/>
+        <circle cx="25" cy="24" r="11" fill="#330000"/><circle cx="25" cy="55" r="11" fill="#332200"/><circle cx="25" cy="86" r="11" fill="#76C043"/>
+      </svg>
+      <div class="signal-label">Steady Green</div>
+      <div class="signal-desc">Go if clear</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="110" viewBox="0 0 50 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="100" rx="8" fill="#222"/>
+        <circle cx="25" cy="24" r="11" fill="#330000"/><circle cx="25" cy="55" r="11" fill="#F78F1E"/><circle cx="25" cy="86" r="11" fill="#003300"/>
+      </svg>
+      <div class="signal-label">Steady Yellow</div>
+      <div class="signal-desc">Prepare to stop</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="110" viewBox="0 0 50 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="100" rx="8" fill="#222"/>
+        <circle cx="25" cy="24" r="11" fill="#cc0000"/><circle cx="25" cy="55" r="11" fill="#332200"/><circle cx="25" cy="86" r="11" fill="#003300"/>
+      </svg>
+      <div class="signal-label">Steady Red</div>
+      <div class="signal-desc">Full stop</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="110" viewBox="0 0 50 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="100" rx="8" fill="#222"/>
+        <circle cx="25" cy="24" r="11" fill="#cc0000" opacity=".6"/><circle cx="25" cy="24" r="15" fill="#cc0000" opacity=".15"/>
+        <circle cx="25" cy="55" r="11" fill="#332200"/><circle cx="25" cy="86" r="11" fill="#003300"/>
+      </svg>
+      <div class="signal-label">Flashing Red</div>
+      <div class="signal-desc">Treat as stop sign</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="110" viewBox="0 0 50 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="100" rx="8" fill="#222"/>
+        <circle cx="25" cy="24" r="11" fill="#330000"/>
+        <circle cx="25" cy="55" r="11" fill="#F78F1E" opacity=".6"/><circle cx="25" cy="55" r="15" fill="#F78F1E" opacity=".15"/>
+        <circle cx="25" cy="86" r="11" fill="#003300"/>
+      </svg>
+      <div class="signal-label">Flashing Yellow</div>
+      <div class="signal-desc">Caution, proceed</div>
+    </div>
+  </div>
+
+  <div class="content-block block-think">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">🤔 Think About It</h2>
+    </div>
+    <div class="block-body">
+      <p>You're approaching an intersection at 40 mph and the light turns yellow. You're about 3 car lengths from the intersection. Should you speed up to "make the light" or brake to stop? <em>The answer: if you can stop safely, you must stop. Running a yellow that turns red is a violation — and a common cause of serious intersection crashes.</em></p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ARROW SIGNALS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Arrow Signals</h2>
+    </div>
+    <div class="block-body">
+      <p>Arrow signals control <strong>specific turning movements</strong> at an intersection. They appear alongside or instead of regular circular lights.</p>
+      <ul>
+        <li><strong>Green arrow</strong> — You have a <strong>protected turn</strong>. Oncoming traffic has a red light, so you may turn in the direction of the arrow without waiting for a gap. Still check for pedestrians.</li>
+        <li><strong>Yellow arrow</strong> — Your protected turn is ending. Prepare to stop. If you're already in the intersection, complete your turn safely.</li>
+        <li><strong>Red arrow</strong> — Do not turn in the direction of the arrow. Wait until the arrow turns green or you get a green circular signal. <em>In Florida, you cannot turn right on a red arrow.</em></li>
+        <li><strong>Flashing yellow arrow</strong> — You may turn in the direction of the arrow, but you must <strong>yield</strong> to oncoming traffic and pedestrians. This is an <em>unprotected</em> turn — no one is being stopped for you.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ARROW SIGNAL ILLUSTRATIONS -->
+  <div class="signal-row">
+    <div class="signal-card">
+      <svg width="50" height="70" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="60" rx="8" fill="#222"/>
+        <polygon points="25,15 35,30 28,30 28,50 22,50 22,30 15,30" fill="#76C043"/>
+      </svg>
+      <div class="signal-label">Green Arrow</div>
+      <div class="signal-desc">Protected turn</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="70" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="60" rx="8" fill="#222"/>
+        <polygon points="25,15 35,30 28,30 28,50 22,50 22,30 15,30" fill="#F78F1E"/>
+      </svg>
+      <div class="signal-label">Yellow Arrow</div>
+      <div class="signal-desc">Turn ending, stop</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="70" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="60" rx="8" fill="#222"/>
+        <polygon points="25,15 35,30 28,30 28,50 22,50 22,30 15,30" fill="#cc0000"/>
+      </svg>
+      <div class="signal-label">Red Arrow</div>
+      <div class="signal-desc">Do not turn</div>
+    </div>
+    <div class="signal-card">
+      <svg width="50" height="70" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="40" height="60" rx="8" fill="#222"/>
+        <polygon points="25,15 35,30 28,30 28,50 22,50 22,30 15,30" fill="#F78F1E" opacity=".6"/>
+        <polygon points="25,15 35,30 28,30 28,50 22,50 22,30 15,30" fill="none" stroke="#F78F1E" stroke-width="1.5"/>
+      </svg>
+      <div class="signal-label">Flashing Yellow Arrow</div>
+      <div class="signal-desc">Yield and turn</div>
+    </div>
+  </div>
+
+  <div class="content-block block-fact">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💡 Florida Fact</h2>
+    </div>
+    <div class="block-body">
+      <p>In Florida, you may <strong>turn right on a steady red light</strong> after a complete stop, unless a sign prohibits it. However, you <strong>cannot turn on a red arrow</strong> — a red arrow means absolutely no turning in that direction until the signal changes. Many Florida intersections now use flashing yellow left-turn arrows, which allow you to turn left when there's a gap in oncoming traffic.</p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 3: PEDESTRIAN SIGNALS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Pedestrian Signals</h2>
+    </div>
+    <div class="block-body">
+      <p>Pedestrian signals are mounted at crosswalks and display symbols or text telling people when to walk. As a driver, understanding these signals helps you predict when pedestrians might be crossing:</p>
+      <ul>
+        <li><strong>Walking person (white)</strong> — Pedestrians may begin crossing. Drivers turning through the crosswalk must yield.</li>
+        <li><strong>Flashing hand with countdown</strong> — Pedestrians already in the crosswalk should finish crossing; new pedestrians should not start. Drivers must still yield to anyone in the crosswalk.</li>
+        <li><strong>Steady hand (orange/red)</strong> — Do not cross. But drivers must still yield to any pedestrian who is still in the crosswalk.</li>
+      </ul>
+      <p><strong>Key rule for drivers:</strong> Regardless of what the pedestrian signal shows, you must <strong>always yield to pedestrians in a crosswalk</strong>. In Florida, failing to yield to a pedestrian in a crosswalk is a traffic violation with significant fines.</p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PAVEMENT MARKINGS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Pavement Markings: Lines on the Road</h2>
+    </div>
+    <div class="block-body">
+      <p>Pavement markings are painted directly on the road surface. They're just as important as signs and signals — they tell you where you can drive, where you can pass, and where you need to be. There are two main colors:</p>
+      <ul>
+        <li><strong>Yellow lines</strong> — Separate traffic moving in <strong>opposite directions</strong> (oncoming traffic). They're always in the center of a two-way road.</li>
+        <li><strong>White lines</strong> — Separate traffic moving in the <strong>same direction</strong> or mark the edge of the road.</li>
+      </ul>
+      <p><strong>Yellow line rules:</strong></p>
+      <ul>
+        <li><strong>Broken yellow center line</strong> — Passing is allowed (when safe and legal)</li>
+        <li><strong>Solid yellow center line</strong> — No passing on your side. If the solid line is on your side and a broken line is on the other side, you may not pass — but the other direction can.</li>
+        <li><strong>Double solid yellow lines</strong> — No passing in either direction. You may cross them only to turn into a driveway or side road.</li>
+      </ul>
+      <p><strong>White line rules:</strong></p>
+      <ul>
+        <li><strong>Broken white lines</strong> — Lane changes are permitted</li>
+        <li><strong>Solid white lines</strong> — Discourage (or prohibit) lane changes. Stay in your lane.</li>
+        <li><strong>Double solid white lines</strong> — Lane changes are prohibited</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAVEMENT MARKING DIAGRAM -->
+  <div class="marking-diagram">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Road surface -->
+      <rect x="0" y="0" width="700" height="280" fill="#555" rx="8"/>
+      <!-- Section labels at top -->
+      <text x="115" y="22" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">Broken Yellow</text>
+      <text x="290" y="22" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">Solid + Broken</text>
+      <text x="470" y="22" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">Double Solid</text>
+      <text x="620" y="22" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">White Lines</text>
+      <!-- Dividers -->
+      <line x1="195" y1="0" x2="195" y2="280" stroke="#777" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="385" y1="0" x2="385" y2="280" stroke="#777" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="545" y1="0" x2="545" y2="280" stroke="#777" stroke-width="1" stroke-dasharray="4,4"/>
+      <!-- Section 1: Broken yellow -->
+      <line x1="115" y1="50" x2="115" y2="240" stroke="#ffd700" stroke-width="3" stroke-dasharray="20,12"/>
+      <text x="60" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#ccc">↑ Pass OK</text>
+      <text x="165" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#ccc">Pass OK ↑</text>
+      <!-- Edge lines -->
+      <line x1="20" y1="50" x2="20" y2="240" stroke="#fff" stroke-width="2"/>
+      <line x1="190" y1="50" x2="190" y2="240" stroke="#fff" stroke-width="2"/>
+      <!-- Section 2: Solid + broken yellow -->
+      <line x1="285" y1="50" x2="285" y2="240" stroke="#ffd700" stroke-width="3"/>
+      <line x1="291" y1="50" x2="291" y2="240" stroke="#ffd700" stroke-width="3" stroke-dasharray="20,12"/>
+      <text x="235" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#f88">← No pass</text>
+      <text x="345" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#8f8">Pass OK →</text>
+      <!-- Section 3: Double solid yellow -->
+      <line x1="465" y1="50" x2="465" y2="240" stroke="#ffd700" stroke-width="3"/>
+      <line x1="472" y1="50" x2="472" y2="240" stroke="#ffd700" stroke-width="3"/>
+      <text x="415" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#f88">No pass</text>
+      <text x="523" y="145" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="10" fill="#f88">No pass</text>
+      <!-- Section 4: White lines -->
+      <line x1="580" y1="50" x2="580" y2="140" stroke="#fff" stroke-width="3" stroke-dasharray="20,12"/>
+      <text x="580" y="155" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="9" fill="#8cf">Broken = change OK</text>
+      <line x1="650" y1="50" x2="650" y2="140" stroke="#fff" stroke-width="3"/>
+      <text x="650" y="155" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="9" fill="#ff8">Solid = stay</text>
+      <line x1="580" y1="180" x2="580" y2="240" stroke="#fff" stroke-width="3"/>
+      <line x1="586" y1="180" x2="586" y2="240" stroke="#fff" stroke-width="3"/>
+      <text x="583" y="258" text-anchor="middle" font-family="'Wix Madefor Text',sans-serif" font-size="9" fill="#f88">Double = prohibited</text>
+      <!-- Direction arrows in each lane -->
+      <polygon points="60,75 66,90 54,90" fill="rgba(255,255,255,0.3)"/>
+      <polygon points="165,210 171,195 159,195" fill="rgba(255,255,255,0.3)"/>
+    </svg>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+    </div>
+  </div>
+
+  <!-- SECTION 5: SPECIAL MARKINGS -->
+  <div class="content-block block-read">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">📖 Special Pavement Markings</h2>
+    </div>
+    <div class="block-body">
+      <p>Beyond basic lane lines, you'll encounter several special markings:</p>
+      <ul>
+        <li><strong>Crosswalks</strong> — White parallel lines or "zebra stripe" patterns at intersections. Pedestrians have the right of way here.</li>
+        <li><strong>Stop lines</strong> — Thick white lines before crosswalks. Stop behind this line — not on it or past it.</li>
+        <li><strong>Turn lanes</strong> — Arrows painted on the pavement showing which direction that lane goes (left turn, right turn, or straight only).</li>
+        <li><strong>Center left-turn lane</strong> — A lane bordered by solid yellow on the outside and broken yellow on the inside. Shared by traffic from both directions for left turns only. <strong>Never use it as a driving lane.</strong></li>
+        <li><strong>Bike lanes</strong> — Marked with a bicycle symbol and solid white line. Do not drive in bike lanes except when making a right turn (and only in the last 200 feet before the turn).</li>
+        <li><strong>HOV lanes (High Occupancy Vehicle)</strong> — Marked with a diamond symbol (◇) on the pavement and signs. Restricted to vehicles with 2 or more occupants during designated hours.</li>
+        <li><strong>Rumble strips</strong> — Textured or raised strips along the shoulder or center line that vibrate your vehicle to alert you if you drift out of your lane.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-block block-fact">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💡 Florida Fact</h2>
+    </div>
+    <div class="block-body">
+      <p>Florida's I-95 and I-595 in South Florida feature <strong>express lanes</strong> separated by double solid white lines and pylons. These lanes have restricted entry and exit points — you cannot cross the double white lines to enter or exit. Look for designated opening points marked with dashed white lines and signs. Entering or exiting outside these points is a traffic violation.</p>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENT -->
+  <div class="content-block block-achievement">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+      <h2 class="block-title">🏆 Achievement Unlocked: Signal Master</h2>
+    </div>
+    <div class="block-body">
+      <p>You now understand traffic signals and pavement markings — the two systems that keep intersections running. Every time you approach an intersection, you'll read the light, check the arrows, scan the crosswalk markings, and position yourself in the correct lane. That's driving smart.</p>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+    </div>
+  </div>
+
+  <!-- VOCABULARY -->
+  <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--binary-blue); margin-bottom: 16px;">📘 Key Vocabulary</h2>
+  <div class="vocab-grid">
+    <div class="vocab-card">
+      <div class="vocab-term">Protected Turn</div>
+      <div class="vocab-def">A turn made on a green arrow signal, where oncoming traffic is stopped by a red light.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Unprotected Turn</div>
+      <div class="vocab-def">A turn where you must yield to oncoming traffic — typically on a solid green or flashing yellow arrow.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Flashing Yellow Arrow</div>
+      <div class="vocab-def">A signal that permits turning, but requires you to yield to oncoming traffic and pedestrians.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Double Solid Yellow Lines</div>
+      <div class="vocab-def">Center line markings that prohibit passing in both directions. May be crossed only for turning into a driveway.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Center Left-Turn Lane</div>
+      <div class="vocab-def">A shared lane in the middle of the road used only for making left turns, bordered by solid and dashed yellow lines.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">HOV Lane</div>
+      <div class="vocab-def">High Occupancy Vehicle lane — restricted to vehicles with 2+ occupants, marked with a diamond symbol.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Crosswalk</div>
+      <div class="vocab-def">A marked area of roadway where pedestrians may cross. Drivers must yield to pedestrians in a crosswalk.</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">Rumble Strips</div>
+      <div class="vocab-def">Textured patterns on the road shoulder or center line that vibrate your car to alert you of lane departure.</div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="content-block block-think" style="margin-top: 32px;">
+    <div class="block-header">
+      <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 class="block-title">💭 Reflection</h2>
+    </div>
+    <div class="block-body">
+      <p><strong>Think about a busy intersection you know well.</strong> What types of signals does it have? Are there arrow signals for turning? What about pavement markings — can you picture the lane lines, crosswalks, and turn arrows?</p>
+      <p>Next time you're riding through that intersection, try to notice every signal and marking. Count the number of different signals you can see from one approach. You might be surprised at how much information the road is giving you — and how much drivers rely on it without even thinking about it.</p>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="lesson-2-1-reading.html" class="btn-nav btn-prev">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Lesson 2.1
+    </a>
+    <a href="lesson-2-2-activity.html" class="btn-nav btn-next">
+      Lesson 2.2 Activity
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </a>
+  </div>
+
+</main>
+</body>
+</html>
