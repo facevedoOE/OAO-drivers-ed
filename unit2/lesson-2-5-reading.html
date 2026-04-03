@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.5: Complex Intersections and Turning | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--font-display:'Wix Madefor Display',sans-serif;--font-body:'Wix Madefor Text',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--font-body);color:#1a1a2e;background:#f0f4f8;line-height:1.7;font-size:16px}
+.oao-header{background:linear-gradient(135deg,var(--binary-blue),#1a2a5e);padding:16px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}.oao-logo-area{display:flex;align-items:center;gap:12px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2);margin:0 4px}.oao-header-course{color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px}.oao-header-sub{color:rgba(255,255,255,.6);font-size:11px}.oao-xp-badge{background:linear-gradient(135deg,var(--gateway-gold),#e8a93e);color:var(--binary-blue);font-family:var(--font-display);font-weight:700;font-size:13px;padding:6px 14px;border-radius:20px;display:flex;align-items:center;gap:6px}.oao-xp-badge svg{width:16px;height:16px}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 24px}.breadcrumb-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:#64748b}.breadcrumb-inner a{color:var(--bitstream-blue);text-decoration:none}.breadcrumb-inner a:hover{text-decoration:underline}.breadcrumb-sep{width:14px;height:14px;stroke:#94a3b8;fill:none;stroke-width:2}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}
+.lesson-container{max-width:900px;margin:0 auto;padding:32px 24px 60px}
+.lesson-badge{display:inline-block;background:linear-gradient(135deg,var(--portal-purple),#8b45b8);color:#fff;font-family:var(--font-display);font-weight:700;font-size:12px;padding:5px 14px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}.lesson-title{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--binary-blue);line-height:1.2;margin-bottom:12px}.lesson-desc{font-size:18px;color:#475569;line-height:1.6;margin-bottom:28px}
+.hero-container{width:100%;border-radius:16px;overflow:hidden;margin-bottom:32px;box-shadow:0 4px 24px rgba(14,28,66,.12)}.hero-container svg{width:100%;height:auto;display:block}
+.standards-box{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-left:4px solid var(--portal-purple);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:28px}.standards-label{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--portal-purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}.standards-box p{font-size:14px;color:#4338ca}
+.objectives-box{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:32px;border:2px solid #e2e8f0}.objectives-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}.objectives-list{list-style:none;padding:0}.objectives-list li{padding:6px 0 6px 28px;position:relative;font-size:15px;color:#334155}.objectives-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--gamer-green);font-weight:700;font-size:16px}
+.content-block{border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}.block-read{background:#fff;border:1px solid #e2e8f0}.block-think{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa}.block-fact{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe}.block-achievement{background:linear-gradient(135deg,#fefce8,#fef3c7);border:1px solid #fde68a}
+.block-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}.block-icon{width:28px;height:28px;flex-shrink:0}.block-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue)}.block-body p{margin-bottom:12px}.block-body p:last-child{margin-bottom:0}.block-body ul,.block-body ol{margin:8px 0 12px 20px}.block-body li{margin-bottom:6px}.block-body strong{color:var(--binary-blue)}
+.section-divider{display:flex;align-items:center;justify-content:center;margin:36px 0;position:relative}.section-divider::before{content:'';position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,#cbd5e1,transparent)}.section-divider-icon{background:#f0f4f8;padding:0 16px;position:relative;z-index:1}.section-divider-icon svg{width:24px;height:24px;stroke:var(--bitstream-blue);fill:none;stroke-width:2}
+.diagram-container{background:#fff;border-radius:12px;padding:20px;margin:20px 0;border:2px solid #e2e8f0;overflow-x:auto}.diagram-container svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.comparison-card{background:#fff;border-radius:12px;padding:20px;border:2px solid #e2e8f0;text-align:center}.comparison-card.green-border{border-color:var(--gamer-green)}.comparison-card.orange-border{border-color:var(--odyssey-orange)}.comparison-title{font-family:var(--font-display);font-weight:700;font-size:16px;margin-bottom:8px}.comparison-card svg{margin:10px auto;display:block}.comparison-desc{font-size:14px;color:#475569;line-height:1.5}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:32px}.vocab-card{background:#fff;border-radius:10px;padding:16px;border-left:4px solid var(--bitstream-blue);box-shadow:0 2px 8px rgba(0,0,0,.05)}.vocab-term{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);margin-bottom:4px}.vocab-def{font-size:14px;color:#475569}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid #e2e8f0}.btn-nav{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:15px;transition:all .2s}.btn-prev{background:#fff;color:var(--binary-blue);border:2px solid #e2e8f0}.btn-prev:hover{background:#f1f5f9}.btn-next{background:linear-gradient(135deg,var(--bitstream-blue),#3ab0d4);color:#fff;border:none}.btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(85,200,232,.4)}.btn-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.animate-in{animation:fadeInUp .5s ease-out forwards;opacity:0}.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+@media(max-width:640px){.lesson-title{font-size:26px}.lesson-desc{font-size:16px}.comparison-grid{grid-template-columns:1fr}.vocab-grid{grid-template-columns:1fr}.oao-xp-badge{font-size:11px;padding:4px 10px}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg>
+<div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div>
+<div class="oao-xp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>300 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner">
+<a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<a href="#">Unit 2: The Language of the Road</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<span class="current">Lesson 2.5: Complex Intersections &amp; Turning</span>
+</div></nav>
+
+<main class="lesson-container">
+
+<div class="animate-in">
+  <div class="lesson-badge">UNIT 2 • LESSON 5</div>
+  <h1 class="lesson-title">Complex Intersections and Turning</h1>
+  <p class="lesson-desc">Turning at an intersection isn't just "signal and go." Protected turns, multi-lane turns, median openings, and jughandles each have their own rules. Master them here, and the real road will feel much simpler.</p>
+</div>
+
+<!-- HERO -->
+<div class="hero-container animate-in delay-1">
+  <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87CEEB"/><stop offset="100%" stop-color="#c9e8f7"/></linearGradient></defs>
+    <rect width="900" height="380" fill="url(#sky5)"/>
+    <rect x="0" y="220" width="900" height="160" fill="#5a9e4b"/>
+    <!-- Multi-lane intersection -->
+    <rect x="0" y="240" width="900" height="110" fill="#555"/>
+    <rect x="350" y="120" width="200" height="260" fill="#555"/>
+    <!-- Lane markings - horizontal -->
+    <line x1="0" y1="270" x2="350" y2="270" stroke="#fff" stroke-width="2" stroke-dasharray="12,8"/>
+    <line x1="550" y1="270" x2="900" y2="270" stroke="#fff" stroke-width="2" stroke-dasharray="12,8"/>
+    <line x1="0" y1="295" x2="350" y2="295" stroke="#ffd700" stroke-width="2.5"/>
+    <line x1="550" y1="295" x2="900" y2="295" stroke="#ffd700" stroke-width="2.5"/>
+    <line x1="0" y1="298" x2="350" y2="298" stroke="#ffd700" stroke-width="2.5"/>
+    <line x1="550" y1="298" x2="900" y2="298" stroke="#ffd700" stroke-width="2.5"/>
+    <line x1="0" y1="320" x2="350" y2="320" stroke="#fff" stroke-width="2" stroke-dasharray="12,8"/>
+    <line x1="550" y1="320" x2="900" y2="320" stroke="#fff" stroke-width="2" stroke-dasharray="12,8"/>
+    <!-- Turn arrows on pavement -->
+    <polygon points="270,262 280,252 280,257 290,257 290,267 280,267 280,272" fill="rgba(255,255,255,.4)" transform="rotate(-90 280 262)"/>
+    <path d="M310,280 Q310,262 295,262" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3"/>
+    <polygon points="298,258 290,262 298,266" fill="rgba(255,255,255,.4)"/>
+    <!-- Traffic light -->
+    <rect x="345" y="160" width="6" height="80" fill="#666"/>
+    <rect x="320" y="130" width="36" height="32" rx="5" fill="#222"/>
+    <circle cx="330" cy="140" r="5" fill="#330000"/><circle cx="338" cy="140" r="5" fill="#330000"/><circle cx="346" cy="140" r="5" fill="#76C043"/>
+    <circle cx="330" cy="154" r="5" fill="#76C043"/><circle cx="330" cy="154" r="8" fill="rgba(118,192,67,.2)"/>
+    <!-- Car making left turn -->
+    <rect x="375" y="325" width="24" height="42" rx="5" fill="#3b82f6"/>
+    <path d="M387,325 Q387,280 430,265" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4"/>
+    <polygon points="427,260 435,265 427,270" fill="#3b82f6"/>
+    <!-- Title -->
+    <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,.85)"/>
+    <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">Complex Intersections: Turning with Confidence</text>
+  </svg>
+</div>
+
+<div class="standards-box animate-in delay-2">
+  <div class="standards-label">Florida Standards Alignment</div>
+  <p>Demonstrate proper turning techniques at complex intersections including protected and unprotected turns, multi-lane turns, and median openings, using appropriate signals and checking blind spots.</p>
+</div>
+
+<div class="objectives-box animate-in delay-3">
+  <div class="objectives-title"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>Learning Objectives</div>
+  <ul class="objectives-list">
+    <li>Distinguish between protected and unprotected left turns</li>
+    <li>Know when right turns on red are permitted or prohibited</li>
+    <li>Execute multi-lane turns correctly, staying in the proper lane</li>
+    <li>Navigate median openings and jughandle turns</li>
+    <li>Use turn signals and check blind spots before every turn</li>
+  </ul>
+</div>
+
+<!-- PROTECTED VS UNPROTECTED -->
+<div class="content-block block-read animate-in delay-4">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Protected vs. Unprotected Left Turns</h2>
+  </div>
+  <div class="block-body">
+    <p>Left turns are the most complex and dangerous maneuver at an intersection because you must cross oncoming traffic. There are two types:</p>
+    <p><strong>Protected left turn:</strong> You have a <strong>green arrow</strong> pointing left. Oncoming traffic has a red light. You can turn without yielding — but always check for pedestrians in the crosswalk.</p>
+    <p><strong>Unprotected left turn:</strong> You have a <strong>solid green light</strong> (or flashing yellow arrow) but no green arrow. Oncoming traffic also has a green light. You must <strong>yield to all oncoming traffic and pedestrians</strong> before turning. Wait in the intersection (past the stop line) for a gap, and complete your turn when safe — or when the light turns yellow/red and oncoming traffic stops.</p>
+    <p><strong>Key safety rules for left turns:</strong></p>
+    <ul>
+      <li>Never assume oncoming traffic will stop — verify before turning</li>
+      <li>Check for vehicles hidden behind oncoming cars (motorcycles, bikes)</li>
+      <li>Do not turn your wheels to the left while waiting — if you're rear-ended with your wheels turned, you'll be pushed into oncoming traffic</li>
+      <li>If you enter the intersection on green but can't complete the turn, finish it when the light changes — don't back up</li>
+    </ul>
+  </div>
+</div>
+
+<!-- COMPARISON CARDS -->
+<div class="comparison-grid">
+  <div class="comparison-card green-border">
+    <div class="comparison-title" style="color:var(--gamer-green)">Protected Left Turn</div>
+    <svg width="80" height="100" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="5" width="50" height="90" rx="8" fill="#222"/>
+      <circle cx="40" cy="22" r="10" fill="#330000"/>
+      <circle cx="40" cy="48" r="10" fill="#332200"/>
+      <circle cx="40" cy="74" r="10" fill="#003300"/>
+      <polygon points="40,15 50,28 45,28 45,38 35,38 35,28 30,28" fill="#76C043" transform="rotate(-90 40 26)"/>
+    </svg>
+    <div class="comparison-desc"><strong>Green arrow = GO.</strong> Oncoming traffic is stopped. Turn safely. Still watch for pedestrians.</div>
+  </div>
+  <div class="comparison-card orange-border">
+    <div class="comparison-title" style="color:var(--odyssey-orange)">Unprotected Left Turn</div>
+    <svg width="80" height="100" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="5" width="50" height="90" rx="8" fill="#222"/>
+      <circle cx="40" cy="22" r="10" fill="#330000"/>
+      <circle cx="40" cy="48" r="10" fill="#332200"/>
+      <circle cx="40" cy="74" r="10" fill="#76C043"/>
+    </svg>
+    <div class="comparison-desc"><strong>Solid green = YIELD.</strong> Oncoming traffic also has green. Wait for a safe gap before turning.</div>
+  </div>
+</div>
+
+<div class="content-block block-think">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">🤔 Think About It</h2>
+  </div>
+  <div class="block-body">
+    <p>You're waiting to make an unprotected left turn. The light turns yellow, and there's one more oncoming car approaching. Should you quickly turn before they get there? <em>No — that's one of the most common causes of left-turn crashes. Wait for the oncoming car to clear or stop. If the light turns red while you're in the intersection, you may then complete your turn safely.</em></p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- RIGHT TURN ON RED -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Right Turn on Red</h2>
+  </div>
+  <div class="block-body">
+    <p>In Florida, you may turn right on a <strong>steady red circular signal</strong> after coming to a <strong>complete stop</strong>, unless:</p>
+    <ul>
+      <li>A <strong>"No Turn on Red"</strong> sign is posted</li>
+      <li>A <strong>red arrow</strong> is displayed (red arrows prohibit all turning)</li>
+      <li>Pedestrians are in the crosswalk</li>
+      <li>You cannot see clearly in both directions</li>
+    </ul>
+    <p><strong>The complete stop is not optional.</strong> Many drivers roll through right-on-red turns without fully stopping — this is a violation and a common cause of pedestrian injuries. Stop completely, check left-right-left for traffic and pedestrians, then turn when safe.</p>
+    <p><strong>Left turn on red:</strong> In Florida, you may also turn left on red <strong>only</strong> when turning from a <strong>one-way street onto another one-way street</strong>, and only after a complete stop.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- MULTI-LANE TURNS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Multi-Lane Turns</h2>
+  </div>
+  <div class="block-body">
+    <p>At larger intersections, multiple lanes may be designated for turning. The critical rule: <strong>finish your turn in the same lane you started in.</strong></p>
+    <ul>
+      <li><strong>Left turn from the inner lane</strong> → Turn into the inner (leftmost) lane of the cross street</li>
+      <li><strong>Left turn from the outer turn lane</strong> → Turn into the next lane over</li>
+      <li><strong>Right turn</strong> → Turn into the rightmost lane of the cross street (unless lane markings indicate otherwise)</li>
+    </ul>
+    <p><strong>Never change lanes during a turn.</strong> Complete the turn first, check your mirrors and blind spots, signal, and then change lanes when it's safe.</p>
+  </div>
+</div>
+
+<!-- MULTI-LANE TURN DIAGRAM -->
+<div class="diagram-container">
+  <svg viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg">
+    <rect width="450" height="350" fill="#5a9e4b" rx="8"/>
+    <!-- Vertical road (4 lanes) -->
+    <rect x="155" y="0" width="140" height="350" fill="#555"/>
+    <line x1="195" y1="0" x2="195" y2="120" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="225" y1="0" x2="225" y2="120" stroke="#ffd700" stroke-width="2"/>
+    <line x1="228" y1="0" x2="228" y2="120" stroke="#ffd700" stroke-width="2"/>
+    <line x1="260" y1="0" x2="260" y2="120" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="195" y1="230" x2="195" y2="350" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="225" y1="230" x2="225" y2="350" stroke="#ffd700" stroke-width="2"/>
+    <line x1="228" y1="230" x2="228" y2="350" stroke="#ffd700" stroke-width="2"/>
+    <line x1="260" y1="230" x2="260" y2="350" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <!-- Horizontal road -->
+    <rect x="0" y="120" width="450" height="110" fill="#555"/>
+    <line x1="0" y1="155" x2="155" y2="155" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="0" y1="175" x2="155" y2="175" stroke="#ffd700" stroke-width="2"/>
+    <line x1="0" y1="178" x2="155" y2="178" stroke="#ffd700" stroke-width="2"/>
+    <line x1="0" y1="195" x2="155" y2="195" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="295" y1="155" x2="450" y2="155" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <line x1="295" y1="175" x2="450" y2="175" stroke="#ffd700" stroke-width="2"/>
+    <line x1="295" y1="178" x2="450" y2="178" stroke="#ffd700" stroke-width="2"/>
+    <line x1="295" y1="195" x2="450" y2="195" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <!-- LEFT TURN PATH (correct - inner to inner) -->
+    <path d="M175,280 Q175,175 100,145" fill="none" stroke="#76C043" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="105,140 95,145 105,150" fill="#76C043"/>
+    <text x="120" y="270" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="10" fill="#76C043">LEFT TURN:</text>
+    <text x="120" y="282" font-family="'Wix Madefor Display',sans-serif" font-weight="600" font-size="9" fill="#76C043">Inner → Inner ✓</text>
+    <!-- RIGHT TURN PATH (correct - right to right) -->
+    <path d="M280,280 Q280,210 350,195" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="347,190 355,195 347,200" fill="#3b82f6"/>
+    <text x="305" y="270" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="10" fill="#3b82f6">RIGHT TURN:</text>
+    <text x="305" y="282" font-family="'Wix Madefor Display',sans-serif" font-weight="600" font-size="9" fill="#3b82f6">Right → Right ✓</text>
+    <!-- Label -->
+    <text x="225" y="340" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="11" fill="#fff">Stay in your lane throughout the entire turn</text>
+  </svg>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- MEDIAN OPENINGS & JUGHANDLES -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Median Openings and Jughandle Turns</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Median openings</strong> (also called median turnarounds or U-turn slots) are breaks in a divided highway's center median that allow you to make a U-turn or left turn. They're common on Florida's multi-lane highways. Rules for median openings:</p>
+    <ul>
+      <li>Yield to oncoming traffic — traffic on the through lanes always has the right-of-way</li>
+      <li>Do not block the opening while waiting for a gap</li>
+      <li>Signal your intent before entering the median</li>
+      <li>Some openings allow U-turns; others are signed for left turns only. Read the signs.</li>
+    </ul>
+    <p><strong>Jughandle turns</strong> are special ramps found in some areas where you exit to the right in order to turn left. Instead of making a direct left across traffic, you take a ramp that loops you around to cross at a signal. Follow the directional signs — they'll guide you through the maneuver.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- SIGNALS AND BLIND SPOTS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Using Signals and Checking Blind Spots</h2>
+  </div>
+  <div class="block-body">
+    <p>Every turn — no matter how simple — requires preparation. Follow this sequence <strong>every time</strong>:</p>
+    <ol>
+      <li><strong>Signal early</strong> — Activate your turn signal at least <strong>100 feet before the turn</strong> (Florida law). On highways, signal even earlier.</li>
+      <li><strong>Check mirrors</strong> — Rearview first, then side mirror on the direction you're turning.</li>
+      <li><strong>Check blind spot</strong> — Quick head check (glance over your shoulder) on the side you're turning toward. Mirrors can't show everything.</li>
+      <li><strong>Position your vehicle</strong> — Move into the correct turn lane. For left turns, use the leftmost lane. For right turns, use the rightmost lane.</li>
+      <li><strong>Reduce speed</strong> — Slow down before the turn, not during it.</li>
+      <li><strong>Scan the intersection</strong> — Check for pedestrians, cyclists, oncoming traffic, and cross traffic.</li>
+      <li><strong>Execute the turn</strong> — Turn smoothly, staying in your lane. Accelerate gently after completing the turn.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="content-block block-fact">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 Florida Fact</h2>
+  </div>
+  <div class="block-body">
+    <p>Florida law (F.S. 316.155) requires you to signal continuously for <strong>at least the last 100 feet</strong> before turning. Failing to signal is a citable offense. At highway speeds, 100 feet passes in about one second, so signal well in advance. Your signal communicates your intentions to every driver, pedestrian, and cyclist around you — it's one of the simplest ways to prevent a crash.</p>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT -->
+<div class="content-block block-achievement">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+    <h2 class="block-title">🏆 Achievement Unlocked: Turn Tactician</h2>
+  </div>
+  <div class="block-body">
+    <p>You've learned the most complex turning maneuvers on the road. Protected and unprotected turns, multi-lane positioning, median openings, and the 7-step turn sequence — these skills will serve you every single day behind the wheel.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- VOCABULARY -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">📘 Key Vocabulary</h2>
+<div class="vocab-grid">
+  <div class="vocab-card"><div class="vocab-term">Protected Left Turn</div><div class="vocab-def">A left turn made on a green arrow signal, where oncoming traffic is stopped by a red light.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Unprotected Left Turn</div><div class="vocab-def">A left turn made on a solid green or flashing yellow arrow, where you must yield to oncoming traffic.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Multi-Lane Turn</div><div class="vocab-def">A turn at an intersection with multiple designated turn lanes. Stay in your lane throughout the turn.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Median Opening</div><div class="vocab-def">A break in a divided highway median allowing U-turns or left turns. Yield to through traffic.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Jughandle</div><div class="vocab-def">A ramp that exits to the right and loops around, allowing you to cross traffic at a signal instead of turning left directly.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Blind Spot</div><div class="vocab-def">The area beside and slightly behind your vehicle that cannot be seen in your mirrors. Always do a head check before turning or changing lanes.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Head Check</div><div class="vocab-def">A quick glance over your shoulder to verify no vehicle, cyclist, or pedestrian is in your blind spot.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Turn Signal Law (Florida)</div><div class="vocab-def">Florida requires continuous signaling for at least 100 feet before a turn. Failing to signal is a citable offense.</div></div>
+</div>
+
+<!-- REFLECTION -->
+<div class="content-block block-think" style="margin-top:32px">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💭 Reflection</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Picture a busy intersection you know.</strong> Does it have a dedicated left-turn arrow, or do left-turners have to wait for a gap? How many lanes are there? Are there median openings nearby?</p>
+    <p>Next time you're a passenger, watch how the driver handles turns. Do they signal early? Do they check their blind spot? Do they stay in their lane during the turn? These small habits make the difference between a smooth, safe driver and a dangerous one.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="lesson-2-4-reading.html" class="btn-nav btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Lesson 2.4</a>
+  <a href="lesson-2-5-activity.html" class="btn-nav btn-next">Lesson 2.5 Activity<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+</div>
+
+</main>
+</body>
+</html>
