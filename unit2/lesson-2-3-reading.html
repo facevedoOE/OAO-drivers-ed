@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.3: Construction Zones and School Zones | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--font-display:'Wix Madefor Display',sans-serif;--font-body:'Wix Madefor Text',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);color:#1a1a2e;background:#f0f4f8;line-height:1.7;font-size:16px}
+.oao-header{background:linear-gradient(135deg,var(--binary-blue) 0%,#1a2a5e 100%);padding:16px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(14,28,66,.3)}
+.oao-header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.oao-logo-area{display:flex;align-items:center;gap:12px}
+.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2);margin:0 4px}
+.oao-header-course{color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px}
+.oao-header-sub{color:rgba(255,255,255,.6);font-size:11px}
+.oao-xp-badge{background:linear-gradient(135deg,var(--gateway-gold),#e8a93e);color:var(--binary-blue);font-family:var(--font-display);font-weight:700;font-size:13px;padding:6px 14px;border-radius:20px;display:flex;align-items:center;gap:6px}
+.oao-xp-badge svg{width:16px;height:16px}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 24px}
+.breadcrumb-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:#64748b}
+.breadcrumb-inner a{color:var(--bitstream-blue);text-decoration:none}
+.breadcrumb-inner a:hover{text-decoration:underline}
+.breadcrumb-sep{width:14px;height:14px;stroke:#94a3b8;fill:none;stroke-width:2}
+.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}
+.lesson-container{max-width:900px;margin:0 auto;padding:32px 24px 60px}
+.lesson-badge{display:inline-block;background:linear-gradient(135deg,var(--portal-purple),#8b45b8);color:#fff;font-family:var(--font-display);font-weight:700;font-size:12px;padding:5px 14px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.lesson-title{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--binary-blue);line-height:1.2;margin-bottom:12px}
+.lesson-desc{font-size:18px;color:#475569;line-height:1.6;margin-bottom:28px}
+.hero-container{width:100%;border-radius:16px;overflow:hidden;margin-bottom:32px;box-shadow:0 4px 24px rgba(14,28,66,.12)}
+.hero-container svg{width:100%;height:auto;display:block}
+.standards-box{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-left:4px solid var(--portal-purple);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:28px}
+.standards-label{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--portal-purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.standards-box p{font-size:14px;color:#4338ca}
+.objectives-box{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:32px;border:2px solid #e2e8f0}
+.objectives-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.objectives-list{list-style:none;padding:0}
+.objectives-list li{padding:6px 0 6px 28px;position:relative;font-size:15px;color:#334155}
+.objectives-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--gamer-green);font-weight:700;font-size:16px}
+.content-block{border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.block-read{background:#fff;border:1px solid #e2e8f0}
+.block-think{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa}
+.block-fact{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe}
+.block-achievement{background:linear-gradient(135deg,#fefce8,#fef3c7);border:1px solid #fde68a}
+.block-warning{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5}
+.block-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.block-icon{width:28px;height:28px;flex-shrink:0}
+.block-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue)}
+.block-body p{margin-bottom:12px}
+.block-body p:last-child{margin-bottom:0}
+.block-body ul,.block-body ol{margin:8px 0 12px 20px}
+.block-body li{margin-bottom:6px}
+.block-body strong{color:var(--binary-blue)}
+.section-divider{display:flex;align-items:center;justify-content:center;margin:36px 0;position:relative}
+.section-divider::before{content:'';position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,#cbd5e1,transparent)}
+.section-divider-icon{background:#f0f4f8;padding:0 16px;position:relative;z-index:1}
+.section-divider-icon svg{width:24px;height:24px;stroke:var(--bitstream-blue);fill:none;stroke-width:2}
+.sign-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;margin:16px 0}
+.sign-card{background:#fff;border-radius:12px;padding:16px;text-align:center;border:2px solid #e2e8f0;transition:transform .2s,box-shadow .2s}
+.sign-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.sign-card svg{width:72px;height:72px;margin-bottom:8px}
+.sign-card .sign-name{font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--binary-blue)}
+.flagger-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:20px 0}
+.flagger-card{background:#fff;border-radius:12px;padding:20px;text-align:center;border:2px solid #e2e8f0;flex:0 1 200px;min-width:160px}
+.flagger-card svg{margin-bottom:10px}
+.flagger-label{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--binary-blue);margin-bottom:4px}
+.flagger-desc{font-size:13px;color:#475569;line-height:1.4}
+.penalty-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.penalty-table th{background:var(--binary-blue);color:#fff;padding:10px 14px;text-align:left;font-family:var(--font-display);font-weight:600}
+.penalty-table td{padding:10px 14px;border-bottom:1px solid #e2e8f0}
+.penalty-table tr:nth-child(even){background:#f8fafc}
+.penalty-table .highlight{background:#fef3c7;font-weight:600}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:32px}
+.vocab-card{background:#fff;border-radius:10px;padding:16px;border-left:4px solid var(--bitstream-blue);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.vocab-term{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);margin-bottom:4px}
+.vocab-def{font-size:14px;color:#475569}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid #e2e8f0}
+.btn-nav{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:15px;transition:all .2s}
+.btn-prev{background:#fff;color:var(--binary-blue);border:2px solid #e2e8f0}
+.btn-prev:hover{background:#f1f5f9;border-color:#cbd5e1}
+.btn-next{background:linear-gradient(135deg,var(--bitstream-blue),#3ab0d4);color:#fff;border:none}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeInUp .5s ease-out forwards;opacity:0}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+@media(max-width:640px){.lesson-title{font-size:26px}.lesson-desc{font-size:16px}.sign-gallery{grid-template-columns:repeat(2,1fr)}.flagger-row{gap:14px}.vocab-grid{grid-template-columns:1fr}.oao-xp-badge{font-size:11px;padding:4px 10px}.penalty-table{font-size:12px}.penalty-table th,.penalty-table td{padding:8px 10px}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg>
+<div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div>
+<div class="oao-xp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>300 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner">
+<a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<a href="#">Unit 2: The Language of the Road</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<span class="current">Lesson 2.3: Construction &amp; School Zones</span>
+</div></nav>
+
+<main class="lesson-container">
+
+<div class="animate-in">
+  <div class="lesson-badge">UNIT 2 • LESSON 3</div>
+  <h1 class="lesson-title">Construction Zones and School Zones</h1>
+  <p class="lesson-desc">Two places demand your absolute best driving: where people are working on the road and where children are near it. The fines are doubled, the risks are real, and the rules are non-negotiable.</p>
+</div>
+
+<!-- HERO -->
+<div class="hero-container animate-in delay-1">
+  <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87CEEB"/><stop offset="100%" stop-color="#c9e8f7"/></linearGradient>
+    </defs>
+    <rect width="900" height="380" fill="url(#sky3)"/>
+    <rect x="0" y="240" width="900" height="140" fill="#5a9e4b"/>
+    <!-- Road -->
+    <rect x="0" y="260" width="900" height="100" fill="#555"/>
+    <line x1="0" y1="310" x2="900" y2="310" stroke="#ffd700" stroke-width="3" stroke-dasharray="15,10"/>
+    <!-- Construction zone section (left half) -->
+    <rect x="0" y="258" width="420" height="104" fill="rgba(247,143,30,0.12)"/>
+    <!-- Orange cones -->
+    <polygon points="160,295 155,310 165,310" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="153" y="310" width="14" height="4" fill="#F78F1E"/>
+    <polygon points="200,295 195,310 205,310" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="193" y="310" width="14" height="4" fill="#F78F1E"/>
+    <polygon points="240,295 235,310 245,310" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="233" y="310" width="14" height="4" fill="#F78F1E"/>
+    <polygon points="280,295 275,310 285,310" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="273" y="310" width="14" height="4" fill="#F78F1E"/>
+    <!-- Construction sign -->
+    <rect x="60" y="190" width="4" height="70" fill="#888"/>
+    <rect x="30" y="158" width="64" height="34" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2"/>
+    <text x="62" y="172" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">ROAD</text>
+    <text x="62" y="183" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">WORK</text>
+    <!-- Flagger person -->
+    <circle cx="340" cy="262" r="8" fill="#F78F1E"/>
+    <line x1="340" y1="270" x2="340" y2="295" stroke="#F78F1E" stroke-width="3"/>
+    <line x1="325" y1="278" x2="355" y2="278" stroke="#F78F1E" stroke-width="3"/>
+    <line x1="340" y1="295" x2="330" y2="315" stroke="#F78F1E" stroke-width="3"/>
+    <line x1="340" y1="295" x2="350" y2="315" stroke="#F78F1E" stroke-width="3"/>
+    <!-- Stop/slow paddle -->
+    <line x1="355" y1="265" x2="375" y2="250" stroke="#888" stroke-width="2"/>
+    <rect x="370" y="238" width="28" height="22" rx="2" fill="#cc0000"/><text x="384" y="253" text-anchor="middle" font-family="Arial" font-weight="700" font-size="8" fill="#fff">STOP</text>
+    <!-- School zone section (right half) -->
+    <rect x="480" y="258" width="420" height="104" fill="rgba(118,192,67,0.08)"/>
+    <!-- School zone sign -->
+    <rect x="540" y="190" width="4" height="70" fill="#888"/>
+    <path d="M510,150 L542,130 L574,150 L574,190 L510,190Z" fill="#b8e86c" stroke="#111" stroke-width="2"/>
+    <text x="542" y="165" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">SCHOOL</text>
+    <text x="542" y="175" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">ZONE</text>
+    <text x="542" y="186" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#111">20</text>
+    <!-- Crosswalk stripes -->
+    <rect x="620" y="290" width="18" height="5" fill="#fff" rx="1"/>
+    <rect x="645" y="290" width="18" height="5" fill="#fff" rx="1"/>
+    <rect x="670" y="290" width="18" height="5" fill="#fff" rx="1"/>
+    <rect x="695" y="290" width="18" height="5" fill="#fff" rx="1"/>
+    <rect x="720" y="290" width="18" height="5" fill="#fff" rx="1"/>
+    <!-- Children figures -->
+    <circle cx="660" cy="270" r="5" fill="#333"/><line x1="660" y1="275" x2="660" y2="288" stroke="#333" stroke-width="2"/>
+    <line x1="653" y1="280" x2="667" y2="280" stroke="#333" stroke-width="2"/>
+    <circle cx="680" cy="272" r="4" fill="#333"/><line x1="680" y1="276" x2="680" y2="286" stroke="#333" stroke-width="1.5"/>
+    <!-- Title -->
+    <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,.85)"/>
+    <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">Construction Zones &amp; School Zones: Extra Care Required</text>
+  </svg>
+</div>
+
+<div class="standards-box animate-in delay-2">
+  <div class="standards-label">Florida Standards Alignment</div>
+  <p>Describe the laws, signs, and safe driving behaviors required in construction zones and school zones, including Florida-specific penalties for violations.</p>
+</div>
+
+<div class="objectives-box animate-in delay-3">
+  <div class="objectives-title">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    Learning Objectives
+  </div>
+  <ul class="objectives-list">
+    <li>Identify construction zone signs by their color and meaning</li>
+    <li>Explain the correct response to flagger signals</li>
+    <li>Navigate lane shifts and work zone merging safely</li>
+    <li>State Florida school zone speed limits and active hours</li>
+    <li>Describe the penalties for violations in construction and school zones</li>
+  </ul>
+</div>
+
+<!-- CONSTRUCTION ZONES -->
+<div class="content-block block-read animate-in delay-4">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Construction Zone Signs: Orange Means Caution</h2>
+  </div>
+  <div class="block-body">
+    <p>Construction zones (also called work zones) are temporary areas where road work is taking place. They're marked with <strong>orange signs and devices</strong> — a color you won't confuse with any other sign category. When you see orange, you should immediately slow down and increase your attention.</p>
+    <p>Common construction zone signs include:</p>
+    <ul>
+      <li><strong>Road Work Ahead</strong> — General warning that construction is coming</li>
+      <li><strong>Flagger Ahead</strong> — A worker will be directing traffic with hand signals</li>
+      <li><strong>Lane Closed</strong> — One or more lanes are blocked; prepare to merge</li>
+      <li><strong>Detour</strong> — Follow the alternate route indicated</li>
+      <li><strong>Road Closed</strong> — You cannot proceed; turn around or follow detour</li>
+      <li><strong>Speed Limit (work zone)</strong> — Reduced speed that's enforceable even when workers aren't visible</li>
+      <li><strong>End Road Work</strong> — You're leaving the construction zone; resume normal speed</li>
+    </ul>
+    <p>In addition to signs, work zones use <strong>traffic control devices</strong>: orange cones, barrels, barricades, flashing arrow panels, and temporary lane markings.</p>
+  </div>
+</div>
+
+<!-- CONSTRUCTION SIGN GALLERY -->
+<div class="sign-gallery">
+  <div class="sign-card">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="15" width="50" height="50" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+      <text x="40" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7" fill="#111">ROAD</text>
+      <text x="40" y="47" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7" fill="#111">WORK</text>
+    </svg>
+    <div class="sign-name">Road Work</div>
+  </div>
+  <div class="sign-card">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="15" width="50" height="50" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+      <circle cx="40" cy="32" r="4" fill="#111"/>
+      <line x1="40" y1="36" x2="40" y2="50" stroke="#111" stroke-width="2"/>
+      <line x1="32" y1="42" x2="48" y2="42" stroke="#111" stroke-width="2"/>
+      <line x1="48" y1="35" x2="55" y2="28" stroke="#111" stroke-width="2"/>
+    </svg>
+    <div class="sign-name">Flagger Ahead</div>
+  </div>
+  <div class="sign-card">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="15" width="50" height="50" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2.5" transform="rotate(45 40 40)"/>
+      <text x="40" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="6" fill="#111">RIGHT</text>
+      <text x="40" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="6" fill="#111">LANE</text>
+      <text x="40" y="54" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="6" fill="#111">CLOSED</text>
+    </svg>
+    <div class="sign-name">Lane Closed</div>
+  </div>
+  <div class="sign-card">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="20" width="60" height="40" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2.5"/>
+      <text x="40" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8" fill="#111">DETOUR</text>
+      <polygon points="58,44 52,38 52,42 30,42 30,46 52,46 52,50" fill="#111"/>
+    </svg>
+    <div class="sign-name">Detour</div>
+  </div>
+  <div class="sign-card">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="15" width="60" height="50" rx="3" fill="#F78F1E" stroke="#111" stroke-width="2.5"/>
+      <text x="40" y="34" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7" fill="#111">SPEED</text>
+      <text x="40" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7" fill="#111">LIMIT</text>
+      <text x="40" y="58" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#111">25</text>
+    </svg>
+    <div class="sign-name">Work Zone Speed</div>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- FLAGGER SIGNALS -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Flagger Signals: Obey the Worker</h2>
+  </div>
+  <div class="block-body">
+    <p>Flaggers are workers who direct traffic through construction zones using paddles and hand signals. <strong>Their instructions override traffic signs and signals.</strong> Disobeying a flagger is a traffic violation. Here are the three main signals:</p>
+  </div>
+</div>
+
+<div class="flagger-row">
+  <div class="flagger-card">
+    <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="20" r="10" fill="#F78F1E"/>
+      <line x1="40" y1="30" x2="40" y2="70" stroke="#F78F1E" stroke-width="4"/>
+      <line x1="40" y1="45" x2="20" y2="35" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="45" x2="60" y2="25" stroke="#888" stroke-width="2"/>
+      <rect x="56" y="12" width="18" height="14" rx="2" fill="#cc0000"/>
+      <text x="65" y="22" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6" fill="#fff">STOP</text>
+      <line x1="40" y1="70" x2="30" y2="95" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="70" x2="50" y2="95" stroke="#F78F1E" stroke-width="3"/>
+    </svg>
+    <div class="flagger-label">STOP</div>
+    <div class="flagger-desc">Paddle faces you with "STOP" — come to a complete stop and wait.</div>
+  </div>
+  <div class="flagger-card">
+    <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="20" r="10" fill="#F78F1E"/>
+      <line x1="40" y1="30" x2="40" y2="70" stroke="#F78F1E" stroke-width="4"/>
+      <line x1="40" y1="45" x2="20" y2="35" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="45" x2="60" y2="25" stroke="#888" stroke-width="2"/>
+      <rect x="56" y="12" width="18" height="14" rx="2" fill="#F78F1E"/>
+      <text x="65" y="22" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#111">SLOW</text>
+      <line x1="40" y1="70" x2="30" y2="95" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="70" x2="50" y2="95" stroke="#F78F1E" stroke-width="3"/>
+    </svg>
+    <div class="flagger-label">SLOW</div>
+    <div class="flagger-desc">Paddle shows "SLOW" — proceed at reduced speed through the zone.</div>
+  </div>
+  <div class="flagger-card">
+    <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="20" r="10" fill="#F78F1E"/>
+      <line x1="40" y1="30" x2="40" y2="70" stroke="#F78F1E" stroke-width="4"/>
+      <line x1="40" y1="45" x2="20" y2="55" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="45" x2="60" y2="35" stroke="#F78F1E" stroke-width="3"/>
+      <path d="M58 30 Q65 30 65 35" stroke="#F78F1E" stroke-width="2" fill="none"/>
+      <line x1="40" y1="70" x2="30" y2="95" stroke="#F78F1E" stroke-width="3"/>
+      <line x1="40" y1="70" x2="50" y2="95" stroke="#F78F1E" stroke-width="3"/>
+    </svg>
+    <div class="flagger-label">WAVING / ARM MOTION</div>
+    <div class="flagger-desc">Flagger waves you forward — proceed slowly and carefully through the zone.</div>
+  </div>
+</div>
+
+<div class="content-block block-think">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">🤔 Think About It</h2>
+  </div>
+  <div class="block-body">
+    <p>A flagger holds up a STOP paddle, but you can see the road ahead is clear. Should you go anyway? <em>Absolutely not. Flagger instructions override your own judgment. There may be equipment, workers, or hazards you can't see. Always obey the flagger — it's the law, and it protects lives.</em></p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- LANE SHIFTS AND MERGING -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Lane Shifts and Work Zone Merging</h2>
+  </div>
+  <div class="block-body">
+    <p>Construction often requires <strong>lane shifts</strong> — where your lane curves around the work area using temporary markings and barriers. Follow these safely:</p>
+    <ul>
+      <li><strong>Slow down before the shift</strong> — not during it</li>
+      <li><strong>Follow the temporary markings</strong> (often orange or white) and lane guides</li>
+      <li><strong>Keep a larger following distance</strong> — reduced lanes mean less room for error</li>
+      <li><strong>Don't change lanes in the work zone</strong> unless directed</li>
+      <li><strong>Merge early when a lane is closing</strong> — don't race to the front and force in ("zipper merge" is appropriate only at the merge point when traffic is slow)</li>
+    </ul>
+    <p><strong>Key safety tip:</strong> Rear-end crashes are the most common type of work zone collision. The #1 cause? Following too closely. Increase your following distance to at least 4 seconds in a construction zone.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- SCHOOL ZONES -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 School Zones: Protecting Children</h2>
+  </div>
+  <div class="block-body">
+    <p>School zones are among the most strictly enforced areas on Florida roads. Children are unpredictable — they may run into the street, cross without looking, or not understand traffic rules. As a driver, you must provide the highest level of caution in these areas.</p>
+    <p><strong>Florida school zone rules:</strong></p>
+    <ul>
+      <li><strong>Speed limit: 15–20 mph</strong> in most Florida school zones (check the posted sign for the exact speed)</li>
+      <li><strong>Active times:</strong> School zone speed limits are enforced during posted hours — typically <strong>30 minutes before and after school</strong>, or when the flashing lights on the school zone sign are activated</li>
+      <li><strong>Flashing beacons:</strong> Many Florida school zone signs have flashing yellow lights that indicate the speed limit is active</li>
+      <li><strong>School buses:</strong> If a school bus displays its red flashing lights and stop arm, you must stop — on <em>both</em> sides of the road unless separated by a raised median</li>
+      <li><strong>Crosswalks:</strong> Always yield to children in crosswalks, and watch for crossing guards</li>
+    </ul>
+  </div>
+</div>
+
+<div class="content-block block-fact">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 Florida Fact: School Bus Law</h2>
+  </div>
+  <div class="block-body">
+    <p>In Florida, when a school bus stops and activates its red flashing lights and stop arm, <strong>all traffic traveling in both directions must stop</strong> and remain stopped until the bus retracts its stop arm. The only exception is if you're on the <strong>opposite side of a divided highway</strong> (separated by a raised median or physical barrier of at least 5 feet). Passing a stopped school bus is a serious offense — you can receive a fine of at least <strong>$265 for a first offense</strong> and <strong>$515 for a second offense within 5 years</strong>, plus points on your license.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- PENALTIES -->
+<div class="content-block block-warning">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><polygon points="16,4 30,28 2,28" stroke="#dc2626" stroke-width="2" fill="none"/><line x1="16" y1="13" x2="16" y2="20" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="24" r="1.5" fill="#dc2626"/></svg>
+    <h2 class="block-title">⚠️ Penalties: Doubled Fines and More</h2>
+  </div>
+  <div class="block-body">
+    <p>Florida law imposes <strong>enhanced penalties</strong> for traffic violations committed in construction zones and school zones. Fines are typically <strong>doubled</strong> when workers or children are present.</p>
+    <table class="penalty-table">
+      <thead>
+        <tr><th>Violation</th><th>Normal Fine</th><th>Work/School Zone Fine</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Speeding (1–5 mph over)</td><td>~$129</td><td class="highlight">~$258 (doubled)</td></tr>
+        <tr><td>Speeding (6–9 mph over)</td><td>~$204</td><td class="highlight">~$408 (doubled)</td></tr>
+        <tr><td>Speeding (10–14 mph over)</td><td>~$254</td><td class="highlight">~$508 (doubled)</td></tr>
+        <tr><td>Reckless driving</td><td>Up to $500</td><td class="highlight">Up to $1,000</td></tr>
+        <tr><td>Passing a stopped school bus</td><td colspan="2" class="highlight">$265–$515 + points</td></tr>
+      </tbody>
+    </table>
+    <p>In addition to fines, construction and school zone violations add <strong>more points to your driving record</strong> and can lead to license suspension.</p>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT -->
+<div class="content-block block-achievement">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+    <h2 class="block-title">🏆 Achievement Unlocked: Zone Defender</h2>
+  </div>
+  <div class="block-body">
+    <p>You now understand the special rules for two of the most dangerous areas on the road. Construction workers and schoolchildren depend on drivers like you to slow down and pay attention. That awareness is what separates a good driver from a great one.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- VOCABULARY -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">📘 Key Vocabulary</h2>
+<div class="vocab-grid">
+  <div class="vocab-card"><div class="vocab-term">Work Zone</div><div class="vocab-def">A temporary area where road construction, maintenance, or utility work is taking place, marked with orange signs and devices.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Flagger</div><div class="vocab-def">A trained worker who directs traffic through a construction zone using a STOP/SLOW paddle and hand signals.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Lane Shift</div><div class="vocab-def">A temporary change in lane alignment that guides traffic around a work area using barriers and markings.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Barricade</div><div class="vocab-def">A portable barrier used to close or restrict traffic from entering part of the roadway during construction.</div></div>
+  <div class="vocab-card"><div class="vocab-term">School Zone</div><div class="vocab-def">A designated area near a school where reduced speed limits and extra traffic rules protect children.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Flashing Beacon</div><div class="vocab-def">A flashing yellow light on a school zone sign that indicates the reduced speed limit is currently active.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Doubled Fines</div><div class="vocab-def">Florida law doubles traffic fines for violations committed in active construction zones and school zones.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Stop Arm</div><div class="vocab-def">The mechanical arm on a school bus that extends outward when students are loading or unloading, requiring all traffic to stop.</div></div>
+</div>
+
+<!-- REFLECTION -->
+<div class="content-block block-think" style="margin-top:32px">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💭 Reflection</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Think about a construction zone you've driven through recently as a passenger.</strong> Did the driver slow down? Did they seem frustrated or impatient? How close were the workers to moving traffic?</p>
+    <p>Now think about the school zone near your school. How fast do cars actually go through it? Do drivers always stop for the school bus? What would happen if a child stepped into the road and a driver wasn't paying attention? These zones exist because the consequences of a mistake are life-changing.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="lesson-2-2-reading.html" class="btn-nav btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Lesson 2.2</a>
+  <a href="lesson-2-3-activity.html" class="btn-nav btn-next">Lesson 2.3 Activity<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+</div>
+
+</main>
+</body>
+</html>

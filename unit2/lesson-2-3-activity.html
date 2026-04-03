@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.3 Activity: Zone Navigation Challenge | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--font-display:'Wix Madefor Display',sans-serif;--font-body:'Wix Madefor Text',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:#f0f4f8;color:#1a1a2e;min-height:100vh}
+.oao-header{background:linear-gradient(135deg,var(--binary-blue) 0%,#1a2a5e 100%);padding:16px 24px;box-shadow:0 2px 20px rgba(14,28,66,.3)}
+.oao-header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.oao-logo-area{display:flex;align-items:center;gap:12px}
+.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2)}
+.oao-header-course{color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px}
+.oao-header-sub{color:rgba(255,255,255,.6);font-size:11px}
+.progress-container{max-width:900px;margin:0 auto;padding:20px 24px 0}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-label{font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--binary-blue)}
+.progress-count{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--portal-purple)}
+.progress-track{width:100%;height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--odyssey-orange),var(--gamer-green));border-radius:10px;transition:width .5s ease;width:0%}
+.activity-container{max-width:900px;margin:0 auto;padding:24px}
+.screen{display:none}.screen.active{display:block}
+.start-card,.results-card{background:#fff;border-radius:16px;padding:40px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.start-badge{display:inline-block;background:linear-gradient(135deg,var(--portal-purple),#8b45b8);color:#fff;font-family:var(--font-display);font-weight:700;font-size:12px;padding:5px 16px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.start-title{font-family:var(--font-display);font-size:30px;font-weight:800;color:var(--binary-blue);margin-bottom:12px}
+.start-desc{font-size:16px;color:#475569;margin-bottom:24px;line-height:1.6;max-width:540px;margin-left:auto;margin-right:auto}
+.start-stats{display:flex;justify-content:center;gap:32px;margin-bottom:28px;flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-value{font-family:var(--font-display);font-weight:800;font-size:28px;color:var(--odyssey-orange)}
+.stat-label{font-size:13px;color:#64748b;font-weight:500}
+.btn-start{background:linear-gradient(135deg,var(--gamer-green),#5fad32);color:#fff;border:none;padding:14px 40px;border-radius:12px;font-family:var(--font-display);font-weight:700;font-size:17px;cursor:pointer;transition:all .2s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(118,192,67,.4)}
+.question-card{background:#fff;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.08);margin-bottom:20px}
+.question-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.q-number{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--portal-purple);text-transform:uppercase;letter-spacing:1px}
+.timer{display:flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--binary-blue)}
+.timer svg{width:20px;height:20px}
+.timer.warning{color:var(--odyssey-orange)}.timer.danger{color:#dc2626;animation:pulse .5s ease infinite alternate}
+@keyframes pulse{from{opacity:1}to{opacity:.5}}
+.scenario-display{display:flex;justify-content:center;align-items:center;padding:20px;margin-bottom:16px;background:linear-gradient(135deg,#1a1a2e,#2a2a4e);border-radius:12px;min-height:180px}
+.scenario-display svg{max-width:100%;height:auto}
+.question-text{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--binary-blue);text-align:center;margin-bottom:20px;line-height:1.4}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option-btn{background:#fff;border:2px solid #e2e8f0;border-radius:12px;padding:14px 18px;cursor:pointer;transition:all .2s;font-family:var(--font-body);font-size:15px;font-weight:500;color:var(--binary-blue);text-align:left}
+.option-btn:hover{border-color:var(--bitstream-blue);background:#f0f9ff}
+.option-btn.correct{border-color:var(--gamer-green);background:#f0fdf4;color:#166534;animation:correctPop .3s ease}
+.option-btn.incorrect{border-color:#dc2626;background:#fef2f2;color:#991b1b}
+.option-btn.disabled{pointer-events:none;opacity:.6}
+@keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+.feedback-box{margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;line-height:1.5;display:none}
+.feedback-box.correct{background:#f0fdf4;border:1px solid #86efac;color:#166534}
+.feedback-box.incorrect{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b}
+.feedback-box.show{display:block;animation:fadeIn .3s ease}
+.btn-next-q{display:none;margin:20px auto 0;padding:12px 32px;border:none;background:linear-gradient(135deg,var(--bitstream-blue),#3ab0d4);color:#fff;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;cursor:pointer;transition:all .2s}
+.btn-next-q:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(85,200,232,.4)}
+.btn-next-q.show{display:block}
+.results-score{font-family:var(--font-display);font-weight:800;font-size:64px;background:linear-gradient(135deg,var(--odyssey-orange),var(--gamer-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.results-label{font-size:16px;color:#64748b;margin-bottom:16px}
+.results-message{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--binary-blue);margin-bottom:8px}
+.results-sub{font-size:15px;color:#475569;margin-bottom:28px}
+.xp-earned{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gateway-gold),#e8a93e);color:var(--binary-blue);font-family:var(--font-display);font-weight:700;font-size:18px;padding:10px 24px;border-radius:25px;margin-bottom:24px}
+.xp-earned svg{width:22px;height:22px}
+.results-breakdown{display:flex;justify-content:center;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.breakdown-item{background:#f8fafc;padding:12px 20px;border-radius:10px;text-align:center}
+.breakdown-value{font-family:var(--font-display);font-weight:800;font-size:24px}
+.breakdown-label{font-size:12px;color:#64748b}
+.btn-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn-replay{background:#fff;color:var(--binary-blue);border:2px solid #e2e8f0;padding:12px 28px;border-radius:10px;font-family:var(--font-display);font-weight:600;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-replay:hover{background:#f1f5f9;border-color:#cbd5e1}
+.btn-continue{background:linear-gradient(135deg,var(--gamer-green),#5fad32);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:15px;cursor:pointer;transition:all .2s}
+.btn-continue:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(118,192,67,.4)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){.options-grid{grid-template-columns:1fr}.start-title{font-size:24px}.question-card{padding:20px}.results-score{font-size:48px}.scenario-display{min-height:140px;padding:12px}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg>
+<div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div></div></header>
+
+<div class="progress-container" id="progressArea" style="display:none"><div class="progress-header"><span class="progress-label">Zone Navigation Challenge</span><span class="progress-count" id="progressCount">0 / 10</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+
+<div class="activity-container">
+
+<div class="screen active" id="startScreen"><div class="start-card">
+  <div class="start-badge">LESSON 2.3 ACTIVITY</div>
+  <h1 class="start-title">🚧 Zone Navigation Challenge</h1>
+  <p class="start-desc">Navigate through construction zones and school zones! Identify signs, respond to flaggers, and choose the correct speed and action for each scenario.</p>
+  <div class="start-stats">
+    <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">Scenarios</div></div>
+    <div class="stat-item"><div class="stat-value">15s</div><div class="stat-label">Per Scenario</div></div>
+    <div class="stat-item"><div class="stat-value">200</div><div class="stat-label">Max XP</div></div>
+  </div>
+  <button class="btn-start" onclick="startActivity()">Start Challenge</button>
+</div></div>
+
+<div class="screen" id="questionScreen"><div class="question-card">
+  <div class="question-meta"><span class="q-number" id="qNumber">Scenario 1 of 10</span>
+  <div class="timer" id="timer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="timerText">15</span></div></div>
+  <div class="scenario-display" id="scenarioDisplay"></div>
+  <div class="question-text" id="questionText"></div>
+  <div class="options-grid" id="optionsGrid"></div>
+  <div class="feedback-box" id="feedbackBox"></div>
+  <button class="btn-next-q" id="btnNextQ" onclick="nextQuestion()">Next Scenario →</button>
+</div></div>
+
+<div class="screen" id="resultsScreen"><div class="results-card">
+  <div class="results-score" id="resultsScore">0%</div>
+  <div class="results-label">Final Score</div>
+  <div class="results-message" id="resultsMessage"></div>
+  <div class="results-sub" id="resultsSub"></div>
+  <div class="xp-earned" id="xpEarned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span id="xpValue">+0 XP</span></div>
+  <div class="results-breakdown">
+    <div class="breakdown-item"><div class="breakdown-value" id="correctCount" style="color:var(--gamer-green)">0</div><div class="breakdown-label">Correct</div></div>
+    <div class="breakdown-item"><div class="breakdown-value" id="incorrectCount" style="color:#dc2626">0</div><div class="breakdown-label">Incorrect</div></div>
+    <div class="breakdown-item"><div class="breakdown-value" id="avgTime" style="color:var(--bitstream-blue)">0s</div><div class="breakdown-label">Avg Time</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-replay" onclick="restartActivity()">Try Again</button>
+    <a href="lesson-2-3-reading.html" class="btn-replay">Review Lesson</a>
+    <button class="btn-continue" onclick="goToQuiz()">Continue to Quiz →</button>
+  </div>
+</div></div>
+
+</div>
+
+<script>
+function constructionSign(text1,text2){
+  return `<svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg"><rect x="75" y="80" width="6" height="55" fill="#888"/><rect x="25" y="15" width="106" height="68" rx="4" fill="#F78F1E" stroke="#111" stroke-width="3" transform="rotate(45 78 49)"/><text x="78" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#111">${text1}</text><text x="78" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#111">${text2||''}</text></svg>`;
+}
+function flaggerSvg(paddle){
+  const pc = paddle==='STOP'?'#cc0000':'#F78F1E', pt = paddle==='STOP'?'#fff':'#111';
+  return `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="28" r="14" fill="#F78F1E"/><line x1="60" y1="42" x2="60" y2="95" stroke="#F78F1E" stroke-width="5"/><line x1="60" y1="60" x2="35" y2="48" stroke="#F78F1E" stroke-width="4"/><line x1="60" y1="60" x2="90" y2="35" stroke="#888" stroke-width="3"/><rect x="84" y="16" width="28" height="22" rx="3" fill="${pc}"/><text x="98" y="31" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${pt}">${paddle}</text><line x1="60" y1="95" x2="45" y2="130" stroke="#F78F1E" stroke-width="4"/><line x1="60" y1="95" x2="75" y2="130" stroke="#F78F1E" stroke-width="4"/></svg>`;
+}
+function schoolZoneSvg(){
+  return `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect x="95" y="90" width="6" height="60" fill="#888"/><path d="M62,50 L98,25 L134,50 L134,90 L62,90Z" fill="#b8e86c" stroke="#111" stroke-width="2.5"/><text x="98" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#111">SCHOOL</text><text x="98" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#111">ZONE</text><text x="98" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="#111">20</text><circle cx="50" cy="55" r="8" fill="#ffd700"/><line x1="50" y1="55" x2="50" y2="55" stroke="none"/><circle cx="50" cy="55" r="11" fill="#ffd700" opacity=".3"/><circle cx="146" cy="55" r="8" fill="#ffd700"/><circle cx="146" cy="55" r="11" fill="#ffd700" opacity=".3"/></svg>`;
+}
+function schoolBusSvg(){
+  return `<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="30" width="190" height="70" rx="6" fill="#F7C948"/><rect x="25" y="40" width="30" height="25" rx="3" fill="#aadcf0"/><rect x="65" y="40" width="30" height="25" rx="3" fill="#aadcf0"/><rect x="105" y="40" width="30" height="25" rx="3" fill="#aadcf0"/><rect x="145" y="40" width="30" height="25" rx="3" fill="#aadcf0"/><text x="110" y="86" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#111">SCHOOL BUS</text><circle cx="55" cy="105" r="12" fill="#333"/><circle cx="55" cy="105" r="6" fill="#888"/><circle cx="175" cy="105" r="12" fill="#333"/><circle cx="175" cy="105" r="6" fill="#888"/><rect x="5" y="45" width="18" height="20" rx="2" fill="#cc0000"/><text x="14" y="57" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#fff">STOP</text><line x1="5" y1="55" x2="-12" y2="55" stroke="#cc0000" stroke-width="3"/><rect x="-20" y="48" width="16" height="14" rx="2" fill="#cc0000"/><text x="-12" y="58" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6" fill="#fff">STOP</text><circle cx="15" cy="35" r="5" fill="#cc0000" opacity=".8"/><circle cx="15" cy="35" r="8" fill="#cc0000" opacity=".2"/><circle cx="215" cy="35" r="5" fill="#cc0000" opacity=".8"/><circle cx="215" cy="35" r="8" fill="#cc0000" opacity=".2"/></svg>`;
+}
+
+const allQuestions = [
+  {visual:constructionSign('ROAD','WORK'),question:"You see an orange diamond sign saying 'ROAD WORK AHEAD.' What should you do?",options:["Maintain your current speed","Slow down and watch for workers and equipment","Change lanes immediately","Stop and wait for instructions"],correct:1,fb_c:"Correct! When you see Road Work Ahead, slow down and increase your attention. Workers and equipment may be near the road.",fb_i:"An orange Road Work Ahead sign means you should slow down and watch for workers, equipment, and lane changes. You don't need to stop, but you must reduce speed."},
+  {visual:flaggerSvg('STOP'),question:"A flagger holds up a STOP paddle. The road ahead looks clear. What should you do?",options:["Proceed slowly since the road looks clear","Come to a complete stop and wait for the flagger's signal","Honk to get the flagger's attention","Go around the flagger using the shoulder"],correct:1,fb_c:"Right! A flagger's STOP paddle means come to a complete stop and wait. Flagger instructions override your own judgment — there may be hidden hazards.",fb_i:"You must always obey the flagger, even if the road looks clear. Stop completely and wait. There may be workers, equipment, or vehicles you can't see."},
+  {visual:flaggerSvg('SLOW'),question:"A flagger shows you the SLOW side of their paddle. How should you respond?",options:["Stop completely and wait","Proceed at reduced speed through the work zone","Speed up to clear the zone quickly","Turn around and find an alternate route"],correct:1,fb_c:"Correct! The SLOW paddle means you may proceed, but at a reduced speed. Stay alert for workers and changing conditions.",fb_i:"The SLOW paddle means proceed at reduced speed — not stop, and not at normal speed. Drive slowly and watch for workers and lane changes."},
+  {visual:schoolZoneSvg(),question:"You see a school zone sign with flashing yellow beacons. The posted speed is 20 mph. You're currently going 35 mph. What must you do?",options:["Maintain 35 mph since school might not be in session","Slow down to 20 mph — the flashing lights mean the zone is active","Slow to 25 mph as a compromise","Speed up to clear the zone faster"],correct:1,fb_c:"Correct! Flashing beacons on a school zone sign mean the reduced speed limit is active. You must slow to the posted speed (20 mph) immediately.",fb_i:"When the flashing beacons are active on a school zone sign, the reduced speed limit is in effect. You must slow to the posted speed — 20 mph in this case."},
+  {visual:schoolBusSvg(),question:"A school bus ahead of you activates its red flashing lights and extends its stop arm on a two-lane road. What must you do?",options:["Pass the bus slowly on the left","Stop and remain stopped until the bus retracts its stop arm","Stop only if children are visible","Slow down but you may pass on the left"],correct:1,fb_c:"Right! When a school bus displays red lights and its stop arm, you must stop on both sides of the road (unless separated by a raised median). Wait until the stop arm retracts.",fb_i:"Florida law requires all traffic in both directions to stop when a school bus has its red lights flashing and stop arm out — no exceptions on a two-lane road."},
+  {visual:constructionSign('LANE','CLOSED'),question:"A 'Right Lane Closed Ahead' sign appears on a highway. What's the best approach?",options:["Stay in the right lane as long as possible, then force your way in","Begin merging left early and safely","Speed up to pass more cars before merging","Stop in the right lane and wait"],correct:1,fb_c:"Correct! When you see a lane closure ahead, begin merging safely and early. Don't wait until the last moment — that causes dangerous sudden stops.",fb_i:"The safest approach is to merge early when you see a lane closure sign. This prevents last-second dangerous merges and keeps traffic flowing."},
+  {visual:`<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="15" width="160" height="90" rx="5" fill="#F78F1E" stroke="#111" stroke-width="3"/><text x="100" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#111">SPEED</text><text x="100" y="53" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#111">LIMIT</text><text x="100" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="28" fill="#111">25</text><text x="100" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="10" fill="#F78F1E">Work Zone</text></svg>`,question:"You're in a construction zone with a posted speed limit of 25 mph. No workers are visible right now. Can you go faster?",options:["Yes — the reduced speed only applies when workers are present","No — the posted work zone speed limit applies at all times","Yes — you can go up to 5 mph over the limit","Only if there are no cones visible"],correct:1,fb_c:"Correct! Work zone speed limits are enforceable at all times while the signs are posted, whether workers are visible or not. You can be ticketed even if no one appears to be working.",fb_i:"Work zone speed limits apply whenever the signs are posted, regardless of whether workers are currently visible. The fine for speeding is doubled in a work zone."},
+  {visual:`<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="140" fill="#444" rx="8"/><line x1="100" y1="0" x2="100" y2="140" stroke="#ffd700" stroke-width="3" stroke-dasharray="15,10"/><polygon points="50,40 45,55 55,55" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="43" y="55" width="14" height="4" fill="#F78F1E"/><polygon points="70,40 65,55 75,55" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="63" y="55" width="14" height="4" fill="#F78F1E"/><polygon points="90,40 85,55 95,55" fill="#F78F1E" stroke="#fff" stroke-width="1"/><rect x="83" y="55" width="14" height="4" fill="#F78F1E"/><text x="60" y="90" text-anchor="middle" font-family="Arial" font-size="10" fill="#ccc">← Cones shifting</text><text x="150" y="90" text-anchor="middle" font-family="Arial" font-size="10" fill="#ccc">Your lane →</text></svg>`,question:"You encounter a lane shift in a construction zone where cones guide you to the right. What's the safest approach?",options:["Speed up to get through the shift quickly","Slow down before the shift and follow the temporary markings carefully","Change lanes to avoid the shift entirely","Stop and wait for the shift to end"],correct:1,fb_c:"Correct! Slow down before the lane shift, not during it. Follow the temporary markings and cones, and increase your following distance.",fb_i:"The safest approach is to slow down before you enter the lane shift, then follow the temporary markings carefully. Don't speed through or make sudden moves."},
+  {visual:`<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="10" width="120" height="50" rx="6" fill="#b8e86c" stroke="#111" stroke-width="2"/><text x="100" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">SCHOOL ZONE</text><text x="100" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">7:00-8:30 AM</text><text x="100" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">2:00-3:30 PM</text><text x="100" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="11" fill="#333">Current time: 10:30 AM</text><text x="100" y="95" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="11" fill="#333">Saturday</text></svg>`,question:"It's 10:30 AM on Saturday. The school zone sign shows hours of 7:00–8:30 AM and 2:00–3:30 PM. Do you need to follow the reduced speed limit?",options:["Yes — school zones are always active","No — it's outside the posted hours and it's the weekend","Yes — you should always go 20 mph near schools","Only if children are visible"],correct:1,fb_c:"Correct! School zone speed limits only apply during the posted hours (and when flashing beacons are active). At 10:30 AM on a Saturday, the zone is not active.",fb_i:"School zone speed limits are enforced during posted hours or when flashing beacons are on. At 10:30 AM on Saturday — outside posted hours — the regular speed limit applies."},
+  {visual:`<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="15" width="140" height="100" rx="6" fill="#fff" stroke="#cc0000" stroke-width="4"/><text x="100" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#cc0000">⚠️ FINES</text><text x="100" y="58" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="10" fill="#cc0000">DOUBLED</text><text x="100" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#111">IN WORK ZONE</text><text x="100" y="98" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="9" fill="#333">$129 → $258</text></svg>`,question:"You receive a speeding ticket for going 8 mph over the limit in an active Florida construction zone. Compared to a normal speeding ticket, your fine will be:",options:["The same as anywhere else","Approximately doubled","Tripled","Only increased by $25"],correct:1,fb_c:"Correct! Florida law doubles fines for traffic violations in active construction zones and school zones. An $204 ticket becomes ~$408!",fb_i:"In Florida, fines are doubled in construction zones and school zones. This is a significant financial penalty designed to deter dangerous driving near workers and children."}
+];
+
+let currentQuestions=[],currentIndex=0,score=0,timeLeft=15,timerInterval=null,totalTime=0,questionTimes=[];
+function shuffleArray(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function startActivity(){currentQuestions=shuffleArray(allQuestions).slice(0,10);currentIndex=0;score=0;totalTime=0;questionTimes=[];document.getElementById('progressArea').style.display='block';showScreen('questionScreen');loadQuestion();}
+function loadQuestion(){const q=currentQuestions[currentIndex];document.getElementById('qNumber').textContent=`Scenario ${currentIndex+1} of ${currentQuestions.length}`;document.getElementById('progressCount').textContent=`${currentIndex} / ${currentQuestions.length}`;document.getElementById('progressFill').style.width=`${(currentIndex/currentQuestions.length)*100}%`;document.getElementById('scenarioDisplay').innerHTML=q.visual;document.getElementById('questionText').textContent=q.question;const grid=document.getElementById('optionsGrid');grid.innerHTML='';q.options.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='option-btn';btn.textContent=opt;btn.onclick=()=>selectAnswer(i);grid.appendChild(btn);});document.getElementById('feedbackBox').className='feedback-box';document.getElementById('feedbackBox').textContent='';document.getElementById('btnNextQ').className='btn-next-q';timeLeft=15;updateTimer();clearInterval(timerInterval);timerInterval=setInterval(()=>{timeLeft--;updateTimer();if(timeLeft<=0){clearInterval(timerInterval);timeUp();}},1000);}
+function updateTimer(){document.getElementById('timerText').textContent=timeLeft;const t=document.getElementById('timer');t.className='timer';if(timeLeft<=4)t.classList.add('danger');else if(timeLeft<=7)t.classList.add('warning');}
+function selectAnswer(i){clearInterval(timerInterval);const q=currentQuestions[currentIndex];const taken=15-timeLeft;questionTimes.push(taken);totalTime+=taken;const btns=document.querySelectorAll('.option-btn');btns.forEach((b,idx)=>{b.classList.add('disabled');if(idx===q.correct)b.classList.add('correct');if(idx===i&&idx!==q.correct)b.classList.add('incorrect');});const fb=document.getElementById('feedbackBox');if(i===q.correct){score++;fb.className='feedback-box correct show';fb.textContent=q.fb_c;}else{fb.className='feedback-box incorrect show';fb.textContent=q.fb_i;}document.getElementById('btnNextQ').className='btn-next-q show';}
+function timeUp(){questionTimes.push(15);totalTime+=15;const q=currentQuestions[currentIndex];document.querySelectorAll('.option-btn').forEach((b,i)=>{b.classList.add('disabled');if(i===q.correct)b.classList.add('correct');});const fb=document.getElementById('feedbackBox');fb.className='feedback-box incorrect show';fb.textContent="⏰ Time's up! "+q.fb_i;document.getElementById('btnNextQ').className='btn-next-q show';}
+function nextQuestion(){currentIndex++;if(currentIndex>=currentQuestions.length)showResults();else loadQuestion();}
+function showResults(){clearInterval(timerInterval);document.getElementById('progressArea').style.display='none';showScreen('resultsScreen');const pct=Math.round((score/currentQuestions.length)*100);const avg=questionTimes.length?(totalTime/questionTimes.length).toFixed(1):0;let xp=score*15;if(pct===100)xp+=50;if(parseFloat(avg)<6)xp+=25;document.getElementById('resultsScore').textContent=pct+'%';document.getElementById('correctCount').textContent=score;document.getElementById('incorrectCount').textContent=currentQuestions.length-score;document.getElementById('avgTime').textContent=avg+'s';document.getElementById('xpValue').textContent='+'+xp+' XP';let msg,sub;if(pct===100){msg="Perfect Score! 🏆";sub="Zone defender extraordinaire!";}else if(pct>=80){msg="Excellent! 🌟";sub="Great awareness. Review any missed scenarios.";}else if(pct>=60){msg="Good Effort! 👍";sub="Keep studying — these zones are critical for safety.";}else{msg="Keep Practicing! 📚";sub="Review Lesson 2.3 and try again — lives depend on this knowledge.";}document.getElementById('resultsMessage').textContent=msg;document.getElementById('resultsSub').textContent=sub;try{window.parent.postMessage({type:'activity_complete',score:pct,xp:xp,lesson:'2.3'},'*');}catch(e){}}
+function restartActivity(){startActivity();}
+function goToQuiz(){window.location.href='lesson-2-3-quiz.html';}
+</script>
+</body>
+</html>
