@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2.6: Highway Driving and Lane Usage | OAO Driver's Ed</title>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--binary-blue:#0E1C42;--bitstream-blue:#55C8E8;--gateway-gold:#C7922C;--portal-purple:#67308F;--gamer-green:#76C043;--odyssey-orange:#F78F1E;--font-display:'Wix Madefor Display',sans-serif;--font-body:'Wix Madefor Text',sans-serif}*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--font-body);color:#1a1a2e;background:#f0f4f8;line-height:1.7;font-size:16px}
+.oao-header{background:linear-gradient(135deg,var(--binary-blue),#1a2a5e);padding:16px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(14,28,66,.3)}.oao-header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}.oao-logo-area{display:flex;align-items:center;gap:12px}.oao-header-divider{width:1px;height:32px;background:rgba(255,255,255,.2);margin:0 4px}.oao-header-course{color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px}.oao-header-sub{color:rgba(255,255,255,.6);font-size:11px}.oao-xp-badge{background:linear-gradient(135deg,var(--gateway-gold),#e8a93e);color:var(--binary-blue);font-family:var(--font-display);font-weight:700;font-size:13px;padding:6px 14px;border-radius:20px;display:flex;align-items:center;gap:6px}.oao-xp-badge svg{width:16px;height:16px}
+.breadcrumb-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 24px}.breadcrumb-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:#64748b}.breadcrumb-inner a{color:var(--bitstream-blue);text-decoration:none}.breadcrumb-inner a:hover{text-decoration:underline}.breadcrumb-sep{width:14px;height:14px;stroke:#94a3b8;fill:none;stroke-width:2}.breadcrumb-inner .current{color:var(--binary-blue);font-weight:600}
+.lesson-container{max-width:900px;margin:0 auto;padding:32px 24px 60px}
+.lesson-badge{display:inline-block;background:linear-gradient(135deg,var(--portal-purple),#8b45b8);color:#fff;font-family:var(--font-display);font-weight:700;font-size:12px;padding:5px 14px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}.lesson-title{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--binary-blue);line-height:1.2;margin-bottom:12px}.lesson-desc{font-size:18px;color:#475569;line-height:1.6;margin-bottom:28px}
+.hero-container{width:100%;border-radius:16px;overflow:hidden;margin-bottom:32px;box-shadow:0 4px 24px rgba(14,28,66,.12)}.hero-container svg{width:100%;height:auto;display:block}
+.standards-box{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-left:4px solid var(--portal-purple);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:28px}.standards-label{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--portal-purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}.standards-box p{font-size:14px;color:#4338ca}
+.objectives-box{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:32px;border:2px solid #e2e8f0}.objectives-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}.objectives-list{list-style:none;padding:0}.objectives-list li{padding:6px 0 6px 28px;position:relative;font-size:15px;color:#334155}.objectives-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--gamer-green);font-weight:700;font-size:16px}
+.content-block{border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}.block-read{background:#fff;border:1px solid #e2e8f0}.block-think{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa}.block-fact{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe}.block-achievement{background:linear-gradient(135deg,#fefce8,#fef3c7);border:1px solid #fde68a}
+.block-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}.block-icon{width:28px;height:28px;flex-shrink:0}.block-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--binary-blue)}.block-body p{margin-bottom:12px}.block-body p:last-child{margin-bottom:0}.block-body ul,.block-body ol{margin:8px 0 12px 20px}.block-body li{margin-bottom:6px}.block-body strong{color:var(--binary-blue)}
+.section-divider{display:flex;align-items:center;justify-content:center;margin:36px 0;position:relative}.section-divider::before{content:'';position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,#cbd5e1,transparent)}.section-divider-icon{background:#f0f4f8;padding:0 16px;position:relative;z-index:1}.section-divider-icon svg{width:24px;height:24px;stroke:var(--bitstream-blue);fill:none;stroke-width:2}
+.diagram-container{background:#fff;border-radius:12px;padding:20px;margin:20px 0;border:2px solid #e2e8f0;overflow-x:auto}.diagram-container svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.lane-info{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0}.lane-card{background:#fff;border-radius:10px;padding:16px;border:2px solid #e2e8f0;text-align:center}.lane-card-title{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--binary-blue);margin-bottom:6px}.lane-card-desc{font-size:13px;color:#475569;line-height:1.4}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:32px}.vocab-card{background:#fff;border-radius:10px;padding:16px;border-left:4px solid var(--bitstream-blue);box-shadow:0 2px 8px rgba(0,0,0,.05)}.vocab-term{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--binary-blue);margin-bottom:4px}.vocab-def{font-size:14px;color:#475569}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid #e2e8f0}.btn-nav{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:15px;transition:all .2s}.btn-prev{background:#fff;color:var(--binary-blue);border:2px solid #e2e8f0}.btn-prev:hover{background:#f1f5f9}.btn-next{background:linear-gradient(135deg,var(--bitstream-blue),#3ab0d4);color:#fff;border:none}.btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(85,200,232,.4)}.btn-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.animate-in{animation:fadeInUp .5s ease-out forwards;opacity:0}.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+@media(max-width:640px){.lesson-title{font-size:26px}.lesson-desc{font-size:16px}.lane-info{grid-template-columns:1fr 1fr}.vocab-grid{grid-template-columns:1fr}.oao-xp-badge{font-size:11px;padding:4px 10px}}
+</style>
+</head>
+<body>
+
+<header class="oao-header"><div class="oao-header-inner"><div class="oao-logo-area">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="var(--bitstream-blue)"/><path d="M20 8C12 8 8 14 8 20c0 8 6 12 12 12s12-4 12-12c0-6-4-12-12-12z" fill="var(--binary-blue)" opacity=".3"/><path d="M14 18q6-6 12 0l-2 4q-4-4-8 0z" fill="#fff"/><circle cx="17" cy="20" r="1.5" fill="#fff"/><circle cx="23" cy="20" r="1.5" fill="#fff"/><path d="M15 24q5 4 10 0" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><text x="42" y="24" font-family="var(--font-display)" font-weight="700" font-size="18" fill="#fff">Optima</text><text x="42" y="34" font-family="var(--font-display)" font-weight="500" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing="2">ACADEMY ONLINE</text></svg>
+<div class="oao-header-divider"></div><div><div class="oao-header-course">Driver's Education</div><div class="oao-header-sub">Florida High School</div></div></div>
+<div class="oao-xp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>300 XP</div></div></header>
+
+<nav class="breadcrumb-bar"><div class="breadcrumb-inner">
+<a href="#">Course Home</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<a href="#">Unit 2: The Language of the Road</a><svg class="breadcrumb-sep" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+<span class="current">Lesson 2.6: Highway Driving &amp; Lane Usage</span>
+</div></nav>
+
+<main class="lesson-container">
+
+<div class="animate-in">
+  <div class="lesson-badge">UNIT 2 • LESSON 6</div>
+  <h1 class="lesson-title">Highway Driving and Lane Usage</h1>
+  <p class="lesson-desc">Highways move faster, merge tighter, and leave less room for error. Understanding how to enter, exit, choose lanes, and pass safely turns the highway from an intimidating place into a smooth, efficient driving experience.</p>
+</div>
+
+<!-- HERO -->
+<div class="hero-container animate-in delay-1">
+  <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5a8fbe"/><stop offset="100%" stop-color="#87CEEB"/></linearGradient></defs>
+    <rect width="900" height="380" fill="url(#sky6)"/>
+    <!-- Ground -->
+    <rect x="0" y="220" width="900" height="160" fill="#6aaa55"/>
+    <!-- Highway (wide, multiple lanes) -->
+    <rect x="0" y="200" width="900" height="160" fill="#444"/>
+    <!-- Lane markings -->
+    <line x1="0" y1="240" x2="900" y2="240" stroke="#fff" stroke-width="2" stroke-dasharray="20,14"/>
+    <line x1="0" y1="280" x2="900" y2="280" stroke="#fff" stroke-width="2" stroke-dasharray="20,14"/>
+    <line x1="0" y1="320" x2="900" y2="320" stroke="#fff" stroke-width="2" stroke-dasharray="20,14"/>
+    <!-- Edge lines -->
+    <line x1="0" y1="205" x2="900" y2="205" stroke="#fff" stroke-width="3"/>
+    <line x1="0" y1="355" x2="900" y2="355" stroke="#fff" stroke-width="3"/>
+    <!-- On-ramp -->
+    <path d="M0,380 Q100,380 180,355" fill="#444" stroke="none"/>
+    <line x1="40" y1="375" x2="160" y2="358" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,5"/>
+    <!-- Cars in different lanes -->
+    <rect x="250" y="210" width="48" height="24" rx="5" fill="#ef4444"/>
+    <rect x="500" y="248" width="48" height="24" rx="5" fill="#3b82f6"/>
+    <rect x="350" y="290" width="48" height="24" rx="5" fill="#76C043"/>
+    <rect x="650" y="328" width="48" height="24" rx="5" fill="#ffd700"/>
+    <!-- Merging car on ramp -->
+    <rect x="100" y="360" width="40" height="20" rx="4" fill="#F78F1E"/>
+    <path d="M140,370 Q180,360 200,350" fill="none" stroke="#F78F1E" stroke-width="2" stroke-dasharray="5,3"/>
+    <!-- Speed limit sign -->
+    <rect x="810" y="140" width="4" height="60" fill="#888"/>
+    <rect x="790" y="95" width="44" height="48" rx="3" fill="#fff" stroke="#111" stroke-width="2"/>
+    <text x="812" y="112" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#111">SPEED</text>
+    <text x="812" y="120" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#111">LIMIT</text>
+    <text x="812" y="137" text-anchor="middle" font-family="Arial" font-weight="700" font-size="16" fill="#111">70</text>
+    <!-- Lane labels -->
+    <text x="450" y="225" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="rgba(255,255,255,.5)">← LEFT (PASSING) LANE</text>
+    <text x="450" y="265" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="rgba(255,255,255,.5)">← CENTER LANE</text>
+    <text x="450" y="305" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="rgba(255,255,255,.5)">← TRAVEL LANE</text>
+    <text x="450" y="345" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="rgba(255,255,255,.5)">← RIGHT (MERGE/EXIT) LANE</text>
+    <!-- Title -->
+    <rect x="0" y="320" width="900" height="60" fill="rgba(14,28,66,.85)"/>
+    <text x="450" y="356" text-anchor="middle" font-family="'Wix Madefor Display',sans-serif" font-weight="700" font-size="22" fill="#fff">Highway Driving: Speed, Space, and Lane Discipline</text>
+  </svg>
+</div>
+
+<div class="standards-box animate-in delay-2">
+  <div class="standards-label">Florida Standards Alignment</div>
+  <p>Demonstrate safe highway driving techniques including proper use of acceleration and deceleration lanes, lane selection, passing procedures, and compliance with Florida's lane usage laws.</p>
+</div>
+
+<div class="objectives-box animate-in delay-3">
+  <div class="objectives-title"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gamer-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>Learning Objectives</div>
+  <ul class="objectives-list">
+    <li>Enter and exit highways safely using acceleration and deceleration lanes</li>
+    <li>Choose the correct lane for your driving situation</li>
+    <li>Follow Florida's passing and lane-use laws</li>
+    <li>Understand minimum speed requirements and express lane rules</li>
+    <li>Navigate weave zones safely</li>
+  </ul>
+</div>
+
+<!-- ENTERING HIGHWAYS -->
+<div class="content-block block-read animate-in delay-4">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Entering the Highway: Acceleration Lanes</h2>
+  </div>
+  <div class="block-body">
+    <p>When entering a highway via an on-ramp, you use an <strong>acceleration lane</strong> (also called a merge lane) to build speed before joining traffic. This is one of the most critical maneuvers in driving. Here's the procedure:</p>
+    <ol>
+      <li><strong>Use the ramp to accelerate</strong> — Begin building speed as soon as you enter the on-ramp. Your goal is to match the speed of highway traffic by the time you reach the merge point.</li>
+      <li><strong>Check traffic</strong> — Use your mirrors and do a head check (blind spot) to find a gap in highway traffic.</li>
+      <li><strong>Signal your merge</strong> — Turn on your left signal to indicate you're entering.</li>
+      <li><strong>Merge smoothly</strong> — Move into the highway lane when you have a safe gap. Adjust your speed to blend with traffic flow.</li>
+      <li><strong>Cancel your signal</strong> — Turn it off after you've merged.</li>
+    </ol>
+    <p><strong>Common mistakes:</strong> Stopping at the end of the acceleration lane (dangerous — highway traffic isn't expecting a stopped vehicle), merging too slowly (creates a speed difference that causes crashes), and failing to check blind spots.</p>
+  </div>
+</div>
+
+<!-- MERGE DIAGRAM -->
+<div class="diagram-container">
+  <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="200" fill="#444" rx="8"/>
+    <!-- Highway lanes -->
+    <line x1="0" y1="70" x2="700" y2="70" stroke="#fff" stroke-width="2" stroke-dasharray="16,10"/>
+    <line x1="0" y1="30" x2="700" y2="30" stroke="#fff" stroke-width="2.5"/>
+    <!-- On-ramp merging -->
+    <path d="M0,180 Q150,180 300,140 Q400,120 500,110" fill="none" stroke="#fff" stroke-width="2"/>
+    <line x1="500" y1="110" x2="700" y2="110" stroke="#fff" stroke-width="2" stroke-dasharray="16,10"/>
+    <line x1="0" y1="200" x2="200" y2="200" stroke="#fff" stroke-width="2.5"/>
+    <!-- Acceleration zone -->
+    <rect x="180" y="130" width="250" height="30" fill="rgba(118,192,67,.15)" rx="4"/>
+    <text x="305" y="150" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="700" font-size="11" fill="#76C043">ACCELERATION LANE</text>
+    <!-- Car on ramp -->
+    <rect x="120" y="168" width="38" height="20" rx="4" fill="#F78F1E"/>
+    <text x="139" y="182" text-anchor="middle" font-family="Arial" font-weight="700" font-size="8" fill="#fff">YOU</text>
+    <!-- Speed arrows -->
+    <text x="80" y="185" font-family="'Wix Madefor Display'" font-weight="600" font-size="9" fill="#ccc">30→</text>
+    <text x="250" y="175" font-family="'Wix Madefor Display'" font-weight="600" font-size="9" fill="#ccc">50→</text>
+    <text x="420" y="150" font-family="'Wix Madefor Display'" font-weight="600" font-size="9" fill="#76C043">65→ MERGE!</text>
+    <!-- Highway car -->
+    <rect x="380" y="45" width="42" height="20" rx="4" fill="#3b82f6"/>
+    <text x="401" y="59" text-anchor="middle" font-family="Arial" font-weight="700" font-size="8" fill="#fff">65mph</text>
+    <!-- Labels -->
+    <text x="350" y="18" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="#ccc">HIGHWAY — LEFT LANE</text>
+    <text x="350" y="60" text-anchor="middle" font-family="'Wix Madefor Display'" font-weight="600" font-size="10" fill="#ccc">HIGHWAY — RIGHT LANE</text>
+  </svg>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- EXITING -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Exiting the Highway: Deceleration Lanes</h2>
+  </div>
+  <div class="block-body">
+    <p>When leaving the highway, you use a <strong>deceleration lane</strong> (exit ramp) to slow down from highway speed to ramp speed. The procedure:</p>
+    <ol>
+      <li><strong>Signal early</strong> — At least 100 feet before the exit (more at highway speeds)</li>
+      <li><strong>Move into the right lane</strong> well before the exit — don't cut across at the last second</li>
+      <li><strong>Enter the deceleration lane</strong> — Move into the exit ramp lane</li>
+      <li><strong>Begin slowing down in the deceleration lane</strong> — Do NOT brake on the highway itself. Slow down after you've entered the exit ramp.</li>
+      <li><strong>Check the ramp speed</strong> — Advisory speed signs on exit ramps are often 25–35 mph. Slow down to this speed before the curve.</li>
+    </ol>
+    <p><strong>Critical rule:</strong> If you miss your exit, <strong>do not stop, back up, or cut across lanes</strong>. Continue to the next exit and turn around. Missing an exit costs you a few minutes; making a dangerous move to catch it can cost your life.</p>
+  </div>
+</div>
+
+<div class="content-block block-think">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">🤔 Think About It</h2>
+  </div>
+  <div class="block-body">
+    <p>You're merging onto I-95 and the acceleration lane is short. Traffic is going 70 mph. Should you slow down or stop at the end of the ramp? <em>No — that's one of the most dangerous things you can do. Accelerate as much as possible, signal, and merge. If you can't find a gap, adjust speed slightly but keep moving. A stopped car at the end of a merge lane is a rear-end crash waiting to happen.</em></p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- LANE SELECTION -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Lane Selection: Right Lane, Left Lane, Center Lane</h2>
+  </div>
+  <div class="block-body">
+    <p>Each lane on a multi-lane highway has a purpose. Choosing the right one helps you drive safely and courteously:</p>
+  </div>
+</div>
+
+<div class="lane-info">
+  <div class="lane-card" style="border-color:var(--gamer-green)">
+    <div class="lane-card-title" style="color:var(--gamer-green)">Right Lane</div>
+    <div class="lane-card-desc">Default travel lane. Use for normal driving, entering, and exiting the highway. Slower traffic stays here.</div>
+  </div>
+  <div class="lane-card" style="border-color:var(--bitstream-blue)">
+    <div class="lane-card-title" style="color:var(--bitstream-blue)">Center Lane(s)</div>
+    <div class="lane-card-desc">Steady through traffic. Less disruption from merging vehicles. Best for long-distance highway travel.</div>
+  </div>
+  <div class="lane-card" style="border-color:var(--odyssey-orange)">
+    <div class="lane-card-title" style="color:var(--odyssey-orange)">Left Lane</div>
+    <div class="lane-card-desc">Passing lane ONLY. Pass slower traffic, then return to the right. Don't cruise in the left lane.</div>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+
+<!-- PASSING AND FL LAW -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Passing Rules and Florida's Left Lane Law</h2>
+  </div>
+  <div class="block-body">
+    <p>On highways, passing is done in the <strong>left lane</strong>. Here's how to pass safely:</p>
+    <ol>
+      <li>Check mirrors and blind spot</li>
+      <li>Signal left and move into the passing lane</li>
+      <li>Accelerate to pass — never exceed the speed limit to pass</li>
+      <li>Once you can see the passed vehicle in your rearview mirror, signal right and return to the travel lane</li>
+      <li>Cancel your signal</li>
+    </ol>
+    <p><strong>Florida's "Slower Traffic Keep Right" law (F.S. 316.081):</strong> If you are driving slower than the normal flow of traffic, you must stay in the right lane. The left lane is for passing only. Florida actively enforces this — you can be cited for <strong>camping in the left lane</strong>, even if you're going the speed limit. The law exists because left-lane cruising forces faster traffic to pass on the right, which is more dangerous.</p>
+    <p><strong>Never pass on the right</strong> unless the vehicle ahead is turning left, or on a multi-lane highway where right-lane traffic is flowing faster. Passing on the right shoulder is always illegal.</p>
+  </div>
+</div>
+
+<div class="content-block block-fact">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 Florida Fact: Minimum Speed</h2>
+  </div>
+  <div class="block-body">
+    <p>Florida highways post <strong>minimum speed limits</strong> in addition to maximum speed limits. On most interstates, the minimum speed is <strong>40 mph</strong> (unless conditions require slower driving). Driving below the minimum speed limit can be just as dangerous as speeding — it creates a speed differential that forces other drivers to brake or swerve. If your vehicle can't maintain the minimum speed, you should not be on the highway.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- EXPRESS LANES, WEAVE ZONES -->
+<div class="content-block block-read">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="var(--binary-blue)" stroke-width="2"/><path d="M10 12h12M10 16h12M10 20h8" stroke="var(--binary-blue)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">📖 Express Lanes, Toll Lanes, and Weave Zones</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Express lanes</strong> (also called managed lanes) are common on Florida's busiest highways like I-95, I-595, and the Turnpike. Key rules:</p>
+    <ul>
+      <li>Express lanes are separated from regular lanes by <strong>double solid white lines and pylons</strong></li>
+      <li>You can <strong>only enter and exit at designated openings</strong> marked with dashed white lines</li>
+      <li>Crossing the double white lines to enter or exit is <strong>illegal and dangerous</strong></li>
+      <li>Express lanes may require a <strong>SunPass or toll transponder</strong></li>
+      <li>Pricing may change based on traffic volume (dynamic tolling)</li>
+    </ul>
+    <p><strong>Weave zones</strong> are short stretches where an on-ramp and off-ramp are close together, forcing entering and exiting traffic to cross paths. In weave zones:</p>
+    <ul>
+      <li><strong>Entering traffic</strong> needs to move left (onto the highway)</li>
+      <li><strong>Exiting traffic</strong> needs to move right (onto the exit ramp)</li>
+      <li>Both groups must adjust speed and yield to each other</li>
+      <li>Be extra cautious — multiple lane changes in a short distance increase crash risk</li>
+      <li>Communicate with signals and be prepared for unexpected movements from other drivers</li>
+    </ul>
+  </div>
+</div>
+
+<div class="content-block block-fact">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="var(--bitstream-blue)" stroke-width="2"/><path d="M16 10v2M16 16v6" stroke="var(--bitstream-blue)" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💡 Florida Fact: SunPass</h2>
+  </div>
+  <div class="block-body">
+    <p>Florida's toll roads and express lanes use <strong>SunPass</strong>, an electronic prepaid toll system. Many Florida highways are now <strong>cashless</strong> — there are no toll booths. If you don't have a SunPass, cameras photograph your license plate and send a bill (at a higher rate). Express lanes on I-95 in South Florida require SunPass and use <strong>dynamic pricing</strong> — tolls increase when traffic is heavy and decrease when it's light.</p>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT -->
+<div class="content-block block-achievement">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l3.6 7.3 8 1.2-5.8 5.6 1.4 8L16 22.3 8.8 26.1l1.4-8-5.8-5.6 8-1.2L16 4z" stroke="var(--gateway-gold)" stroke-width="2" fill="none"/></svg>
+    <h2 class="block-title">🏆 Achievement Unlocked: Highway Navigator</h2>
+  </div>
+  <div class="block-body">
+    <p>You now understand every aspect of highway driving — from the merge onto the ramp to the exit off it. Lane discipline, passing etiquette, express lanes, and weave zones — these skills will carry you across Florida's extensive highway system safely and confidently.</p>
+  </div>
+</div>
+
+<div class="section-divider"><div class="section-divider-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" stroke="currentColor" fill="none" stroke-width="2"/></svg></div></div>
+
+<!-- VOCABULARY -->
+<h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--binary-blue);margin-bottom:16px">📘 Key Vocabulary</h2>
+<div class="vocab-grid">
+  <div class="vocab-card"><div class="vocab-term">Acceleration Lane</div><div class="vocab-def">A ramp lane used to build speed and merge onto the highway. Match highway speed before merging.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Deceleration Lane</div><div class="vocab-def">An exit ramp lane used to slow down from highway speed. Brake in the deceleration lane, not on the highway.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Weave Zone</div><div class="vocab-def">A stretch where an on-ramp and off-ramp overlap, forcing entering and exiting traffic to cross paths.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Slower Traffic Keep Right</div><div class="vocab-def">Florida law (F.S. 316.081) requiring slower vehicles to stay in the right lane. The left lane is for passing only.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Express Lane</div><div class="vocab-def">A managed highway lane separated by barriers with restricted entry/exit points. Often requires SunPass and variable tolls.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Minimum Speed</div><div class="vocab-def">The slowest legal speed on a highway (typically 40 mph in Florida). Driving below this is dangerous and illegal.</div></div>
+  <div class="vocab-card"><div class="vocab-term">Merge</div><div class="vocab-def">The process of joining highway traffic from an on-ramp by matching speed and finding a gap in traffic flow.</div></div>
+  <div class="vocab-card"><div class="vocab-term">SunPass</div><div class="vocab-def">Florida's electronic prepaid toll system used on toll roads and express lanes throughout the state.</div></div>
+</div>
+
+<!-- REFLECTION -->
+<div class="content-block block-think" style="margin-top:32px">
+  <div class="block-header">
+    <svg class="block-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="8" stroke="var(--odyssey-orange)" stroke-width="2"/><path d="M13 22h6M14 25h4" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/><path d="M16 8v2M12 10l1 1M20 10l-1 1" stroke="var(--odyssey-orange)" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="block-title">💭 Reflection</h2>
+  </div>
+  <div class="block-body">
+    <p><strong>Think about the last time you were on a highway as a passenger.</strong> Which lane were you in? Did the driver stay right or cruise in the left lane? Did they signal when changing lanes? How did it feel when the driver merged onto the highway — smooth, or a little scary?</p>
+    <p>Highway driving can be intimidating at first, but it's actually quite predictable once you understand the system. Everyone is going the same direction, there are no intersections, and the rules are straightforward: match speed, stay right, pass left, signal always.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="lesson-2-5-reading.html" class="btn-nav btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Lesson 2.5</a>
+  <a href="lesson-2-6-activity.html" class="btn-nav btn-next">Lesson 2.6 Activity<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+</div>
+
+</main>
+</body>
+</html>
